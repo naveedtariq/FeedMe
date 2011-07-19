@@ -1,0 +1,301 @@
+div.summary_bar {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #d8dfea;
+	clear: both;
+	padding-top: 11px;
+	padding-right: 20px;
+	padding-left: 20px;
+	color: black;
+	font-weight: normal;
+	line-height: normal;
+	background-color: white;
+}
+div.summary_bar	div.summary {
+		color: #333333;
+		float: left;
+		padding-top: 3px;
+		padding-bottom: 4px;
+	}
+	
+
+
+/** Checkout */
+
+#checkout, #order	table {
+		border-collapse: collapse;
+}		
+#checkout, #order	table	td {
+			margin: 0;
+			padding: 4px;
+		}
+#checkout, #order	table	tr.category td {
+			padding: 0;
+			font-style: italic;
+			color: #666;
+		}
+		
+#checkout, #order	table	tr.food	td {
+				padding-left: 4px;
+			}
+#checkout, #order	table tr.food td.price {
+				padding-left: 20px;
+			}
+
+		
+#checkout, #order	table	tr.topping td {
+				padding-top: 0px;
+				padding-left: 12px;
+			}
+#checkout, #order	table tr.topping td.price {
+				padding-left: 20px;
+			}
+		
+#checkout, #order	table	tr.sep td {
+			border-top: 1px solid #e9e9e9;
+			padding-top: 4px;
+			margin-top: 4px;
+		}
+#checkout, #order	table	tr.strong_sep td {
+			border-top: 1px solid #c9c9c9;
+			padding-top: 4px;
+			margin-top: 4px;
+		}
+
+#checkout, #order	table	td.price {
+			padding-left: 20px;
+		}
+#checkout, #order	table	span.free {
+			color: #666;
+		}
+#checkout, #order	table	tr.total td {
+			font-weight: bold;
+		}
+
+
+/** Content Menu */
+#content_menu {
+	background-color: #e9e9e9;
+	padding: 4px;
+}
+#content_menu	div.title {
+		float: left;
+		padding: 8px;
+}
+#content_menu	div.title a {
+		display: block;
+		}
+
+	
+#content_menu	h1 {
+		font-size: 14px;
+		font-weight: bold;
+		font-color: black;
+	}
+	
+#content_menu	ul {
+		float: left;
+		width: 10em;
+	}
+#content_menu	br {
+		clear: left;
+	}
+#content_menu	li {
+		list-style: none;
+	}
+#content_menu	li a {
+			display: block;
+			text-decoration: none;
+		}
+		
+#content_menu	div.title li a:hover {
+			text-decoration: underline;
+		}
+
+.home_main_item {
+  margin:0;
+  padding:20px 20px;
+  border-right:1px solid #ddd;
+  background:#fff;
+  position:relative;
+  z-index:1;
+}
+
+div.side_column {
+  float:right;
+  padding-top:5px;
+  width:186px;
+	/*padding-bottom: 8000px;
+	margin-bottom: -8000px;*/
+}
+div.side_column	div.sidebar_item {
+	  width:186px;
+	}
+
+div.side_column	div.sidebar_item_header {
+		margin:0 5px 0 5px;
+		padding:3px 5px 4px 5px;
+		background:#e9e9e9;
+		text-align:right;
+	}
+div.side_column	div.sidebar_item_header	h2 {
+		  float:left;
+		  font-size:11px;
+		  color:#333;
+		}
+		
+div.side_column	div.sidebar_item_header		div.option {
+		  margin-top:2px;
+		  font-size:9px;
+	  }
+div.side_column	div.sidebar_item_header div.option			a {
+			  color: #3b5998;
+			  font-weight: bold;
+			}
+
+div.side_column	div.sidebar_item_body {
+		padding: 8px 10px 15px 10px;
+	}
+
+
+/** Restaurant List */
+table.restaurant_list	div.closed div.name a {
+		color: #696969;
+	}
+table.restaurant_list	td {
+		background-color: white;
+		width: 200px;
+		border: 1px solid #e7e7e7;
+		height: 54px;
+		clear: both;
+	  padding: 5px 0px 4px 5px;
+	}
+table.restaurant_list td		div.name {
+			color: #3b5998;
+			text-decoration: none;
+			font-weight: bold;
+			margin-bottom: 1px;
+			font-size: 11px;
+		}
+		
+table.restaurant_list td		div.slogan {
+			font-size: 11px;
+		}
+		
+table.restaurant_list td		div.subinfo {
+			float: left;
+			margin-top: 1px;
+			color: #666666;
+			font-size: 9px;
+		}
+
+table.food_list	td {
+		background-color: white;
+		width: 49%;
+		border: 1px solid #e7e7e7;
+		clear: both;
+	  padding: 5px 4px 4px 4px;
+}
+table.food_list	td div.name {
+			text-decoration: none;
+			font-weight: bold;
+			margin-bottom: 1px;
+			font-size: 12px;
+		}
+table.food_list	td	div.description {
+			font-style: italic;
+			color: #666666;
+		}
+table.food_list	td	div.size, table.food_list	td div.single_price {
+			text-align: right;
+		}
+table.food_list	td		span.price {
+			text-decoration: none;
+		}
+table.food_list	td		a {
+			display: block;
+			text-align: right;
+		}
+
+/** Cart */
+div#cart div.ordered_food {
+		padding: 4px;
+		margin: 4px 0 4px 0;
+		border-bottom: 1px solid #e9e9e9;
+	}
+div#cart div.ordered_food	div.topping {
+			padding-left: 4px;
+		}
+
+div#cart form {
+		clear: both;
+		text-align: center;
+		padding: 10px 0;
+	}
+}
+
+/*  -----------------------------|  Pagination |----------------------------  */
+.pagination {
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pagination a, .pagination span {
+  display: inline;
+  float: left;
+}
+
+.pagination a, .pagination span {
+  display: block;
+  padding: 3px;
+  padding-bottom: 2px;
+}
+
+.pagination a:hover {
+  background: #3B5998;
+  border-color: #D8DFEA;
+  border-bottom: 1px solid #3B5998;
+  color: white;
+  text-decoration: none;
+}
+
+.pagination .current a, .pagination .current a:hover {
+  background: transparent;
+  border-color: #3B5998;
+  border-bottom: 2px solid #3B5998;
+  color: #3B5998;
+  font-weight: bold;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+/* Text Pages */
+div.text {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  line-height:16px;
+  margin: 10px;
+  padding: 20px;
+}
+
+/* Orders List */
+
+	
+div.order_list div.order {
+		border: 1px solid #e7e7e7;
+		clear: both;
+	  padding: 5px;
+		margin: 4px 8px;
+		background-color: white;
+	}
+div.order_list div.order		div.restaurant_name {
+			font-weight: bold;
+			font-size: 12px;
+		}
+
+/* Restaurant Show */
+p.delivery_note {
+	color:#333;
+}

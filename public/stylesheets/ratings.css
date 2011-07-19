@@ -1,0 +1,101 @@
+#star-ratings-block {
+	text-align: center;
+	width:100px;
+	margin:0 auto;
+}
+
+.star-rating-wrap{
+	white-space:nowrap;
+}
+
+.star-rating, .star-rating div,
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus,
+.star-rating li.current-rating{
+	background: url(/images/star.png) left -1000px repeat-x;
+	text-align: center;
+}
+.star-rating{
+	position:relative;
+	width:100px;
+	height:20px;
+	overflow:hidden !important;
+	list-style:none;
+	margin:0 !important;
+	padding:0 !important;
+	background-position: left top;
+	display: block;
+	text-align: center;
+}
+.star-rating li{
+	display: inline;
+	background: none !important;
+	border: 0 !important;
+	text-align: center;
+}
+ul.star-rating a, ul.star-rating div, 
+ul.star-rating li.current-rating{
+	position:absolute;
+top:0;
+left:0;
+text-indent:-1000em;
+height:20px;
+line-height:20px;
+outline:none;
+overflow:hidden;
+border: none;
+}
+.star-rating a:hover,
+.star-rating a:active,
+.star-rating a:focus{
+	background-position: left bottom;
+}
+.star-rating .one-star{
+	width:20%;
+	z-index:6;
+}
+.star-rating .two-stars{
+	width:40%;
+	z-index:5;
+}
+.star-rating .three-stars{
+	width:60%;
+	z-index:4;
+}
+.star-rating .four-stars{
+	width:80%;
+	z-index:3;
+}
+.star-rating .five-stars{
+	width:100%;
+	z-index:2;
+}
+.star-rating li.current-rating{
+	z-index:1;
+	background-image: url(/images/star.png) !important;
+	background-position: left center !important;
+}
+
+
+
+.inline-rating{
+display:-moz-inline-block;
+display:-moz-inline-box;
+display:inline-block;
+vertical-align: middle;
+}
+
+.small-star{
+width:50px !important;
+height:10px !important;
+}
+.small-star,
+.small-star a:hover,
+.small-star a:active,
+.small-star a:focus,
+.small-star li.current-rating{
+background-image: url(/images/star_small.png) !important;
+line-height: 10px !important;
+height: 10px !important;
+}

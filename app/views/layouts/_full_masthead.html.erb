@@ -1,0 +1,25 @@
+<div class="dashboard_header">
+	<div class="dh_links clearfix">
+		<div class="dh_actions">
+			<%= link_to 'Browse Restaurant List', restaurants_path %>
+			<span class="pipe">|</span>
+			<%= link_to 'My Order History', orders_path %>
+			<span class="pipe">|</span>
+			<%= link_to 'Suggest a New Restaurant', new_restaurant_suggestion_path %>
+			<span class="pipe">|</span>
+			<%= link_to 'Give Us Feedback', new_feedback_path %>
+			<span class="pipe">|</span>
+			<%= link_to "Help", help_path %>
+		</div>
+	</div>
+	<div class="dh_titlebar clearfix">
+		<h2 style="background-image: url('/images/hamburger_16.gif')">
+			<% page_title = yield :page_title -%>
+			<%= page_title.blank? ? 'Food Court' : page_title %>
+		</h2>
+		<%= button_link_to "Change Your Location", new_location_path %>
+		<% if current_user.try(:admin?) or Rails.env.development? -%>
+      <%= link_to "Administrator Access", admin_restaurants_path, :style => 'color: #A00', :target => '_blank' %>
+    <% end -%>
+	</div>
+</div>

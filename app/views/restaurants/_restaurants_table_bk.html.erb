@@ -1,0 +1,18 @@
+<table class="restaurant_list" width="100%">
+	<% restaurants.in_groups_of(3, false) do |row_tasks| %>
+	  <tr>
+				<% @count = 0 %>
+	   		<% for restaurant in row_tasks %>
+					<td width="33%" valign="top" align="center">
+						<%= render :partial => 'restaurants/square_icon', :locals => {:restaurant => restaurant} %>
+					</td>
+					<% @count += 1%>
+			<% end %>
+			<% while @count < 3 %>
+				<td width="33%" valign="top" align="center"></td>
+				<% @count += 1%>
+			<% end %>
+			
+	  </tr>
+	<% end %>
+</table>

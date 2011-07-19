@@ -1,0 +1,19 @@
+<a class="restaurant-box <%= 'closed' unless restaurant.open? %>" href="<%= url_for restaurant %>">
+	<div class="name"><%= restaurant.name %></div>
+	
+	<div class="image_wrapper">
+	<%# if restaurant.restaurant_images.find(:first) %>
+		<%# image_tag url_for_file_column(restaurant.restaurant_images.find(:first), "filename")  %>
+	<%# else %>
+		<%= image_tag 'question_mark.jpg'  %>
+	<%# end %>
+	</div>
+	
+	<div class="info">
+		<div class="left">
+ 				<%= render :partial => "ratings/static_rating", :locals => { :restaurant => restaurant } %>
+		</div>
+		<div class="right"><%= restaurant.short_open_string %></div>
+		<div class="clr_fix"></div>
+	</div>
+</a>

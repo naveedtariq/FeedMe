@@ -1,0 +1,55 @@
+<div class="clearfix">
+	
+		<h1 class="blue_title">Categories</h1>
+		
+	<div class="title" style="display:none;">
+		<div><%=h @restaurant.name %></div>
+		<div class="distance">
+		TODO: Use Geokit
+			<%#= number_with_precision(@restaurant.distance_from(current_location, :units => :miles), :precision => 1) %> <%#= @restaurant.distance_from(current_location, :units => :miles) == 1 ? 'mile' : 'miles' %> away from you
+		</div>
+	</div>
+	<br>
+	<div style="width:80%; margin:0 auto">
+		<% if @restaurant.specials.size > 0 and combo.nil? -%>
+			<div class="section_title specials_title"><a href="#specials">Specials</a></div>
+		<% end -%>
+		
+		<% if @restaurant.combos.size > 0 and combo.nil? -%>
+			<div class="section_title combos_title"><a href="#combos">Combinations</a></div>
+		<% end -%>
+		
+		<% if @restaurant.menu_sections.size > 0 %>
+			<% @restaurant.menu_sections.each do |menu_section| %>
+				<% unless menu_section.nil? %>
+				<%# next if combo.nil? and menu_section.only_for_combos? %>
+				<%# next unless combo.nil? or combo.combo_menu_sections.collect {|c| c.menu_section}.include?(menu_section) %>
+					<div class="section_title">
+						<a href="#menu-section-<%= menu_section.id %>"><%= menu_section.name %></a>
+					</div>
+				<% end -%>
+			<% end -%>
+		<% end -%>
+		<div class="section_title" id="save_favorite">
+			<% unless @restaurant.is_favorite? %>
+				<%= link_to "Save Restaurant as Favorite", :action => "add_favorite", :id => @restaurant.id %>
+			<% else %>
+				<%= link_to "Remove from Favorites", :action => "remove_favorite", :id => @restaurant.id %>
+			<% end %>
+		</div>
+		
+	</div>
+	
+	<div id="map_wrapper">
+	<a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" target="_blank">View on Google</a>
+	<%#= @map.div %>
+	</div>
+	
+	
+	<div id="star-ratings-block">
+	    <%#= render :partial => "ratings/rating", :locals => { :restaurant => @restaurant } %>
+	</div>
+	
+	
+	
+</div>

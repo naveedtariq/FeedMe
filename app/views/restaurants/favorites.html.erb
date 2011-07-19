@@ -1,0 +1,9 @@
+<%= render :partial => 'restaurants_table', :locals => {:restaurants => @favorites.collect {|f| f.restaurant}} %>
+
+
+<% @favorites.each do |favorite| %>
+<div>
+<%= link_to favorite.restaurant_id, :action => "show", :id => favorite.restaurant_id %>
+<%= link_to favorite.restaurant_id, :action => "remove_favorite", :id => favorite.restaurant_id %>
+</div>
+<% end %>

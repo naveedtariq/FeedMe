@@ -1,0 +1,14 @@
+#Fill here the Google Maps API keys for your application
+#In this sample:
+#For development and test, we have only one possible host (localhost:3000), so there is only a single key associated with the mode.
+#In production, the app can be accessed through 2 different hosts: thepochisuperstarmegashow.com and exmaple.com. There then needs a 2-key hash. If you deployed to one host, only the API key would be needed (as in development and test).
+#foodcourt.hardindd.com: ABQIAAAAewWj9StFHn8gtaD8t6gYlhQFXnDnlK0qmQK99x20in7FnpQVkhSJKuYZf0OGli0K0tTaMFPMJYJ-iA
+#foodcourt.zapto.org: ABQIAAAAewWj9StFHn8gtaD8t6gYlhTxO1Kw9SSScOFGMYnRWTNe-gpy3RR3HRh9zGKwN0XwWrVUDjnKJf8Fsg
+
+development: ABQIAAAAewWj9StFHn8gtaD8t6gYlhRygx2tN5DEbxpkhbyZ8OxkN1_1TxQGS01alTje2v991IQtPYXjjF-hhw
+ 
+test: ABQIAAAAewWj9StFHn8gtaD8t6gYlhQFXnDnlK0qmQK99x20in7FnpQVkhSJKuYZf0OGli0K0tTaMFPMJYJ-iA
+
+production:
+ foodcourt.hardindd.com: ABQIAAAAewWj9StFHn8gtaD8t6gYlhQFXnDnlK0qmQK99x20in7FnpQVkhSJKuYZf0OGli0K0tTaMFPMJYJ-iA
+ apps.facebook.com: ABQIAAAAewWj9StFHn8gtaD8t6gYlhQFXnDnlK0qmQK99x20in7FnpQVkhSJKuYZf0OGli0K0tTaMFPMJYJ-iA

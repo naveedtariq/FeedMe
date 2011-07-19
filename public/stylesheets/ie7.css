@@ -1,0 +1,254 @@
+/*  ------------------------------------------------------------------------
+                    Facebook | IE7/PC Hacks | getfirefox.com
+    ------------------------------------------------------------------------  */
+
+.inputbutton,
+.inputsubmit {
+  padding: 0px 3px; }
+
+.clearfix, #userprofile {
+  overflow : hidden ! important;
+  _height : 1% ! important;
+}
+
+#nav a {
+  width:115px;
+  display:block;
+
+}
+
+/* Menu image alignment hacks */
+
+#navigator .main_set li .with_arrow {
+  margin-top: 1px;
+}
+
+#navigator .main_set li a.global_menu_arrow,
+#navigator .main_set li a.global_menu_arrow_active {
+  height: 19px;
+  width: 17px;
+  margin: 0px 0px -10px -1px;
+  padding: 3px 0px 3px;
+  background: transparent url(/images/global_menu_arrow.gif) no-repeat 0px center; }
+  
+  #navigator .main_set li a.global_menu_arrow_active,
+  #navigator .main_set li a.global_menu_arrow:hover, 
+  #navigator .main_set li a.global_menu_arrow_active:hover {
+    background: #5c75aa url(/images/global_menu_arrow.gif) no-repeat 0px center; }
+
+#profilenarrowcolumn {
+  margin-right: 9px!important;
+}
+
+.box_head {
+  padding-bottom: 0px;
+}
+
+.box_head h2 {
+  padding-bottom: 0px;
+}
+
+
+/*  ------------------------|  DISPLAY COMPONENTS  |------------------------  */
+
+.tabs {
+  padding:0;
+}
+
+.toggle_tabs li a {
+  display:inline-block;
+}
+
+.toggle_tabs {
+  margin-bottom:-1px;
+}
+
+.toggle_tabs li {
+  background-position:0 3px;
+}
+
+.profile .account_info {
+  margin: 0px -21px 2px -229px;
+  padding: 17px 21px 8px 237px;
+}
+
+.typeahead_list {
+  margin-left: 1px;
+}
+
+#profileActions a:hover .unselected .text {
+  padding-top: 2px;
+}
+
+.app_icon_row {
+  position: static;
+}
+
+/*  ---------------------------|  EDIT ACCOUNT  |---------------------------  */
+
+.editaccount .settings_panel .email_option { padding-bottom: 0px; }
+
+.editaccount #email .buttons { margin-top: 0px; margin-left: 0px; padding-left: 22px; }
+
+
+/* ----------------------------|  UBERSEARCH |----------------------------  */
+
+.dropdown-container {
+  direction: ltr; /* IE7 hack to force redraw */
+		
+  margin-left: 2px;
+  margin-top: 1px;
+  z-index: 1000 !important;
+}
+
+.ubersearch .filters fieldset legend {
+  margin: -5px -10px 0px -7px;
+  padding-bottom: 4px;
+  width: 133px }
+
+.filters #label_c2, .filters #label_c1 {
+  display:block;
+}
+
+#qsearch .typeahead_list {
+  margin-top: -2px;
+  margin-left: 0px;
+}
+
+/*  ------------------------------|  MEGABOX  |-----------------------------  */
+
+.composer_fields label {
+  padding-top:7px;
+}
+
+#compose_message .inputsubmit {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* ----------------------------| NOTIFICATIONS |----------------------------  */
+
+.notifications .submission small {
+  line-height:12px;
+}
+
+.notification_checkboxes {
+  margin-top:-8px;
+}
+
+.notifications label {
+  display:inline-block;
+}
+
+.confirminvite .inputsubmit,
+.confirminvite .inputbutton {
+  padding: 1px 3px;
+}
+
+/* ------------------------------| FEEDBACK |--------------------------------  */
+
+.explanation .square_bullets {
+  margin-left:0;
+}
+
+.feedback .mixer_panel .saved_notification {
+  display:inline-block;
+}
+
+.feedback .mixer_panel .left_buttons, .feedback .mixer_panel .right_buttons {
+  margin-top:1px;
+}
+
+.feedback .mixer_panel .mixer_bar {
+  margin-top:5px;
+  margin-bottom:1px;
+}
+
+.vslider {
+  padding-bottom: 19px;
+}
+
+/* --------------------------------| SHARE |---------------------------------  */
+
+#shareitems .share_and_hide {
+  width:60px;
+}
+
+#shareitems .x_to_hide {
+  float:right;
+}
+
+.share_pop_dialog .status h2 {
+  padding-top:1px;
+  padding-bottom:1px;
+}
+
+/*  -----------------------------|  MOTION  |------------------------------  */
+
+.video_permalink #add_comment {
+  padding-top: 15px;
+}
+
+.video_upload_page .separators {
+  position: relative;
+  margin-bottom: -1.1em;
+}
+
+.video_upload_page .separators a {
+  display: inline-block;
+}
+
+
+/*  -----------------------------|  ADD POLL  |------------------------------  */
+
+.editor.showrows .hiddenrow {
+  display: block;
+}
+
+/*  --------------------------|  APP DIRECTORY  |---------------------------  */
+
+.products .side_column {
+  float:right;
+  width:156px;
+}
+
+.products .app_browser li a,
+.products .app_browser li.app_type a {
+  margin-left:1px;
+}
+
+.products .app_browser li.selected a {
+  margin-left:0;
+  border-left:1px solid #fff;
+}
+
+/*  -----------------------------| THE WALL  |------------------------------  */
+#content .thewall {
+  margin-bottom: 15px;
+}
+
+/*  --------------------------|  MEGWALL  |---------------------------  */
+
+#inline_wall_post dd {
+  margin-left:4px;
+}
+
+.attachment_compact .wall_video_thumb .play {
+  margin-top:-22px;
+  padding-bottom:3px;
+}
+
+/*  --------------------------|  MULTI FRIEND SELECTOR  |---------------------------  */
+
+#fb_multi_friend_selector #fs_limit_by_network_menu ul {
+  height:220px;
+  width:140px;  
+}
+
+#fb_multi_friend_selector #friends .square {
+  position:static;
+}
+
+#fb_multi_friend_selector #friends .square span {
+  position:static;
+}

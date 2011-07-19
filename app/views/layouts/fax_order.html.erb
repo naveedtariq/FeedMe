@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<style>
+	body {
+	  background: #fff;
+	  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+	  font-size: 12px;
+	  margin: 0px;
+	  padding: 0px;
+	  text-align: left;
+	}
+	h1 {
+		font-size: 18px;
+	}
+
+	h2 {
+		font-size: 14px;
+		border-bottom: 2px solid black;
+		margin-bottom: 2px;
+	}
+	
+	div#order_info h2 {
+		text-align: center;
+		border: none;
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	div#order_info {
+		padding: 4px;
+		border: 1px solid black;
+	}
+
+
+	#ordered_foods table {
+	  border-collapse: collapse;
+	}
+	#ordered_foods table td {
+	  margin: 0;
+	  padding: 4px;
+	}
+	#ordered_foods table tr.category td {
+	  padding: 0;
+	  font-style: italic;
+	  color: #666;
+	}
+	#ordered_foods table tr.food td {
+	  padding-left: 4px;
+	}
+	#ordered_foods table tr.food td.price {
+	  padding-left: 20px;
+	}
+	#ordered_foods table tr.topping td {
+	  padding-top: 0px;
+	  padding-left: 12px;
+	}
+	#ordered_foods table tr.topping td.price {
+	  padding-left: 20px;
+	}
+	#ordered_foods table tr.sep td {
+	  border-top: 1px solid #e9e9e9;
+	  padding-top: 4px;
+	  margin-top: 4px;
+	}
+	#ordered_foods table tr.strong_sep td {
+	  border-top: 1px solid #c9c9c9;
+	  padding-top: 4px;
+	  margin-top: 4px;
+	}
+	#ordered_foods table td.price {
+	  padding-left: 20px;
+	}
+	#ordered_foods table span.free {
+	  text-decoration: line-through;
+	  color: #c9c9c9;
+	}
+	#ordered_foods table tr.total td {
+	  font-weight: bold;
+	}
+
+
+	
+	</style>
+	<%= yield :head %>
+</head>
+
+<body>
+	<div id="masthead">
+		<h1>Facebook Food Court</h1>
+	</div>
+	
+	<%= yield %>
+	
+	
+	<%# === Debug Data === %>
+	<% if ENV['RAILS_ENV'] == 'development' %>
+	<div id="debug" >
+		<a href="#" onclick="Element.toggle('debug_info');return false" style="text-decoration: none; color: #ccc;">Show Debug Info ➲</a>
+
+		<div id="debug_info" style="display : none;"class="dialog">
+			<div class="content">
+				<div class="t"></div>
+				<%= debug session %>
+				<%= debug params %>	
+				<div class="b"><div></div></div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	
+</body>
+</html>

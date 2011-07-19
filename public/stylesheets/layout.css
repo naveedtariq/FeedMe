@@ -1,0 +1,22 @@
+div.content_no_sidebar {
+	background-color:#F7F7F7;
+	/*border-top:1px solid #CCCCCC;*/
+	padding-top:10px;
+	width: 644px;	
+}
+
+#home_container {
+	height: 100%;
+	position: relative;
+}
+
+div.main_column {
+	float:left;
+	width:406px;
+	padding: 4px;
+}
+
+div.side_column {
+	float:right;
+	width:210px;
+}

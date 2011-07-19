@@ -1,0 +1,49 @@
+<% content_for :head do -%>
+	<%= javascript_include_tag :defaults %>
+<% end -%>
+
+<% content_for :content_menu do %>
+	<%= render :partial => 'restaurants/menu_sections' %>
+<% end -%>
+
+<% content_for :dialogs do %>
+	<% @menu_section.foods.each do |food| -%>
+		<%= render :partial => 'food_dialog', :locals => {:restaurant => @restaurant, :menu_section => @menu_section, :food => food} %>
+	<% end -%>
+<% end -%>
+
+<% div_for(@menu_section) do -%>
+	<h2><%= h @menu_section.name %></h2>
+	
+	<table class="food_list">
+	<% @menu_section.foods.each do |food| %>
+	  <tr>
+	    <td>
+				<div class="info">
+					<div class="name"><%= h food.name %></div>
+					<div class="description"><%= h(truncate_words(food.description)) unless food.description.blank? %></div>
+					<% if food.sizes.count > 0 -%>
+						<% food.sizes.each do |size| -%>
+							<div class="size">
+								<%=h size.name %>
+								<span class="price"><%=number_to_currency size.price %></span>
+							</div>
+						<% end -%>
+					<% elsif -%>
+						<div class="single_price"><span class="price"><%=number_to_currency food.price %></span></div>
+					<% end -%>
+					<%= link_to_function "View/Add", "Effect.Appear('food_dialog_#{food.id}', { duration: 0.3 });" %>
+				</div>
+			</td>
+	  </tr>
+	<% end %>
+	</table>
+<% end -%>
+
+
+
+<% content_for :side_column do -%>
+	<div id="cart" class="sidecolumn_module">
+		<%= render :partial => "restaurants/cart" %>
+	</div>
+<% end -%>

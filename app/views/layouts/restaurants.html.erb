@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<script type="text/javascript">
+	<%#= fb_connect_async_js  do %>    
+      <%#= yield :fb_connect%>
+    <%# end %>
+	</script>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Restaurants: <%= controller.action_name %></title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+  <%= stylesheet_link_tag 'new' %>
+  <%= stylesheet_link_tag 'facebook_style' %>
+  <%= stylesheet_link_tag 'ratings' %>
+  <%= stylesheet_link_tag 'dialog' %>
+  <%= javascript_include_tag :defaults %>
+	<%# fb_connect_javascript_tag %>
+	<%# init_fb_connect "XFBML" %>
+	
+	<% if params[:controller] == 'locations' %>
+	<script type="text/javascript">
+	
+
+		function switchLocationBox() {
+			
+			if(!$('new_location')) return;
+			if(!$('saved_locations')) {
+				$('new_location').show(); 
+				$('locationLink').hide();
+				return;	
+			}
+			
+			if($('new_location').visible()) {
+				$('new_location').hide(); 
+				$('saved_locations').show();
+				$('locationLink').innerHTML = "Add Another Location";
+			} else {
+				$('new_location').show(); 
+				$('saved_locations').hide();
+				$('locationLink').innerHTML = "Saved Locations";
+			}
+		}
+		
+		Event.observe(window, 'load', function() {
+				if($('restaurant_info')) $('restaurant_info').hide();
+  			switchLocationBox();
+		});
+		
+	</script>
+	<% end %>
+	<% if params[:controller] == 'restaurants' %>
+	<script type="text/javascript">
+		Event.observe(window, 'load', function() {
+				if($('restaurant_info')){
+					$('restaurant_info').hide();
+					
+				} 
+				
+		});
+		
+		Event.observe(window, 'scroll', function() {
+			var c = $('cart').cumulativeScrollOffset();
+			var o = $('cart_wrapper').cumulativeOffset();
+			var viewport = document.viewport.getDimensions();
+			var cartDimensions = $('cart').getDimensions();
+			if(c.top < o.top) {
+				if($('cart').hasClassName('cart_fix')) $('cart').removeClassName('cart_fix');
+				//$('menu_categories').removeClassName('cart_fix');
+			} else {
+				if(!$('cart').hasClassName('cart_fix')) $('cart').addClassName('cart_fix');
+				//$('menu_categories').addClassName('cart_fix');
+			}
+			if(cartDimensions.height >= viewport.height - 30) {
+				if($('cart').hasClassName('cart_fix')) $('cart').removeClassName('cart_fix');
+				//$('cart').style.height = viewport.height - 30 + 'px';
+				//if($('cart').hasClassName('scroll')) $('cart').addClassName('scroll');
+			}
+		});
+		
+	</script>
+	<% end %>
+	
+	<% if params[:controller] == 'restaurants' && params[:action] == 'show' %>
+	<%#= GMap.header %>
+    <%#= @map.to_html %>
+    <% end %>
+
+</head>
+<body>
+<div id="header">
+	<div id="logo"><a href="http://71.90.29.134:3000/"></a></div>
+
+	<div class="links">
+		<%= link_to "food court home", "/location/new" %>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<%= link_to "contact us", :controller => :feedbacks, :action => :new %>
+	</div>
+	
+</div>
+
+<% if session[:current_location] %>
+<div id="top_menu">
+<div class="second_links">
+<ul class="main_set">
+<li><%= link_to_unless_current('Search Results', :controller => "restaurants", :action => "index" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%# link_to_unless_current('Favorite Restaurants', :controller => "favorites", :action => "index" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%# link_to_unless_current('Suggest New Restaurant', new_restaurant_suggestion_url ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%= link_to_function 'Invite Friends!', 
+   "fb_connect_invite_friends({
+       type: 'Foodcourt', 
+       invitation_copy:'Please accept this invitation to Foodcourt.', 
+       request_action_text:'Invite your friends to join Foodcourt',
+	   request_action_url:'http://#{request.env['HTTP_HOST']}/pages/facebook_submit'
+    })" %>
+</li>
+</ul>
+</div>
+</div>
+<% end %>
+
+<div id="page_content">
+	<% if notice = flash[:notice] -%>
+		<div class="status">
+		  <span id="status_title"><%= notice %></span>
+		</div>
+	<% end -%>
+	<% error_content = yield :error 
+		unless error_content.blank? -%>
+		<div id="error">
+			<%= error_content %>
+		</div>
+	<% end %>
+<%= yield %>
+</div>
+<br><br>
+<div id="footer">
+<div class="footer_content">
+<div id="footer_clear">
+<div class="first"><%= link_to "about us", "/about/" %></div>
+<div><%= link_to "contact us", :controller => :feedbacks, :action => :new %></div>
+<div><%= link_to "faq", :controller => :faqs, :action => :index %></div>
+<div><%= link_to "restaurant owners", "/restaurant_suggestions/owners" %></div>
+<div><%= link_to "advertisers", :controller => :advertisers, :action => :new %></div>
+<div><%= link_to "privacy policy", "/about/privacy" %></div>
+<div class="last"><%= link_to "terms and conditions", "/about/tos" %></div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

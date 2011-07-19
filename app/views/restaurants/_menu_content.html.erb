@@ -1,0 +1,62 @@
+<div class="clearfix">
+
+<br>
+<div>
+	
+	<div style="text-align:center">
+	<%#= image_tag url_for_file_column(menu_section, "filename") if menu_section.filename  %>
+		<a href="#menu-section-<%= menu_section.id %>" id="menu-section-<%= menu_section.id %>" class="blue_text" style="text-decoration:underline">
+			
+			<%= menu_section.name %>
+		</a>
+		<%# if menu_section.notes %>
+		<div class="section_note"><%#=menu_section.notes%></div>
+		<%# end -%>
+	</div>
+	
+	<table class="food_list" width="100%">
+		<% count = 0 %>
+		<% 
+		menu_section.menu_items.each do |food|
+			table_class = "row_2"
+			table_class = "row_1" if count % 2 == 0
+		%>
+		  <tr class="<%=table_class%>">
+		    <td align="left" width="70%" class="<%=table_class%>">
+					
+		    	<%# if food.spiciness == 1 %>
+		    		<%#= image_tag 'spicy.png'  %>
+		    	<%# end %>
+
+		    	<%= link_to_function food.name, "Effect.Appear('food_dialog_#{food.id}', { duration: 0.3 });" %>
+					<%#= link_to_function food.name, "Effect.Appear('combo_food_dialog_#{food.id}', { duration: 0.3 });" %>
+					<% unless food.desc.nil? %>
+						<div class="section_note"><%= food.desc %></div>
+					<% end %>
+			</td>
+			<%# if combo.nil? %>
+			<td align="right" class="<%=table_class%>" width="30%">
+				<div class="blue_text">
+					<%# if food.sizes.count > 0 -%>
+						<%# food.sizes.each do |size| -%>
+							<div class="size">
+								<%#=h size.name %>
+								<span class="p"><%=number_to_currency food.price %></span>
+							</div>
+						<%# end -%>
+					<%# else -%>
+						<%#=number_to_currency food.price %>
+					<%# end -%>
+				</div>
+			
+			</td>
+			<%# end %>
+		  </tr>
+		<% 
+			count += 1
+		end 
+		%>
+	</table>
+</div>
+</div>
+<br><br>

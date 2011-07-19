@@ -1,0 +1,100 @@
+#dialog {
+  margin: 0px auto;
+  border: solid 10px #D8DFEA; }
+
+#dialog td.dialog {
+  padding-top: 10px;
+  background: #FFFFFF;
+  border: solid 1px #3B5998; }
+
+#dialog td td {
+  color: #555;
+  border: none; }
+
+#dialog td .formtable {
+  margin: 5px 10px 0px; }
+
+#dialog p {
+  margin: 10px; 
+  text-align: left; }
+
+#dialog h4 {
+  border-bottom: solid 1px #D8DFEA;
+  margin: 5px 10px 5px;
+  padding: 0px 0px 2px;
+  font-size: 13px; }
+
+#dialog .buttons {
+  padding: 10px;
+  text-align: right; }
+
+#dialog .buttons input {
+  margin-left: 10px; }
+
+#dialog small {
+  font-weight: normal;
+  color: gray; }
+
+#dialog_note {
+  margin: 10px auto 0px auto;
+  border: 0; }
+
+#dialog_note td {
+  text-align: center; }
+
+div.notice {
+  width: 400px;
+  margin: 80px 100px;
+  padding: 10px;
+  position: absolute;
+  z-index: 100;
+  background: #f7f7f7;
+  border: solid 3px #3B5998; }
+  
+  div.notice h4 {
+    margin-bottom: 10px; }
+  
+  div.notice .buttons {
+    margin: 10px 0px 0px;
+    text-align: center; }
+  
+  div.notice .buttons input {
+    margin-left: 10px;
+    width: 60px; }
+
+#dynamic_dialog {
+  position: absolute;
+  z-index: 1;
+  background: #FFFFFF;
+  left: 0px;
+  top: 0px;
+  width: 360px;
+}
+
+.dialog_padding #content {
+  padding: 20px 0px;
+}
+
+
+.generic_dialog{height:0px;left:0px;overflow:visible;position:fixed;top:0px;width:100%;z-index:100;}
+#generic_dialog_iframe{filter:alpha(opacity=0);left:0px;position:absolute;top:0px;z-index:1;}
+.pop_dialog #generic_dialog_popup,
+.contextual_dialog #generic_dialog_popup{height:0px;overflow:visible;position:relative;}
+.generic_dialog div.dialog_loading{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:10px;}
+#generic_dialog_overlay{z-index:99;display:block;position:absolute;top:0px;left:0px;width:100%;}
+table.pop_dialog_table{border-collapse:collapse;margin:auto;table-layout:fixed;width:465px;}
+td.pop_topleft, td.pop_topright, td.pop_bottomleft, td.pop_bottomright{height:10px;overflow:hidden;padding:0px!important;padding:5px;width:10px!important;width:0px;}
+td.pop_topleft{background-image:url('/images/pop_dialog_top_left.png')!important;background-image:none;filter:none!important;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.ak.facebook.com/images/pop_dialog_top_left.png', sizingMethod='crop');}
+td.pop_topright{background-image:url('/images/pop_dialog_top_right.png')!important;background-image:none;filter:none!important;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.ak.facebook.com/images/pop_dialog_top_right.png', sizingMethod='crop');}
+td.pop_bottomleft{background-image:url('/images/pop_dialog_bottom_left.png')!important;background-image:none;filter:none!important;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.ak.facebook.com/images/pop_dialog_bottom_left.png', sizingMethod='crop');}
+td.pop_bottomright{background-image:url('/images/pop_dialog_bottom_right.png')!important;background-image:none;filter:none!important;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.ak.facebook.com/images/pop_dialog_bottom_right.png', sizingMethod='scale');}
+td.pop_border{background-image:url('/images/pop_dialog_border.png')!important;background-image:none;filter:none!important;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.ak.facebook.com/images/pop_dialog_border.png', sizingMethod='scale');}
+td.pop_content{background-color:white;padding:0px;}
+td.pop_content h2{background:#6d84b4;border:1px solid #3b5998;color:white;font-size:14px;font-weight:bold;margin:0px;}
+td.pop_content h2 span{display:block;padding:4px 10px 5px 10px;}
+td.pop_content .dialog_content{background:#fff;border:1px solid #555;border-top-width:0px;}
+td.pop_content .dialog_body{padding:10px;border-bottom:1px solid #ccc;}
+td.pop_content .dialog_summary{background:#f2f2f2;padding:8px 10px 8px 10px;border-bottom:1px solid #ccc;}
+td.pop_content .dialog_buttons{background:#f2f2f2;padding:8px;text-align:right;}
+td.pop_content .dialog_buttons input{margin-left:5px;}
+td.pop_content .dialog_buttons_left_msg{float:left;}

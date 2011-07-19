@@ -1,0 +1,250 @@
+/****************************
+* API KEY FORM              *
+****************************/
+
+
+
+#dev_opt_title a {
+  padding-left: 20px;
+  background-image: url(/images/flex_arrow_shut.gif);
+  background-repeat: no-repeat;
+  padding-top: 2px;
+}
+
+#dev_opt_title.opt_open a {
+  background-image: url(/images/flex_arrow_open.gif);
+}
+
+.dev_form_buttons {
+  text-align: center;
+  margin: 0 auto 10px auto;
+}
+
+#upload_panel {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#upload_panel p {
+  margin: 10px 0;
+  padding: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+#upload_panel .inputfile {
+  display: block;
+}
+
+#upload_panel .photo_agree {
+  width: 300px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+#upload_panel .dev_form_buttons small {
+  display: block;
+  margin: 8px 0;
+}
+
+.app_picture .current img {
+  width: 200px;
+}
+
+.form_description {
+  padding: 10px 25px 0px;
+}
+
+#canvas_availability .available,
+#canvas_availability .not_available {
+  display: none;
+  font-weight: bold;
+  padding-left: 15px;
+}
+
+#canvas_availability .available {
+  color: green;
+}
+
+#canvas_availability .not_available {
+  color: red;
+}
+
+#canvas_availability.canvas_not_available .not_available,
+#canvas_availability.canvas_available .available {
+  display: inline;
+}
+
+/*  ------------------------------|  FORMS  |-------------------------------  */
+
+form.inputform {
+  margin: 0 10px 0 10px;
+}
+form.inputform	h1 {
+		padding: 4px 10px 3px 10px;
+		margin-bottom: 10px;
+	}
+
+form.inputform	h2 {
+	  background-color: #e9e9e9;
+	  color: #888;
+	  font-size: 11px;
+	  font-weight: bold;
+	  padding: 4px 10px 3px 10px;
+	}
+
+form.inputform	h3 {
+	  color: #888;
+	  font-size: 11px;
+	  font-weight: bold;
+	  padding: 4px 10px 3px 0;
+	  border-bottom: 1px solid #ccc;
+	  margin: 0 10px;
+	}
+
+form.inputform	dl {
+	  margin: 10px;
+	}
+
+form.inputform	dt {
+	  width: 150px;
+	  float: left;
+	  clear: left;
+	  color: #555;
+	  font-weight: bold;
+	  text-align: right;
+	  font-size: 11px;
+	  margin: 0 10px 10px 0;
+	  padding-top: 5px;
+	}
+
+form.inputform	dt span {
+	  color: #888;
+	  font-size: 9px;
+	  display: block;
+	}
+
+form.inputform	dd {
+	  width: 400px;
+	  margin: 0 0 10px 0;
+	  float: left;
+	}
+
+form.inputform	span.explanation {
+	  display: block;
+	  margin-top: 3px;
+	  font-size: 9px;
+	  color: #888;
+	}
+
+form.inputform	dd .inputcheckbox {
+	  margin: 2px 4px 0 0;
+	}
+
+form.inputform	dd .inputcheckbox {
+	  margin: 2px 4px 0 0;
+	}
+
+form.inputform	dd label {
+	  margin-right: 15px;
+	}
+	
+form.inputform	div.submit {
+	  clear: both;
+	  text-align: center;
+	  padding: 10px 0;
+	}
+
+
+div.fieldWithErrors input{
+	border: 1px solid red;
+}
+
+
+label {
+  color: #666666;
+  font-weight: bold; }
+
+.formtable {
+  margin: 0px auto; }
+
+.formtable {
+  margin: 0px; }
+
+.formtable td {
+  border: none;
+  margin: 0px;
+  padding: 3px 1px; }
+
+.formtable td.label {
+  color: #666666;
+  font-weight: bold;
+  padding-right: 10px; }
+
+.formtable tr.tallrow {
+  vertical-align: top; }
+
+.formbuttons {
+  text-align: center;
+  margin: 10px 10px; }
+
+.formbuttons .inputsubmit, .formbuttons .inputbutton {
+  margin: 2px 4px; }
+
+.formbuttons .securetoggle {
+  padding: 9px 0px 0px 0px; }
+
+
+/*  FORM INPUTS  */
+
+.inputtext,
+.inputpassword {
+  border: 1px solid #bdc7d8;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
+  padding: 3px; 
+}
+
+textarea {
+  border: 1px solid #bdc7d8;
+  padding: 3px;
+  font-size: 11px;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif; 
+}
+     
+.inputbutton, .inputsubmit {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3b5998', endColorstr='#1F3E80');
+	background: -webkit-gradient(linear, left top, left bottom, from(#3b5998), to(#1F3E80));
+	background: -moz-linear-gradient(top,  #3b5998,  #1F3E80);
+
+
+  border-style: solid;
+  border-top-width: 1px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+  border-top-color: #D9DFEA;
+  border-left-color: #D9DFEA;
+  border-bottom-color: #0e1f5b;
+  border-right-color: #0e1f5b;
+  background-color: #3b5998;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-family: "lucida grande", tahoma, verdana, arial, sans-serif; 
+  text-align: center;
+}
+
+.inputcheckbox {
+  border: 0px;
+}
+
+.inputsearch {
+  background: white url(/images/magglass.png) no-repeat 3px 4px;
+  padding-left: 17px;
+}
+
+.transparent_png_ie6 { 
+  display: none;
+}
+
+

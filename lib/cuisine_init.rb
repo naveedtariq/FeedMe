@@ -1,0 +1,6 @@
+require 'cuisine_library/addressable'
+require 'cuisine_library/array'
+require 'cuisine_library/credit_card'
+require 'cuisine_library/format'
+require 'cuisine_library/efax'
+require 'cuisine_library/efax_reply'

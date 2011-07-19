@@ -1,0 +1,72 @@
+<div id="sort_links">
+<div class="second_links">
+<ul class="main_set">
+<li><%= link_to_unless((@sort != "price" and @sort != "location"), 'A - Z', :controller => "restaurants", :action => "index", :sort => 'name' ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%= link_to_unless(@sort == "price", 'Price', :controller => "restaurants", :action => "index", :sort => 'price' ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%= link_to_unless(@sort == "location", 'Location', :controller => "restaurants", :action => "index", :sort => 'location' ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+</ul>
+</div>
+<div class="clr_fix"></div>
+</div>
+<div style="border:1px solid #d4dae8; padding:10px">
+
+
+<div style="padding-bottom:10px" id="cuisine_list">
+	<% @cuisines.each do |cuisine| %>
+		<%= link_to_unless(@cuisine_id == "#{cuisine.id}", cuisine.name, :controller => "restaurants", :action => "index", :sort => @sort, :cuisine => cuisine.id) {|link| content_tag 'span', link, :class => 'current'} %>&nbsp;&nbsp;&nbsp;&nbsp;
+	<% end %>
+</div>
+
+
+
+
+
+<% content_for :summary do -%>
+	<% if current_location && current_location.city && current_location.state -%>
+	Displaying <%= (@restaurants.total_entries == @restaurants.size) ? 'all ' + pluralize(@restaurants.size, 'restaurant') : "#{@restaurants.size} of #{@restaurants.total_entries} total restaurants" %> near <%= current_location.city %>, <%= current_location.state %>.
+	<% else -%>
+	Displaying <%= (@restaurants.total_entries == @restaurants.size) ? 'all ' + pluralize(@restaurants.size, 'restaurant') : "#{@restaurants.size} of #{@restaurants.total_entries} total restaurants" %>.
+	<% end -%>
+<% end -%>
+
+<h2 style="display:none">Displaying results around <%= current_location.zip -%></h2>
+
+<% content_for :pagination do -%>
+	<%= will_paginate @restaurants, :prev_label => 'Prev', :next_label => 'Next', :inner_window => 2 %>
+<% end -%>
+
+<% if @restaurants.size < -1 -%>
+	<div class="status">
+		<h2>Expecting more restaurants?</h2>
+		<p>We're adding new restaurants every day, but it looks like we don't have <%= @restaurants.any? ? 'many' : 'any' %> nearby you.  Perhaps you'd like to 
+			<%= link_to 'change your location', new_location_path %>?
+		</p>
+		<p>If you know of a restaurant that you'd like to see here, go right ahead and <%= link_to 'send us your suggestion', new_restaurant_suggestion_url %>.</p>
+	</div>
+<% end -%>
+
+
+
+<%= render :partial => 'restaurants_table', :locals => {:restaurants => @restaurants} %>
+
+</div>
+
+<% content_for :side_column do -%>
+	<div class="sidebar_item">
+		<div class="sidebar_item_header clearfix"><h2><span>Restaurant Missing?</span></h2></div>
+		<div class="sidebar_item_body clearfix">
+		We may have not heard of your favorite restaurant!
+		<%= link_to "Suggest a New Restaurant", new_restaurant_suggestion_path %> and we'll work on
+		making them available for online ordering.
+		</div>
+	</div>
+	
+	<div class="sidebar_item">
+		<div class="sidebar_item_header clearfix"><h2><span>Different Location?</span></h2></div>
+		<% if current_location && current_location.address -%>
+		<div class="sidebar_item_body clearfix">If you're not at <em><%= current_location.address.to_s %></em>, you can <%= link_to "Change your location", new_location_path %> to see the restaurants near you.</div>
+		<% else -%>
+		<div class="sidebar_item_body clearfix">To get more accurate results, you can <%= link_to "Change your location", new_location_path %> to see the restaurants near you.</div>
+		<% end -%>
+	</div>
+<% end -%>

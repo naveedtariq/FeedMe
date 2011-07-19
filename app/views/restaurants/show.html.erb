@@ -1,0 +1,156 @@
+<% @notice = flash[:notice] %>
+
+	<div id="artwork"><%= image_tag @restaurant.image %></div>
+
+<div style="clear:both">
+
+	<div style="border:1px solid #cccccc; float:left;">
+
+	<div class="left-column" style="height:100%">
+		<div id="menu_categories">
+		<%#= render :partial => 'menu_sections', :locals => {:combo => @combo} %>
+		<%= render :partial => 'menu_sections' %>
+		</div>
+		<div class="clear_fix"></div>
+	</div>
+	
+	<div class="center-column">
+		<div style="position:relative">
+		<% unless @restaurant.open? %>
+			<div style="margin-bottom:10px"><h1 class="red_text big_title" align="center"><%= @restaurant.name %></h1></div>
+		<% end %>
+			
+		<div class="left"><h1 class="blue_title"><%=link_to @restaurant.name %></h1></div>
+		<div class="right"><div><a href="javascript:void(0)" onclick="$('restaurant_info').toggle()">Restaurant Info</a></div></div>
+		<div class="clearfix"></div>
+			<div id="restaurant_info">
+				<div style="position:relative">
+				<div style="position:absolute; top:0; right:0; z-index:2"><a href="javascript:void(0)" onclick="$('restaurant_info').hide()">close</a></div>
+				<div class="time_wrapper">
+					<% unless @restaurant.phone_number.nil? or @restaurant.phone_number.blank? %>
+					<div><b>Phone number</b>: <%= @restaurant.phone_number %></div>
+					<% end %>
+					<% unless @restaurant.fax_number.nil? or @restaurant.fax_number.blank? %>
+					<div><b>Fax number</b>: <%= @restaurant.fax_number %></div>
+					<% end %>
+				</div>
+				
+				<div class="time_wrapper">
+					<b>Restaurant hours:</b>
+					<div><%= @restaurant.open_times_string %></div>	
+				</div>
+				<% if @restaurant.can_deliver? %>
+				<div class="time_wrapper">
+					<b>Delivery hours:</b>
+					<div><%= @restaurant.delivery_times_string %></div>
+				</div>
+				<% end %>
+				</div>
+			</div>
+		</div>
+		
+		
+		<br>
+		<div><%= image_tag 'spicy.png'  %> Designates a <b>Bund Pharoo</b> food</div>
+		
+		
+		<% if searching_delivery? and not @restaurant.delivering? %>
+			<div id="error" style="margin-top:10px; font-size:12px">Delivery is currently closed for this restaurant.<br><b>Delivery status:</b> <%=@restaurant.delivering_string %></div>
+		<% end %>
+		
+		<% unless @combo.nil? %>
+			<br>
+			<div id="combo_information">
+			<%= render :partial => 'combos/combo_information', :locals => {:ordered_combo => @ordered_combo} %>
+			</div>
+		<% end %>
+		
+		
+		<%# menu section and combo popup dialogs %>
+		<div class="clearfix">
+		<% @restaurant.menu_sections.each do |menu_section| %>
+			<% if @combo.nil? %>
+				<% menu_section.menu_items.each do |item| -%>
+						<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
+				<% end -%>
+			<% else -%>
+				<% menu_section.foods.each do |food| -%>
+						<%= render :partial => 'combos/combo_food_dialog', :locals => {:restaurant => @restaurant, :food => food, :combo => @combo, :ordered_combo => @ordered_combo} %>
+				<% end -%>
+			<% end -%>
+		<% end %>
+		
+		<%# @restaurant.specials.each do |special| -%>
+			<%#= render :partial => 'specials/special_dialogs', :locals => {:restaurant => @restaurant, :special => special} %>
+		<%# end %>
+		</div>
+		
+		
+		
+		<br>
+		
+		<% if @combo.nil? %>
+			<% if @restaurant.specials.count > 0 %>
+				<div style="text-align:center" class="specials_title">
+					<a href="#specials" id="specials" class="blue_text" style="text-decoration:underline">SPECIALS</a>
+				</div>
+				 <%= render :partial => "specials/special_content", :locals => { :restaurant => @restaurant } %>
+			<% end %>
+		
+			<% if @restaurant.combos.count > 0 and @combo.nil? %>
+				<br><br>
+				<div style="text-align:center" class="combos_title">
+					<a href="#combos" id="combos" class="blue_text" style="text-decoration:underline">Combinations</a>
+				</div>
+				<%= render :partial => "combos/combo_content", :locals => { :restaurant => @restaurant } %>
+			<% end %>
+		
+			<% @restaurant.menu_sections.each do |menu_section| %>
+				<%# next if menu_section.only_for_combos? %>
+				<%# if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
+					<%= render :partial => 'menu_content', :locals => {:menu_section => menu_section} %>
+				<%# end %>
+			<% end %>
+		
+			
+		
+		<% else %>
+			<% unless @combo.nil? %>
+				<% if @error == 1 %>
+					<div style="color:#f00; text-align:center">You must choose the correct number of items before adding to the cart.</div>
+				<% end %>
+				
+				<% @restaurant.menu_sections.each do |menu_section| %>
+					<% if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
+						<%= render :partial => 'menu_content', :locals => {:menu_section => menu_section, :combo => @combo, :ordered_combo => @ordered_combo} %>
+					<% end %>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+		
+
+	</div>
+		
+	
+	<div class="clear_fix"></div>
+	</div>
+	
+	
+	<div id="cart_wrapper">
+	<div id="cart" class="right-column">
+		<%#= render :partial => "cart" %>
+		
+		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
+			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
+		<% end -%>
+	</div>
+	</div>
+	
+	
+	
+	
+
+
+
+</div>

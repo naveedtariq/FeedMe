@@ -1,0 +1,17 @@
+<div class="text">
+	<h2>There are no restaurants nearby!</h2>
+	<p>We're adding new restaurants every day, but it looks like we don't have any nearby you.  Perhaps you'd like to 
+		<%= link_to 'change your location', new_user_location_url(current_user) %>?  Don't worry, we'll let you know when we have restaurants nearby!
+	</p>
+	<% if @closest_restaurant -%>
+	<p>The closest restaurants are in <strong><%= @closest_restaurant.city %>, <%= @closest_restaurant.state %></strong>.
+	<% end -%>
+	<p>If you know of a restaurant that you'd like to see here, go right ahead and <%= link_to 'send us your suggestion', new_restaurant_suggestion_url %>.</p>
+
+	<h2>While you wait, why not <%= link_to_function 'throw some virtual food at your friends', 'top.location = "http://apps.facebook.com/foodfight"' %>?</h2>
+
+	<div style="text-align: center">
+		<%= link_to_function image_tag('food_fight_logo.gif'), 'top.location = "http://apps.facebook.com/foodfight"' %>
+	</div>
+	
+</div>

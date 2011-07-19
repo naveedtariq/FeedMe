@@ -1,0 +1,38 @@
+body {
+  font-family: arial, sans-serif;
+}
+
+
+h1 {
+  text-shadow: #CCC 2px 2px 1px;
+  background-color: #F0F0F0;
+  margin-bottom: 0;
+  padding: 16px 16px 0.5em 16px;
+}
+#menu {
+  background-color: #F0F0F0;
+  padding: 8px;
+}
+
+#menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+#menu li {
+  list-style: none;
+  display: inline;
+  border-left: 1px solid #AAA;
+}
+#menu li:first-child {
+  border-left: none;
+}
+#menu li a {
+  padding: 8px;
+  text-decoration: none;
+  color: #4392C0;
+}
+#menu li a:visited {
+  padding: 8px;
+  text-decoration: none;
+}

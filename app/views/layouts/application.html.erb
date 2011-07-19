@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<%= stylesheet_link_tag 'facebook_style', 'base', 'layout', 'form', 'custom', 'dialog', 'site' %>
+	<%= javascript_include_tag :defaults %>
+	<!--[if gte IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/stylesheets/ie7.css); /* ]]> */</style><![endif]-->
+	<%= yield :head %>
+	<%#= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag :defaults %>
+</head>
+
+<% side_column = yield :side_column -%>
+<body<%= ' style="background-color: #fff"' unless side_column.blank? %> id="body">
+<script>
+	function safariFixSession(sess_id, controller) {
+    var url = location.href;
+    var url_with_redirect = controller + "?redirect_to=" + url;
+    
+    $$('body')[0].insert("<form id='safariFixSession'></form>");
+    var f = $('safariFixSession')
+    f.method = 'POST';
+    f.action = url_with_redirect;
+    var m = document.createElement('input');
+    m.setAttribute('type', 'hidden');
+    m.setAttribute('name', '_session_id');
+    m.setAttribute('value', sess_id);
+    f.appendChild(m);
+    // var m = document.createElement('input');
+    // m.setAttribute('type', 'hidden');
+    // m.setAttribute('name', 'authenticity_token');
+    // m.setAttribute('value', '<%= form_authenticity_token %>');
+    // f.appendChild(m);    
+    f.submit();
+	} 
+
+  if (document.cookie.indexOf("safari_cookie_fix") == -1) safariFixSession("<%= session[:session_id] %>", "/safari_cookie_fix");
+  
+  
+</script>
+<%= fb_connect_javascript_tag %>
+<%= init_fb_connect "XFBML" %>
+
+	<%# === Masthead === %>
+	<% masthead_content = yield :masthead 
+		if masthead_content.blank? -%>
+		<%= render :partial => 'layouts/full_masthead' %>
+	<% else -%>
+		<%= masthead_content %>
+	<% end -%>
+
+	<%# === Content Menu === %>
+	<% content_menu = yield :content_menu 
+	unless content_menu.blank? -%>
+	<div id="content_menu">
+		<%= content_menu %>
+	</div>
+	<% end -%>
+	
+	<%# === Dialogs === %>
+	<%= yield :dialogs %>
+
+	<%# === Page Body === %>
+	<div class="sharebox">
+	  <% summary = yield :summary
+	     pagination = yield :pagination
+	     if summary || pagination %>
+		<div class="bar clearfix summary_bar">
+			<div class="summary"><%= summary %></div>
+			<%= pagination %>
+		</div>
+		<% end %>
+
+		<div id="home_container" class="clearfix friends">
+			
+			<%# === Main / Only Column === %>
+			<div class="<%= side_column.blank? ? 'content_no_sidebar' : 'main_column' %> full_text" id="home_main">
+			  <%= facebook_messages %>
+				<% error_content = yield :error 
+					unless error_content.blank? -%>
+					<div id="error">
+						<%= error_content %>
+					</div>
+				<% end %>
+				<% if notice = flash[:notice] -%>
+					<div class="status">
+						<h2>
+							<span id="status_title"><%= notice %></span>
+						</h2>
+					</div>
+				<% end -%>
+				<%= yield %>
+			</div>
+			
+			<%# === Side Column === %>
+			<% unless side_column.blank? -%>
+			<div id="home_sidebar" class="side_column clearfix">
+				<%= yield :side_column %>
+			</div>
+			<% end -%>
+		</div>
+	</div>
+	
+	<%# === Current Time ===%>
+	<% if Rails.env.development? %>
+	  <div id="time">
+	    <%= Time.now.to_s %>
+	  </div>
+	<% end %>
+	
+	<%# === Debug Data === %>
+	<% if ENV['RAILS_ENV'] == 'development' %>
+	<div id="debug" >
+		<a href="#" onclick="Element.toggle('debug_info');return false" style="text-decoration: none; color: #ccc;">Show Debug Info ➲</a>
+
+		<div id="debug_info" style="display : none;"class="dialog">
+			<div class="content">
+				<div class="t"></div>
+				<%= debug session %>
+				<%= debug params %>	
+				<div class="b"><div></div></div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	
+	<%# Goooooooooooooooooogle %>
+	<script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+	_uacct = "UA-2268043-2";
+	urchinTracker();
+	</script>
+</body>
+</html>

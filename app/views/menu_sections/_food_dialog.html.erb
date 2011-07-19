@@ -1,0 +1,119 @@
+<div style="position:relative">
+<div style="display:none" class="generic_dialog pop_dialog" id="food_dialog_<%= food.id %>">
+	<div style="top: 0px;" id="generic_dialog_popup">
+		<table id="pop_dialog_table" class="pop_dialog_table">
+			<tbody>
+				<tr>
+					<td class="pop_topleft"></td>
+
+					<td class="pop_border"></td>
+
+					<td class="pop_topright"></td>
+				</tr>
+
+				<tr>
+					<td class="pop_border"></td>
+
+					<td class="pop_content" id="pop_content">
+						<h2><span>Add <%=h food.name %>?</span></h2>
+
+						<div class="dialog_content">
+							<%= form_tag :controller => 'ordered_foods', :action => 'create', :id => "food_dialog_form_#{food.id}" %>
+								<div class="dialog_body">
+								<div class="left">
+								
+									<% unless food.desc.blank? -%>
+										<p><span class="description"><%=h food.desc%></span></p>
+									<% end -%>
+									<%# if food.food_types.count > 0 %>
+										<p>
+											<div><b>Select one:</b></div>
+										<%# food.food_types.each do |food_type| -%>
+											<div><%#= radio_button_tag :food_type, food_type.id, food_type == food.food_types.first%> <%#= food_type.name %></div>
+										<%# end -%>
+										</p>
+									<%# end %>
+									
+									<%# if food.included_toppings.count > 0 -%>
+										<p>
+										<div class="included_toppings">Included Options: <%#= h food.included_toppings.join(', ')%></div>
+										</p>
+									<%# end -%>
+									
+									<%# if food.toppable? -%>
+									<p>
+										<%#= link_to_function "Add Toppings", "$('toppings_#{food.id}').toggle();" %>
+										<div id="toppings_<%=food.id %>" style="display: none" >
+											<%# if !food.max_free_toppings.nil? and food.max_free_toppings > 0 -%>
+												You may select up to <%#= food.max_free_toppings %> toppings for free
+											<%# end -%>
+											<div class="toppings_list clearfix">
+											<%# if food.food_toppings.nil? or food.food_toppings.count == 0 %>
+												<%# restaurant.available_toppings.each do |att| -%>
+													<div><label><%#= check_box_tag('available_topping_ids[]', att.id) %> <%#=h att.topping.name %> (<span class="price"><%#= number_to_currency att.price %></span>)</label></div>
+												<%# end -%>
+											<%# end %>
+		
+											<%# food.food_toppings.each do |att| -%>
+												<div><label><%#= check_box_tag('food_topping_ids[]', att.id) %> <%#=h att.topping.name %> 
+													(<span class="price"><%#= number_to_currency att.price %></span>)</label></div>
+											<%# end -%>
+											
+											</div>
+										</div>
+									</p>
+									<%# end -%>
+									<p>
+									<%# if food.sizes.count > 0 -%>
+										<%# food.sizes.each do |size| -%>
+											<div class="clearfix">
+											<label><%#= radio_button_tag('size_id', size.id, size == food.sizes.first) %> <%#=h size.name %> <span class="price"><%#=number_to_currency size.price %></span></label>
+											</div>
+										<%# end -%>
+									<%# else -%>
+										<b>Price: <%= number_to_currency food.price %></b>
+									<%# end -%>
+									</p>
+
+								</div>
+								
+								<div class="right" style="padding-right:10px; padding-top:20px">
+								
+								<%= text_field_tag :count, 1, :size => 2 %>
+								</div>
+								
+								<div class="clearfix">&nbsp;</div>
+								<p>
+									<div><b>Special instructions</b></div>
+									<div><%= text_area_tag :special_instructions, nil, {:size => "50x5"} %></div>
+								</p>
+								</div>
+								
+								<div class="dialog_buttons">
+									<%= hidden_field_tag :food_id, food.id %>
+									<input type="button" value="Add" class="inputsubmit" onclick="<%= remote_function( 
+									    :url    => {:controller => 'ordered_foods', :action => 'create' },
+											:submit => "food_dialog_#{food.id}",
+											:method => :post,
+											:after => "$('food_dialog_#{food.id}').hide()") %>"/>
+									<input class="inputsubmit" value="Cancel" onclick="$('food_dialog_<%= food.id %>').hide()" type="button">
+								</div>
+							</form>
+						</div>
+					</td>
+
+					<td class="pop_border"></td>
+				</tr>
+
+				<tr>
+					<td class="pop_bottomleft"></td>
+
+					<td class="pop_border"></td>
+
+					<td class="pop_bottomright"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>

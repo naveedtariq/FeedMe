@@ -1,0 +1,148 @@
+
+	<div style="text-align:center"><h1 class="blue_title">My Cart</h1></div><br>
+	<% @count = 1 %>
+	<% pending_order_at(@restaurant).foods.each do |ordered_food| -%>
+		<% div_for(ordered_food) do -%>
+			<div class="title">
+				<% unless ordered_food.count == 1 -%>
+					<span class="quantity">(<%= ordered_food.count %>)</span>
+				<% end -%>
+				<span class="name"><%= h ordered_food.food.name %></span>
+				<% unless ordered_food.size.nil? -%>
+					<span class="size">(<%= h ordered_food.size.name %>)</span>
+				<% end -%>
+			</div>
+			
+			
+			<% ordered_food.ordered_toppings.each do |ot| -%>
+				<div class="topping">
+					<span class="plus">+</span>
+					<span class="name"><%= h ot.topping.name %></span>
+					<% if ot.price > 0 -%>
+						<span class="price"><%= number_to_currency ot.price %></span>
+					<% end -%>
+				</div>
+			<% end -%>
+			
+			<div style="clear:both">
+				<div class="left">
+					<div class="price">Price: <%= number_to_currency ordered_food.total_price %></div>
+				</div>
+				<div class="right">
+				<%= link_to_remote "Remove",
+					:url => {:controller => 'ordered_foods', :action => 'destroy', :id => ordered_food.id }, 
+					:method => :delete %>
+				</div>
+				<div class="clr_fix">&nbsp;</div>
+			</div>
+		<% end -%>
+		<% @count += 1 -%>
+	<% end -%>
+	
+	
+	
+	
+	<% pending_order_at(@restaurant).specials.each do |ordered_special| -%>
+		<div class="ordered_food">
+			<div class="title">
+				<% unless ordered_special.count == 1 -%>
+					<span class="quantity">(<%= ordered_special.count %>)</span>
+				<% end -%>
+				<span class="name"><%= h ordered_special.special.title %></span>
+			</div>
+			
+			
+			<% ordered_special.ordered_toppings.each do |ot| -%>
+				<div class="topping">
+					<span class="plus">+</span>
+					<span class="name"><%= h ot.topping.name %></span>
+					<% if ot.price > 0 -%>
+						<span class="price"><%= number_to_currency ot.price %></span>
+					<% end -%>
+				</div>
+			<% end -%>
+			
+			<div style="clear:both">
+				<div class="left">
+					<div class="price">Price: <%= number_to_currency ordered_special.total_price %></div>
+				</div>
+				<div class="right">
+				<%= link_to_remote "Remove",
+					:url => {:controller => 'ordered_specials', :action => 'destroy', :id => ordered_special.id }, 
+					:method => :delete %>
+				</div>
+				<div class="clr_fix">&nbsp;</div>
+			</div>
+		</div>
+		<% @count += 1 -%>
+	<% end -%>
+	
+	
+	<% pending_order_at(@restaurant).completed_combos.each do |ordered_combo| -%>
+		<div class="ordered_food">
+			<div class="title">
+				<span class="name"><%= h ordered_combo.combo.title %></span>
+			</div>
+			
+			<% ordered_combo.ordered_combo_foods.each do |ordered_combo_food| -%>
+				<div style="padding-left:5px">
+				<div><%=ordered_combo_food.food.name %></div>
+				
+				<% ordered_combo_food.ordered_toppings.each do |ot| -%>
+					<div class="topping">
+						<span class="plus">+</span>
+						<span class="name"><%= h ot.topping.name %></span>
+						<% if ot.price > 0 -%>
+							<span class="price"><%= number_to_currency ot.price %></span>
+						<% end -%>
+					</div>
+				<% end -%>
+				</div>
+			<% end -%>
+			
+			<div style="clear:both">
+				<div class="left">
+					<div class="price">Price: <%= number_to_currency ordered_combo.total_price %></div>
+				</div>
+				<div class="right">
+				<%= link_to_remote "Remove",
+					:url => {:controller => 'ordered_combos', :action => 'destroy', :id => ordered_combo.id }, 
+					:method => :delete %>
+				</div>
+				<div class="clr_fix">&nbsp;</div>
+			</div>
+		</div>
+		<% @count += 1 -%>
+	<% end -%>
+	
+
+	<div id="order_for" class="blue_text">
+		This order is for <%= searching_delivery? ? "DELIVERY" : "PICK UP" %>
+	</div>
+		
+	
+	<% if pending_order_at(@restaurant).foods.empty? and pending_order_at(@restaurant).combos.empty? and pending_order_at(@restaurant).specials.empty? -%>
+		<div style="text-align:center">Your cart is empty</div>
+	<% else -%>
+		<div class="subtotal">
+			Sub Total: 
+			<%= number_to_currency pending_order_at(@restaurant).subtotal %>
+		</div>
+		<div style="text-align:center">
+		<% if @restaurant.open? -%>
+			<% if @restaurant.minimum_order.nil? or @restaurant.minimum_order < pending_order_at(@restaurant).subtotal -%>
+			  <%= button_to 'Check Out', new_restaurant_order_placement_url(@restaurant), :class => 'inputsubmit', :method => 'get' %>
+			<% else -%>
+			<div id="minimum_order">
+				<%= h @restaurant.name %> has a minimum order of <%= number_to_currency @restaurant.minimum_order %>
+			</div>
+			<% end -%>
+	
+		<% else -%>
+			<div class="closed">
+			<%=h @restaurant.name %> is currently closed.
+			</div>
+		<% end -%>
+		</div>
+	<% end -%>
+
