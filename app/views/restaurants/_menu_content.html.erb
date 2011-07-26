@@ -1,14 +1,11 @@
-<div class="clearfix">
+<div class="food_menu menu_<%= menu_section.id %>" style="display: none;">
 
-<br>
 <div>
 	
 	<div style="text-align:center">
 	<%#= image_tag url_for_file_column(menu_section, "filename") if menu_section.filename  %>
-		<a href="#menu-section-<%= menu_section.id %>" id="menu-section-<%= menu_section.id %>" class="blue_text" style="text-decoration:underline">
+		<%= menu_section.name %> - <a href="#" onclick="display_menu(<%= menu_section.id %>);">&lt;- Back to Categories</a>
 			
-			<%= menu_section.name %>
-		</a>
 		<%# if menu_section.notes %>
 		<div class="section_note"><%#=menu_section.notes%></div>
 		<%# end -%>
@@ -59,4 +56,3 @@
 	</table>
 </div>
 </div>
-<br><br>

@@ -6,26 +6,24 @@
 
 	<div style="border:1px solid #cccccc; float:left;">
 
-	<div class="left-column" style="height:100%">
-		<div id="menu_categories">
-		<%#= render :partial => 'menu_sections', :locals => {:combo => @combo} %>
-		<%= render :partial => 'menu_sections' %>
-		</div>
-		<div class="clear_fix"></div>
-	</div>
+	<!--<div class="left-column" style="height:100%"></div>-->
 	
 	<div class="center-column">
+
 		<div style="position:relative">
 		<% unless @restaurant.open? %>
-			<div style="margin-bottom:10px"><h1 class="red_text big_title" align="center"><%= @restaurant.name %></h1></div>
+			<div style="margin-bottom:10px">
+				<h1 class="red_text big_title" align="center"><%= @restaurant.name %></h1>
+				( <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.75em;" target="_blank">View on Google</a> )
+			</div>
 		<% end %>
 			
 		<div class="left"><h1 class="blue_title"><%=link_to @restaurant.name %></h1></div>
-		<div class="right"><div><a href="javascript:void(0)" onclick="$('restaurant_info').toggle()">Restaurant Info</a></div></div>
+		<div class="right"><div><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle()">Restaurant Info</a></div></div>
 		<div class="clearfix"></div>
 			<div id="restaurant_info">
 				<div style="position:relative">
-				<div style="position:absolute; top:0; right:0; z-index:2"><a href="javascript:void(0)" onclick="$('restaurant_info').hide()">close</a></div>
+				<div style="position:absolute; top:0; right:0; z-index:2"><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle();">close</a></div>
 				<div class="time_wrapper">
 					<% unless @restaurant.phone_number.nil? or @restaurant.phone_number.blank? %>
 					<div><b>Phone number</b>: <%= @restaurant.phone_number %></div>
@@ -47,11 +45,13 @@
 				<% end %>
 				</div>
 			</div>
+			
+		<div id="menu_categories">
+		<%#= render :partial => 'menu_sections', :locals => {:combo => @combo} %>
+		<%= render :partial => 'menu_sections' %>
 		</div>
-		
-		
-		<br>
-		<div><%= image_tag 'spicy.png'  %> Designates a <b>Bund Pharoo</b> food</div>
+
+		</div>
 		
 		
 		<% if searching_delivery? and not @restaurant.delivering? %>
@@ -68,17 +68,11 @@
 		
 		<%# menu section and combo popup dialogs %>
 		<div class="clearfix">
-		<% @restaurant.menu_sections.each do |menu_section| %>
-			<% if @combo.nil? %>
-				<% menu_section.menu_items.each do |item| -%>
-						<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
-				<% end -%>
-			<% else -%>
-				<% menu_section.foods.each do |food| -%>
-						<%= render :partial => 'combos/combo_food_dialog', :locals => {:restaurant => @restaurant, :food => food, :combo => @combo, :ordered_combo => @ordered_combo} %>
-				<% end -%>
-			<% end -%>
-		<% end %>
+		<%# @restaurant.menu_sections.each do |menu_section| %>
+				<%# menu_section.menu_items.each do |item| -%>
+						<%#= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
+			<%# end -%>
+		<%# end %>
 		
 		<%# @restaurant.specials.each do |special| -%>
 			<%#= render :partial => 'specials/special_dialogs', :locals => {:restaurant => @restaurant, :special => special} %>

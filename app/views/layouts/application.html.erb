@@ -2,15 +2,15 @@
 <html>
 <head>
 	<%= stylesheet_link_tag 'facebook_style', 'base', 'layout', 'form', 'custom', 'dialog', 'site' %>
-	<%= javascript_include_tag :defaults %>
+	<%#= javascript_include_tag :defaults %>
 	<!--[if gte IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/stylesheets/ie7.css); /* ]]> */</style><![endif]-->
 	<%= yield :head %>
 	<%#= stylesheet_link_tag 'application' %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery-1.6.2.min' %>
 </head>
 
 <% side_column = yield :side_column -%>
-<body<%= ' style="background-color: #fff"' unless side_column.blank? %> id="body">
+<body<%= 'style="background-color: #fff"' unless side_column.blank? %> id="body">
 <script>
 	function safariFixSession(sess_id, controller) {
     var url = location.href;

@@ -288,7 +288,11 @@ dt.blue_text {
 #map_canvas { height: 100% }
 #map_wrapper {
 margin:20px auto;
+clear: both;
 
+font-size: 1.3em;
+
+margin-top: 15px;
 }
 #map {
 	width: 80%;
@@ -300,7 +304,7 @@ margin:20px auto;
 	text-align: center;
 	float:left;
 	
-	width: 160px;
+	width: 500px;
 	background-color: #f6f6f6 !important;
 	/*overflow: hidden;*/
 }
@@ -308,12 +312,12 @@ margin:20px auto;
 #menu_categories {
 	padding-top: 25px;
 	left:0;
-	width: 160px;
+	width: auto;
 }
 
 .center-column {
 	float:left;
-	width:375px;
+	width: 500px;
 	padding: 25px 5px;
 	position:relative;
 }
@@ -355,8 +359,10 @@ margin:20px auto;
 	background: -moz-linear-gradient(top,  #627AAD,  #315091);
 	border:1px solid #284585;
 	text-align: center;
-	margin-bottom: 5px;
-	padding:5px 0;
+	margin: 5px;
+	padding: 5px;
+
+	float: left;
 }
 
 #save_favorite {
@@ -705,6 +711,8 @@ td span.food {
 	right:0;
 	background:#fff;
 	width:300px;
+
+	display: none;
 }
 .time_wrapper {
 	font-size:11px;
