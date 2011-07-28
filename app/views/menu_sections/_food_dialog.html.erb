@@ -34,11 +34,17 @@
 										</p>
 									<%# end %>
 									
-									<%# if food.included_toppings.count > 0 -%>
+									<% unless food.children.count > 0 -%>
 										<p>
-										<div class="included_toppings">Included Options: <%#= h food.included_toppings.join(', ')%></div>
+										<div class="included_toppings"><b>Included Options: <br /></b>
+											<% puts '+++++++++++++' + food.children.inspect + '+++++++++++++++++' %>
+											<% food.children.each do |option| %>
+												<%= check_box_tag 'option'+option.id, 1%> <%= option.name + '(' + option.price + ')' %>
+												<br />
+											<% end %>
+										</div>
 										</p>
-									<%# end -%>
+									<% end -%>
 									
 									<%# if food.toppable? -%>
 									<p>
@@ -96,7 +102,7 @@
 											:submit => "food_dialog_#{food.id}",
 											:method => :post,
 											:after => "$('food_dialog_#{food.id}').hide()") %>"/>
-									<input class="inputsubmit" value="Cancel" onclick="$('food_dialog_<%= food.id %>').hide()" type="button">
+									<input class="inputsubmit" value="Cancel" onclick="$('#food_dialog_<%= food.id %>').hide()" type="button">
 								</div>
 							</form>
 						</div>

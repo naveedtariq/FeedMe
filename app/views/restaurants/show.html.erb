@@ -68,11 +68,11 @@
 		
 		<%# menu section and combo popup dialogs %>
 		<div class="clearfix">
-		<%# @restaurant.menu_sections.each do |menu_section| %>
-				<%# menu_section.menu_items.each do |item| -%>
-						<%#= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
-			<%# end -%>
-		<%# end %>
+		<% @restaurant.menu_sections.each do |menu_section| %>
+				<% menu_section.menu_items.each do |item| -%>
+						<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
+			<% end -%>
+		<% end %>
 		
 		<%# @restaurant.specials.each do |special| -%>
 			<%#= render :partial => 'specials/special_dialogs', :locals => {:restaurant => @restaurant, :special => special} %>

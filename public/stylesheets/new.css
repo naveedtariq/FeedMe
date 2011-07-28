@@ -120,7 +120,10 @@ body {
 }
 
 .blue_text {
-	color:#3b5998;
+	color: #3B5998;
+	float: right;
+	font-size: 1.5em;
+	margin-right: 10px;
 }
 dt.blue_text {
 	padding-bottom:5px;
@@ -401,14 +404,14 @@ margin-top: 15px;
 }
 
 .row_1 {
-	background: #e4e6e8;
+	background: #F4F6F8;
 	padding:7px 0px 7px 5px;
 	
 	font-size: 13px;
 	vertical-align: top;
 }
 .row_2 {
-	background: #fff;
+	background: #FAFBFC;
 	padding:7px 0px 7px 5px;
 	
 	font-size: 13px;
@@ -433,9 +436,8 @@ font-size:11px;
 
 
 .section_note {
-	font-style: italic;
-	font-size: 12px;
-	color: #999;
+	font-size: 13px;
+	color: #666;
 	text-align: left;
 	margin-bottom: 7px;
 }

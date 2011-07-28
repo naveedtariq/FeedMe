@@ -19,31 +19,15 @@
 			table_class = "row_1" if count % 2 == 0
 		%>
 		  <tr class="<%=table_class%>">
-		    <td align="left" width="70%" class="<%=table_class%>">
+		    <td align="left" width="100%" class="<%=table_class%>">
 					
-		    	<%# if food.spiciness == 1 %>
-		    		<%#= image_tag 'spicy.png'  %>
-		    	<%# end %>
+		    	<%= link_to_function food.name, "show_menu_item(#{food.id})" %>
 
-		    	<%= link_to_function food.name, "Effect.Appear('food_dialog_#{food.id}', { duration: 0.3 });" %>
-					<%#= link_to_function food.name, "Effect.Appear('combo_food_dialog_#{food.id}', { duration: 0.3 });" %>
 					<% unless food.desc.nil? %>
-						<div class="section_note"><%= food.desc %></div>
+						<div class="section_note"><%= truncate food.desc, :length => 50 %></div>
 					<% end %>
-			</td>
-			<%# if combo.nil? %>
-			<td align="right" class="<%=table_class%>" width="30%">
 				<div class="blue_text">
-					<%# if food.sizes.count > 0 -%>
-						<%# food.sizes.each do |size| -%>
-							<div class="size">
-								<%#=h size.name %>
-								<span class="p"><%=number_to_currency food.price %></span>
-							</div>
-						<%# end -%>
-					<%# else -%>
-						<%#=number_to_currency food.price %>
-					<%# end -%>
+					<span class="p"><%=number_to_currency food.price %></span>
 				</div>
 			
 			</td>
