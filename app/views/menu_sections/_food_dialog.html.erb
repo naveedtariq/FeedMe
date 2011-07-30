@@ -22,7 +22,7 @@
 								<div class="dialog_body">
 								<div class="left">
 								
-									<% unless food.desc.blank? -%>
+									<% unless food.desc.blank? %>
 										<p><span class="description"><%=h food.desc%></span></p>
 									<% end -%>
 									<%# if food.food_types.count > 0 %>
@@ -34,12 +34,23 @@
 										</p>
 									<%# end %>
 									
-									<% unless food.children.count > 0 -%>
+									<% unless food.children.empty? %>
 										<p>
 										<div class="included_toppings"><b>Included Options: <br /></b>
-											<% puts '+++++++++++++' + food.children.inspect + '+++++++++++++++++' %>
+											<%# puts '+++++++++++++' + food.children.inspect + '+++++++++++++++++' %>
+
 											<% food.children.each do |option| %>
-												<%= check_box_tag 'option'+option.id, 1%> <%= option.name + '(' + option.price + ')' %>
+												<%= check_box_tag option.id, 1, false, :class => 'item_options' %> <%= option.name.capitalize %>
+												<% unless option.children.empty? %>
+													<div id="child_opts_<%= option.id %>" style="margin-left: 15px; display: none;">
+													<%= hidden_field_tag "option_used", "nil" %>
+													<% option.children.each do |child| %>
+														<%= radio_button_tag option.name, 1, false, {:class => "sub_option", :price => child.price, :id => child.id} %>
+														<%= label_tag option.name, child.name.capitalize + ' ($' + child.price + ')' %>
+														<br />
+													<% end %>
+													</div>
+												<% end %>
 												<br />
 											<% end %>
 										</div>
@@ -77,7 +88,8 @@
 											</div>
 										<%# end -%>
 									<%# else -%>
-										<b>Price: <%= number_to_currency food.price %></b>
+										<b>Price: 
+										<%= text_field_tag("total_price_active", food.price, {:disabled => true, :id => "total_price_active"}) %></b>
 									<%# end -%>
 									</p>
 
