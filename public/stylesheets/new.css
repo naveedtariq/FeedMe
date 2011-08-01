@@ -480,9 +480,8 @@ div.title {
 
 
 .food_description, #generic_dialog_popup .description {
-	font-style: italic;
-	font-size: 12px;
-	color: #999;
+	font-size: 15px;
+	color: #333;
 	text-align: left;
 }
 

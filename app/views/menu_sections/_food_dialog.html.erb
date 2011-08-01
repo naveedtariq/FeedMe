@@ -23,7 +23,7 @@
 								<div class="left">
 								
 									<% unless food.desc.blank? %>
-										<p><span class="description"><%=h food.desc%></span></p>
+										<p><span class="description"><%= food.desc.capitalize %></span></p>
 									<% end -%>
 									<%# if food.food_types.count > 0 %>
 										<p>
@@ -89,7 +89,7 @@
 										<%# end -%>
 									<%# else -%>
 										<b>Price: 
-										<%= text_field_tag("total_price_active", food.price, {:disabled => true, :id => "total_price_active"}) %></b>
+										<%= text_field_tag("total_price", food.price, {:disabled => true, :id => "total_price", :class => 'nactive'}) %></b>
 									<%# end -%>
 									</p>
 
@@ -114,7 +114,7 @@
 											:submit => "food_dialog_#{food.id}",
 											:method => :post,
 											:after => "$('food_dialog_#{food.id}').hide()") %>"/>
-									<input class="inputsubmit" value="Cancel" onclick="$('#food_dialog_<%= food.id %>').hide()" type="button">
+									<input class="inputsubmit" value="Cancel" onclick="hide_food_dialog('food_dialog_<%= food.id %>');" type="button">
 								</div>
 							</form>
 						</div>
