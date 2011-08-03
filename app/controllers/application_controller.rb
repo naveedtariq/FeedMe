@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   filter_parameter_logging :fb_sig_friends
+
+	def current_cart
+		session[:current_cart] ||= (session[:current_cart] = Cart.new(:restaurant_id => current_restaurant, :user_id => current_user.id)
+	end
+
+	def current_restaurant
+		session[:current_restaurant]
+	end
   
 	def ensure_authenticated
 		if session[:at]

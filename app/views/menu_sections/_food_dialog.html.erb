@@ -109,11 +109,7 @@
 								
 								<div class="dialog_buttons">
 									<%= hidden_field_tag :food_id, food.id %>
-									<input type="button" value="Add" class="inputsubmit" onclick="<%= remote_function( 
-									    :url    => {:controller => 'ordered_foods', :action => 'create' },
-											:submit => "food_dialog_#{food.id}",
-											:method => :post,
-											:after => "$('food_dialog_#{food.id}').hide()") %>"/>
+									<input type="button" value="Add to Cart" class="inputsubmit" onclick="cart_add(<%= "#{food.id}, '#{food.name}', #{food.price}" %>);"/>
 									<input class="inputsubmit" value="Cancel" onclick="hide_food_dialog('food_dialog_<%= food.id %>');" type="button">
 								</div>
 							</form>

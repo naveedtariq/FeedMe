@@ -10,7 +10,11 @@ class RestaurantsController < ApplicationController
 
 
 	def show
+		
 		@restaurant = Restaurant.restaurant( params[:id] )
+		unless @restaurant
+			session[:restaurant_id] = @restaurant.id
+		end
 #puts @restaurant.inspect + '*********************************************'
 	end
 

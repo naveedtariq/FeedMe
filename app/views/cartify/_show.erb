@@ -1,0 +1,23 @@
+<div id="cartify">
+<h2>Your Cart</h2>
+
+<div id="cartify_items"></div>
+
+<script id="cart_item_template" type="x-tmpl-mustache">
+	<div id="Test">
+		{{#items}}
+		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}</b><br />
+
+		Options:
+		<ul>
+			{{#options}}
+			<li>{{name}} - {{price}}</li>
+			{{/options}}
+		</ul>
+		{{/items}}
+	</div>
+</script>
+
+
+<div>Total Price: $<span id="cart_price">0</div>
+</div>
