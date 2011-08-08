@@ -8,6 +8,13 @@ class CartItem
 		@name = params[:name]
 		@price = params[:price].to_f
 		@id = params[:id]
+
+		unless params[:options].nil?
+			params[:options].each do |opt|
+				self.add_option(opt)
+			end
+		end
+
 	end
 
 	def add_option(option)

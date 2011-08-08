@@ -1,9 +1,9 @@
 
-function cart_add( id, name, price )
+function cart_add( food_id )
 {
 	//alert(id);
 
-	var data =
+/*	var data =
 	{
 		items:
 		[{
@@ -21,9 +21,25 @@ function cart_add( id, name, price )
 				price: 1,
 			 }]
 		}]
-	};
+	};*/
 
-	$('#cart_item_template').mustache(data).appendTo('#cartify_items');
+	var dlg = $('#food_dialog_'+food_id);
 
-	$('#food_dialog_'+id).hide();
+	var opts = $('.item_options',dlg);
+
+	var options = Array();
+
+	if ( opts.length )
+	{
+		opts.each( function(i) 
+		{
+			alert($('input.sub_option:checked',$(this)).attr('name'));
+			
+		});
+
+	}
+
+	/*$('#cart_item_template').mustache(data).appendTo('#cartify_items');
+
+	$('#food_dialog_'+id).hide();*/
 }

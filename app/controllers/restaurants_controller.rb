@@ -18,4 +18,7 @@ class RestaurantsController < ApplicationController
 #puts @restaurant.inspect + '*********************************************'
 	end
 
+	def add_favorite
+	end
+
 end

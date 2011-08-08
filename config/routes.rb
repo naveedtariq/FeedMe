@@ -1,6 +1,6 @@
 Fc::Application.routes.draw do
 
-  get "cartify/add"
+#get "cartify/add"
 
 	root :to => "locations#new"
 	resource :location

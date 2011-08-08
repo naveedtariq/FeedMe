@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :fb_sig_friends
 
 	def current_cart
-		session[:current_cart] ||= (session[:current_cart] = Cart.new(:restaurant_id => current_restaurant, :user_id => current_user.id)
+		session[:current_cart] ||= (session[:current_cart] = Cart.new(:restaurant_id => current_restaurant, :user_id => current_user.id))
 	end
 
 	def current_restaurant
