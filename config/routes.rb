@@ -1,10 +1,10 @@
 Fc::Application.routes.draw do
 
-#get "cartify/add"
-
-	root :to => "locations#new"
+	resources :orders
 	resource :location
 	resources :restaurants
+
+	root :to => "locations#new"
 
 	match '/:controller(/:action(/:id))'
 	match '/:controller(/:action(/:id)).:format'
