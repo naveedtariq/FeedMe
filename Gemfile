@@ -12,6 +12,7 @@ gem 'httparty'
 #gem "rmagick"
 #gem "geokit"
 gem 'geokit-rails3'
+gem 'jquery-rails', '>= 1.0.12'
 
 #gem 'slim_scrooge'
 gem "will_paginate", "~> 3.0.pre2"

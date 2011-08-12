@@ -1,88 +1,40 @@
-
-function cart_add( food_id )
+function cart_add( food_id , food_name, food_price )
 {
-	//alert(id);
+	var new_food = function(id, name, price, count, instructions){
+		return {id:id,name:name,price:price,count:count,instructions:instructions}
+	}
 
-/*	var data =
-	{
-		items:
-		[{
-			name: 	name,
-			qty: 		2,
-			price: 	price,
+	var new_option = function(id, name, price){
+		return {id:id,name:name,price:price}
+	}
 
-			options:
-			[{
-				name: 'Achaar Topping',
-				price: 1,
-			 },
-			 {
-				name: 'Extra Cheese',
-				price: 1,
-			 }]
-		}]
-	};*/
-
-	// find the main food dialog
-	dlg = $('#food_dialog_'+'364555');
-
-	// find all sub options (checkboxes)
-	opts = $('.item_options',dlg);
-
-	console.log(opts);
-
-	// if there are any options found
-	if ( opts.length )
-	{
-		order = new Object;
-		order.food_id = food_id;
-		order.sub_options = Array();
-
-		// loop through all of them
-		opts.each( function(i)
-		{
-			// and if it's checked (selected)
-			if ( $(this).attr('checked') )
-			{
-				order.sub_options[i] = new Object;
-
-				// find it's name which would be ID of that item
-				item_id = $(this).attr('name');
-
-				order.sub_options[i].id = item_id;
-
-				// using that ID find the DIV containing sub options(Radio buttons) for this item
-				radio_div = $('#child_opts_'+item_id);
-
-				// find all radio buttons and loop through each
-				atleast_one_checked = false;
-				$('input:radio', radio_div).each( function()
-				{
-					//console.log($(this).attr('id'));
-
-					// we are only interested if it's checked
-					if ( $(this).attr('checked') )
-					{
-						atleast_one_checked = true;
-						order.sub_options[i].sub_option = this.id;
-						//alert(this.id);
+	var get_option = function(ele){
+			option = null;
+			if ($(ele).attr('checked'))	{
+				div = $('#child_opts_'+ele.id);
+				$('input:radio', div).each( function(){
+					if ($(this).attr('checked')){
+						option = new_option(this.id, $(this).attr("option_name"), $(this).attr("price"));
 					}
 				});
-
-				if ( !atleast_one_checked )
-				{
-					//TODO: could be better way of telling user
-					alert('You have to select atleast one option.');
-					order = Array();
-					return;
-				}
 			}
+			return option;
+	}
 
+	dlg = $('#food_dialog_'+food_id);
+	opts = $('.item_options',dlg);
+	count = $('#count',dlg).val();
+	instructions = $('#special_instructions',dlg).val();
+
+	if ( opts.length ){
+		order = new_food(food_id, food_name, food_price, count, instructions);
+		order.options = Array();
+		opts.each(function(){
+			option = get_option(this);
+			if(option){
+				order.options.push(option);
+			}
 		});
-
-		// get count of order and special instructions
-		order.count = $('#count',dlg).val();
-		order.instructions = $('#special_instructions',dlg).val();
 
 		console.log(order);
 		order_JSON = JSON.stringify(order);
@@ -92,5 +44,9 @@ function cart_add( food_id )
 	/*$('#cart_item_template').mustache(data).appendTo('#cartify_items');
 
 	$('#food_dialog_'+id).hide();*/
-	$.post( '/orders', '[]', function(data) { alert(data.session_id); } );
+	$.post( '/orders', 'data='+order_JSON, function(data) { 
+		ht = $('#cart_item_template').mustache(data);
+		$('#cartify_items').html(ht);
+	});
+
 }

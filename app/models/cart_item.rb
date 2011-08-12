@@ -1,26 +1,36 @@
 class CartItem
-	attr_accessor :id, :name, :price, :options, :total
+	attr_accessor :id, :name, :price, :options, :total, :qty
 
 	def initialize(params)
-		@total = 0
+		params.symbolize_keys!
 		@options = []
 
+		@qty = 1
 		@name = params[:name]
 		@price = params[:price].to_f
 		@id = params[:id]
+		@total = @price
 
 		unless params[:options].nil?
 			params[:options].each do |opt|
-				self.add_option(opt)
+				add_option(ItemOption.new(opt))
 			end
 		end
 
 	end
 
+	def tray
+		tray_str = (self.id.to_s+"/"+self.qty.to_s)
+		self.options.each do |option|
+			tray_str = tray_str+option.tray.to_s
+		end	
+		tray_str
+	end
+
 	def add_option(option)
 		@options << option
-
 		@total = @total + option.price
+		puts (option.price)
 	end
 
 end

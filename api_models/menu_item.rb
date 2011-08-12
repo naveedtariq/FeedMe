@@ -2,6 +2,7 @@ class MenuItem < ApiModel
 	attr_accessor :id, :name, :price, :desc, :children, :raw
 
 	def initialize(params)
+		@qty = 1
 		super(params)
 #puts '++++++++++++' + params[:raw]["children"].inspect + "++++++++++++++++++++++++++++++"
 
@@ -13,6 +14,7 @@ class MenuItem < ApiModel
 			end
 		end
 	end
+
 
 	def self.populate( data )
 		MenuItem.new( {:id => data["id"], :name => data["name"], :desc => data["descrip"], :price => data["price"], :raw => data} ) unless data.nil?

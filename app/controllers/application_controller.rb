@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
 	def current_cart
 		session[:current_cart] ||= (session[:current_cart] = Cart.new(:restaurant_id => current_restaurant, :user_id => current_user.id))
+		puts session[:current_cart].inspect
+		session[:current_cart]
 	end
 
 	def current_restaurant

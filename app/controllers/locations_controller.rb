@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  include PublicSection
+#  include PublicSection
 
   layout 'restaurants'
   skip_before_filter :require_location

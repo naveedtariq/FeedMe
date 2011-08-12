@@ -54,6 +54,9 @@ GEM
     inherited_resources (1.2.2)
       has_scope (~> 0.5.0)
       responders (~> 0.6.0)
+    jquery-rails (1.0.12)
+      railties (~> 3.0)
+      thor (~> 0.14)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     mail (2.2.19)
@@ -120,6 +123,7 @@ DEPENDENCIES
   geokit-rails3
   httparty
   inherited_resources
+  jquery-rails (>= 1.0.12)
   mysql
   rails (= 3.0.8)
   ruby-debug19

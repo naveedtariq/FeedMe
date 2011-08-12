@@ -1,5 +1,5 @@
 class Cart 
-	attr_accessor :user_id, :restaurant_id, :items, :total
+	attr_accessor :user_id, :restaurant_id, :items, :total, :location, :card
 
 	def initialize(params)
 		@total = 0
@@ -11,7 +11,15 @@ class Cart
 
 	def add_item(item)
 		@items << item
-		@total = @total + item.price
+		@total = @total + item.total
+	end
+
+	def tray
+		tray_str = ""
+		self.items.each do |item|
+			tray_str = tray_str + item.tray.to_s + "+"
+		end
+		tray_str.chomp("+")
 	end
 
 end
