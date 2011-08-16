@@ -21,9 +21,9 @@ class OrdersController < ApplicationController
 		current_cart.restaurant_id = 142
 		current_cart.card = Card.new({:name => "Abid Mahmood", :number => "4111111111111111", :cvv => "123",
 															:bill_addr => current_location.street, :bill_addr2 => current_location.street, :bill_city => current_location.city,
-															:bill_state => current_location.state, :expiry => "06/2019", :bill_zip => current_location.zip})
+															:bill_state => current_location.state, :expiry => "06/2019", :bill_zip => current_location.zip.split("-")[0]})
 		resp = RestApi.place_order(current_cart)
-		render :json => resp.to_json + current_cart.to_json
+		render :json => resp.to_json + RestApi.order_hash(current_cart).to_json
 		
 	end
 

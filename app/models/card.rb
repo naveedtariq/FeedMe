@@ -7,7 +7,7 @@ class Card
 		@cvv = params[:cvv]
 		@bill_addr = params[:bill_addr]
 		@name = params[:name]
-		@bill_addrw = params[:bill_addr2]
+		@bill_addr2 = params[:bill_addr2]
 		@bill_city = params[:bill_city]
 		@bill_zip = params[:bill_zip]
 		@bill_state = params[:bill_state]
