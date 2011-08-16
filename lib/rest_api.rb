@@ -7,7 +7,7 @@ class RestApi
 	def self.restaurants(params)
 		url = "/dl/#{params[:datetime]}/#{params[:postal_code]}/#{params[:city]}/#{params[:street_address]}"
 		respt = self.do_get(url)
-		puts respt.to_json + "--------------------------------------"
+		puts respt.to_json + "-----------------------------**-------"
 		respt
 	end
 
@@ -19,12 +19,14 @@ class RestApi
 	
 	def self.place_order(cart)
 		url = "/o/#{cart.restaurant_id}"
+#url = "http://www.postbin.org/14evnuh/#{cart.restaurant_id}"
     options = { :body => self.order_hash(cart)}
 		self.do_post(url, options)
 	end
 
 	def self.order_hash(order)
-		{ :tray => order.tray, :tip => 0,	:delivery_date => "ASAP", :first_name => User.find(order.user_id).name,
+		{ :restaurant_id => order.restaurant_id,
+			:tray => order.tray, :tip => 0,	:delivery_date => "ASAP", :first_name => User.find(order.user_id).name,
 			:last_name => User.find(order.user_id).name, :addr => order.location.street, :city => order.location.city,
 			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "1033378965", :em => "aabaassit@gmail.com",
 			:card_name => order.card.name, :card_number => order.card.number, :card_cvv => order.card.cvv,
@@ -39,7 +41,7 @@ class RestApi
 	end
 
 	def self.do_get(url)
-		puts URI.escape( add_auth_params url ).inspect
+		puts "\n******** API CALL\n" + self.base_uri + URI.escape( add_auth_params url ).inspect + "\n\n"
 		get(URI.escape( add_auth_params url )).parsed_response
 	end
 

@@ -133,6 +133,7 @@
 	<div id="cart_wrapper">
 	<div id="cart" class="right-column">
 		<%= render :partial => "cartify/show" %>
+		<%= render :partial => "cartify/checkout_dialog" %>
 		
 		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
 			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>

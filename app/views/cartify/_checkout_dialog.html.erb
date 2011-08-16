@@ -1,0 +1,47 @@
+<div id="card_info" style="display: none; width: 350px; right: 400px; position: relative;">
+
+<table id="pop_dialog_table" class="pop_dialog_table" style="widht: 350px;">
+<tbody>
+	<tr>
+		<td class="pop_topleft"></td>
+
+		<td class="pop_border"></td>
+
+		<td class="pop_topright"></td>
+	</tr>
+
+	<tr>
+		<td class="pop_border"></td>
+
+		<td class="pop_content" id="pop_content">
+			<h2><span>Enter Payment Info</span></h2>
+
+			<div class="dialog_content">
+				<%= form_tag :controller => 'order', :action => 'checkout' %>
+					<div class="dialog_body" style="height: 150px;">
+					<div class="left">
+						Name: <%= text_field_tag :count, 1, :size => 2 %><br />
+						Card No: <%= text_field_tag :count, 1, :size => 2 %><br />
+						CCV: <%= text_field_tag :count, 1, :size => 2 %><br />
+						<input class="inputsubmit" value="Checkout" onclick="" type="button" />
+					</div>
+					</div>
+				</form>
+			</div>
+
+		</td>
+
+		<td class="pop_border"></td>
+	</tr>
+
+	<tr>
+		<td class="pop_bottomleft"></td>
+
+		<td class="pop_border"></td>
+
+		<td class="pop_bottomright"></td>
+	</tr>
+</tbody>
+</table>
+
+</div>

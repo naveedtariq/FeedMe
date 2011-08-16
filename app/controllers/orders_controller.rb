@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
 
 
 	def checkout
+		puts "*******\n\n" + current_location.inspect + "**********\n\n"
 		current_cart.location = current_location
 		current_cart.restaurant_id = 142
 		current_cart.card = Card.new({:name => "Abid Mahmood", :number => "4111111111111111", :cvv => "123",
