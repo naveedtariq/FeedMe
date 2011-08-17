@@ -25,11 +25,14 @@ class RestApi
 	end
 
 	def self.order_hash(order)
+		time = Time.now + 36000
+
+#TODO: Tray not working, ASAP in delivery_date Not working
+
 		{ :restaurant_id => order.restaurant_id,
 			:type => 'RES',
 #:tray => order.tray, :tip => 0,	:delivery_date => "ASAP", :first_name => User.find(order.user_id).name,
-#TODO: Tray not working
-			:tray => '364555%2F1-491307%2C491310%2B364575%2F1-491338', :tip => 0,	:delivery_date => "08-18", :delivery_time => "20:00", :first_name => User.find(order.user_id).name,
+			:tray => '364555%2F1-491307%2C491310%2B364575%2F1-491338', :tip => 0,	:delivery_date => time.strftime("%m-%d"), :delivery_time => time.strftime("%H:%M"), :first_name => User.find(order.user_id).name,
 			:last_name => User.find(order.user_id).name, :addr => order.location.street, :city => order.location.city,
 			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "2125551212", :em => "aabaassit@gmail.com",
 			:card_name => order.card.name, :card_number => order.card.number, :card_cvc => order.card.cvv,
