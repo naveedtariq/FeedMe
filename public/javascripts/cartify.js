@@ -50,3 +50,35 @@ function cart_add( food_id , food_name, food_price )
 	});
 
 }
+
+
+
+
+function place_order()
+{
+	var form = $('#form_card_info');
+
+	$.ajax({
+		url: '/orders/checkout',
+		type: 'POST',
+		data: form.serialize(),
+		dataType: 'JSON',
+		success: function(data) {
+			//alert('hello');
+			form.slideToggle();
+			$('#card_transaction').html(data.text);
+			setTimeout("$('#card_info').fadeOut(500)",7000);
+		},
+
+	});
+
+	return false;
+}
+
+function show_card_dialog()
+{
+	var form = $('#form_card_info');
+	form.show();
+	$('#card_transaction').html('');
+	$('#card_info').show();
+}

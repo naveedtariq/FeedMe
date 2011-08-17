@@ -98,3 +98,23 @@ td.pop_content .dialog_summary{background:#f2f2f2;padding:8px 10px 8px 10px;bord
 td.pop_content .dialog_buttons{background:#f2f2f2;padding:8px;text-align:right;}
 td.pop_content .dialog_buttons input{margin-left:5px;}
 td.pop_content .dialog_buttons_left_msg{float:left;}
+
+
+label.checkout
+{
+width: 125px;
+float: left;
+}
+
+input.checkout
+{
+width: 140px;
+}
+
+div#card_transaction
+{
+font-size: 1.25em;
+font-color: #000;
+padding: 15px;
+}
+

@@ -17,15 +17,32 @@ class OrdersController < ApplicationController
 
 
 	def checkout
-		puts "*******\n\n" + current_location.inspect + "**********\n\n"
+#puts "*******\n\n" + current_location.inspect + "**********\n\n"
+#puts "*******------\n\n" + params.inspect + "**********\n\n"
 		current_cart.location = current_location
 		current_cart.restaurant_id = 142
-		current_cart.card = Card.new({:name => "Abid Mahmood", :number => "4111111111111111", :cvv => "123",
-															:bill_addr => current_location.street, :bill_addr2 => current_location.street, :bill_city => current_location.city,
-															:bill_state => current_location.state, :expiry => "06/2019", :bill_zip => current_location.zip.split("-")[0]})
+
+		#overriding paramas
+		params[:bill_addr] = current_location.street
+		params[:bill_addr2] = current_location.street
+		params[:bill_city] = current_location.city
+		params[:bill_state] = current_location.state
+		params[:bill_zip] = current_location.zip.split("-")[0]
+
+#puts "*******------\n\n" + params.inspect + "**********\n\n"
+
+		current_cart.card = Card.new(params)
+
+#working test data below
+#		current_cart.card = Card.new({:name => "Abid Mahmood", :number => "4111111111111111", :cvv => "123",
+#														:bill_addr => current_location.street, :bill_addr2 => current_location.street, :bill_city => current_location.city,
+#														:bill_state => current_location.state, :expiry => "06/2019", :bill_zip => current_location.zip.split("-")[0]})
+
 		resp = RestApi.place_order(current_cart)
-		render :json => resp.to_json + RestApi.order_hash(current_cart).to_json
-		
+
+#render :json => resp.to_json + RestApi.order_hash(current_cart).to_json
+#{"_error":0,"msg":"Success","text":"Thank you for your order!"}
+		render :json => resp.to_json
 	end
 
 end

@@ -1,6 +1,6 @@
 <div id="card_info" style="display: none; width: 350px; right: 400px; position: relative;">
 
-<table id="pop_dialog_table" class="pop_dialog_table" style="widht: 350px;">
+<table id="pop_dialog_table" class="pop_dialog_table" style="width: 350px;">
 <tbody>
 	<tr>
 		<td class="pop_topleft"></td>
@@ -14,19 +14,24 @@
 		<td class="pop_border"></td>
 
 		<td class="pop_content" id="pop_content">
-			<h2><span>Enter Payment Info</span></h2>
+			<h2><span>Please Enter Your Payment Info</span></h2>
 
 			<div class="dialog_content">
-				<%= form_tag :controller => 'order', :action => 'checkout' %>
-					<div class="dialog_body" style="height: 150px;">
+				<form id="form_card_info" action="" onsubmit="return place_order();">
+					<div class="dialog_body" style="height: 200px; padding: 25px;">
 					<div class="left">
-						Name: <%= text_field_tag :count, 1, :size => 2 %><br />
-						Card No: <%= text_field_tag :count, 1, :size => 2 %><br />
-						CCV: <%= text_field_tag :count, 1, :size => 2 %><br />
-						<input class="inputsubmit" value="Checkout" onclick="" type="button" />
+						<%= label_tag 'name', 'Card Name', :class => 'checkout' %> <%= text_field_tag 'name', nil, :class => 'checkout' %><br />
+						<%= label_tag 'cardno', 'Card No', :class => 'checkout' %> <%= text_field_tag 'number', '4111111111111111', :class => 'checkout' %><br />
+						<%= label_tag 'cvv', 'CVV', :class => 'checkout' %> <%= text_field_tag 'cvv', nil, :class => 'checkout' %><br />
+						<%= label_tag 'expiry', 'Expiry', :class => 'checkout' %> <%= text_field_tag 'expiry', nil, :class => 'checkout' %><br />
+						<%#= label_tag 'zip', 'Card Zip', :class => 'checkout' %> <%#= text_field_tag 'bill_zip', nil, :class => 'checkout' %><br />
+						<br />
+						<input class="inputsubmit" value="Cancel" onclick="$('#card_info').hide();" type="button" style="float: left" />
+						<input class="inputsubmit" value="Place Order" type="submit" style="float: right" />
 					</div>
 					</div>
 				</form>
+			<div id="card_transaction"></div>
 			</div>
 
 		</td>
