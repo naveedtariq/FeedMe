@@ -1,8 +1,14 @@
 Fc::Application.routes.draw do
 
 	resources :orders do
-		get 'checkout', :on => :collection 
+		collection do
+			get 'checkout' 
+			get 'candeliver'
+			get 'getcart'
+			get 'remove'
+		end
 	end
+
 	resource :location
 	resources :restaurants
 

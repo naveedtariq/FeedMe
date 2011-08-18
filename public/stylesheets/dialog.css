@@ -111,6 +111,11 @@ input.checkout
 width: 140px;
 }
 
+input.del_datetime
+{
+width: 40px
+}
+
 div#card_transaction
 {
 font-size: 1.25em;

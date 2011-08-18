@@ -12,10 +12,12 @@ class RestaurantsController < ApplicationController
 	def show
 		
 		@restaurant = Restaurant.restaurant( params[:id] )
-		unless @restaurant
+		@cart = current_cart
+
+		unless @restaurant.nil?
 			session[:restaurant_id] = @restaurant.id
 		end
-#puts @restaurant.inspect + '*********************************************'
+#puts "\n\n-------************\n\n" + @cart.inspect + "\n\n*********************************************\n\n"
 	end
 
 	def add_favorite

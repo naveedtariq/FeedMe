@@ -1,5 +1,5 @@
 class Cart 
-	attr_accessor :user_id, :restaurant_id, :items, :total, :location, :card
+	attr_accessor :user_id, :restaurant_id, :items, :total, :location, :card, :date, :time
 
 	def initialize(params)
 		@total = 0
@@ -12,6 +12,15 @@ class Cart
 	def add_item(item)
 		@items << item
 		@total = @total + item.total
+	end
+
+	def remove_item(id)
+		@items.each do |item|
+			if item.id.to_s == id then
+				@total = @total - item.total
+				@items.delete(item)
+			end
+		end
 	end
 
 	def tray

@@ -31,9 +31,9 @@ function hide_food_dialog(id)
 	dialog.hide();
 }
 
-// Food Dialog Bindings
 $( function()
 {
+	// Food Dialog Bindings
 	//binding radio buttons to calculate price
 	$(".sub_option").each(function()
 	{

@@ -1,5 +1,5 @@
 class CartItem
-	attr_accessor :id, :name, :price, :options, :total, :qty
+	attr_accessor :id, :name, :price, :options, :total, :qty, :unique_id
 
 	def initialize(params)
 		params.symbolize_keys!
@@ -10,6 +10,7 @@ class CartItem
 		@price = params[:price].to_f
 		@id = params[:id]
 		@total = @price
+		@unique_id = Time.now.gmtoff
 
 		unless params[:options].nil?
 			params[:options].each do |opt|

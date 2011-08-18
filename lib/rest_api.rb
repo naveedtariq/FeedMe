@@ -16,6 +16,11 @@ class RestApi
 		url = "/frd/#{params[:id]}"
 		self.do_get(url)
 	end
+
+	def self.check_delivery(params)
+		url = "/dc/#{params[:id]}/#{params[:date]}+#{params[:time]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		self.do_get(url)
+	end
 	
 	def self.place_order(cart)
 		url = "/o/#{cart.restaurant_id}"
@@ -31,8 +36,8 @@ class RestApi
 
 		{ :restaurant_id => order.restaurant_id,
 			:type => 'RES',
-#:tray => order.tray, :tip => 0,	:delivery_date => "ASAP", :first_name => User.find(order.user_id).name,
-			:tray => '364555%2F1-491307%2C491310%2B364575%2F1-491338', :tip => 0,	:delivery_date => time.strftime("%m-%d"), :delivery_time => time.strftime("%H:%M"), :first_name => User.find(order.user_id).name,
+#:tray => order.tray, :tip => 0,	:delivery_date => time.strftime("%m-%d"), :delivery_time => time.strftime("%H:%M"), :first_name => User.find(order.user_id).name,
+			:tray => order.tray, :tip => 0,	:delivery_date => order.date, :delivery_time => order.time, :first_name => User.find(order.user_id).name,
 			:last_name => User.find(order.user_id).name, :addr => order.location.street, :city => order.location.city,
 			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "2125551212", :em => "aabaassit@gmail.com",
 			:card_name => order.card.name, :card_number => order.card.number, :card_cvc => order.card.cvv,

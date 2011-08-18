@@ -1,12 +1,14 @@
 <div id="cartify">
-<h2>Your Cart</h2>
+<h2 style="color: #3B5998; font-size: 1.85em; margin: -10px 0 10px 45px;">Your Cart</h2>
 
 <div id="cartify_items"></div>
 
 <script id="cart_item_template" type="x-tmpl-mustache">
 	<div id="Test">
 		{{#items}}
-		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}, Total: {{total}}</b><br />
+		<div id="cart_item_{{id}}">
+		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}, Total: {{total}}</b> &nbsp;
+		<a href="#" onclick="remove_item({{id}});">Remove [X]<a/><br />
 
 		Options:
 		<ul style="margin-top:0px;margin-bottom:0px;">
@@ -14,11 +16,12 @@
 			<li>{{name}} - {{price}}</li>
 			{{/options}}
 		</ul>
+		</div>
 		{{/items}}
-		<b>Total Price:</b> {{total}}
+		<b>Total Price:</b> {{total}}<br />
 	</div>
 </script>
 
 <br />
-<a href="#" onClick="show_card_dialog();">Checkout</a>
+<a id="checkout_link" style="display: none;" href="#" onClick="show_card_dialog();">Checkout</a>
 </div>
