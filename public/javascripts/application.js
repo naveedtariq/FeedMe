@@ -1,6 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+/* OUTDATE CRAP
 function set_document_title() {
   try {
     document.title = $$('h1').first().innerHTML + ' - ' + document.title;
@@ -84,4 +85,4 @@ function fb_connect_invite_friends(options) {
   })
 
 
-}
+}*/

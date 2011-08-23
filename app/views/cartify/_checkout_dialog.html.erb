@@ -20,15 +20,16 @@
 				<form id="form_card_info" action="" onsubmit="return place_order();">
 					<div class="dialog_body" style="height: 225px; padding: 25px;">
 					<div class="left">
+						<span style="color: #3B5998; font-size: 1.15em; display: none; float: left; width: 270px;" id="ploader">Please wait....</span>
 						<%= label_tag 'name', 'Card Name', :class => 'checkout' %> <%= text_field_tag 'name', nil, :class => 'checkout' %><br />
 						<%= label_tag 'cardno', 'Card No', :class => 'checkout' %> <%= text_field_tag 'number', '4111111111111111', :class => 'checkout' %><br />
 						<%= label_tag 'cvv', 'CVV', :class => 'checkout' %> <%= text_field_tag 'cvv', nil, :class => 'checkout' %><br />
 						<%= label_tag 'expiry', 'Expiry', :class => 'checkout' %> <%= text_field_tag 'expiry', nil, :class => 'checkout' %><br />
-						<%= label_tag 'date', 'Delivery Date & Time', :class => 'checkout' %> <%= text_field_tag 'date', nil, :class => 'del_datetime' %>
+						<%= label_tag 'date', 'Delivery Date & Time', :class => 'checkout' %>, <%= text_field_tag 'date', nil, :class => 'del_datetime' %>
 						<%= text_field_tag 'time', nil, :class => 'del_datetime' %> <br />Eg: 04-16, 22:00<br />
 						<span id="can_deliver" style="height: 25px; display: block; font-size: 1.25em;"></span><br />
-						<input class="inputsubmit" value="Check Availability" type="button" onclick="check_delivery();" style="float: right;" /><br />
-						<input class="inputsubmit" value="Cancel" onclick="$('#card_info').hide();" type="button" style="float: left" />
+						<input class="inputsubmit" id="checkout_avail" value="Check Availability" type="button" onclick="check_delivery();" style="float: right;" /><br />
+						<input class="inputsubmit" id="checkout_cancel" value="Cancel" onclick="$('#card_info').hide();" type="button" style="float: left; position: relative;" />
 						<input class="inputsubmit" id="placeorder_button" value="Place Order" type="submit" style="float: right" disabled="disabled" />
 					</div>
 					</div>

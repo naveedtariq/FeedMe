@@ -1,11 +1,37 @@
 
 $(function(){
+	update_cart();
+});
 
-	// render current items in cart
+
+function loading(tellme)
+{
+	if ( tellme )
+	{
+		$('#ploader').fadeIn('slow');
+		$('input',$('#card_info')).attr('readonly','readonly');
+
+		return;
+	}
+
+	$('#ploader').fadeOut('slow');
+	$('input',$('#card_info')).removeAttr('readonly');
+}
+
+// render current items in cart
+function update_cart()
+{
 	$.get('/orders/getcart', function(data){
 			parse_cart(data);
 		});
-});
+}
+
+function empty_cart()
+{
+	$.get('/orders/emptycart',function(data){
+		update_cart();
+	});
+}
 
 
 function parse_cart(data)
@@ -14,7 +40,10 @@ function parse_cart(data)
 	$('#cartify_items').html(ht);
 
 	if (data.items.length > 0)
+	{
+		$('div.cart_item').animate({backgroundColor: '#FFF'},1000);
 		$('#checkout_link').show();
+	}
 }
 
 
@@ -61,11 +90,9 @@ function cart_add( food_id , food_name, food_price )
 		console.log(order_JSON);
 	}
 
-	/*$('#cart_item_template').mustache(data).appendTo('#cartify_items');
-
-	$('#food_dialog_'+id).hide();*/
 	$.post( '/orders', 'data='+order_JSON, function(data) { 
 			parse_cart(data);
+			dlg.hide();
 	});
 
 }
@@ -76,6 +103,7 @@ function cart_add( food_id , food_name, food_price )
 function place_order()
 {
 	var form = $('#form_card_info');
+	loading(true);
 
 	$.ajax({
 		url: '/orders/checkout',
@@ -83,19 +111,32 @@ function place_order()
 		data: form.serialize(),
 		dataType: 'JSON',
 		success: function(data) {
+			loading(false);
 			//alert('hello');
 			//form.slideToggle();
 			msg = data.text;
-			if ( data._error == 0 )
-				msg = msg + '<a href="#" onclick="$(\'#card_info\').slideToggle();">Close [X]</a>';
+			if ( data._error == 1 )
+			{
+				$('#card_transaction').html(msg);
+				return false;
+			}
+
+			msg = msg + '<a href="#" onclick="$(\'#card_info\').slideToggle();">Close [X]</a>';
 			$('#card_transaction').html(msg);
-			//setTimeout("$('#card_info').fadeOut(500)",7000);
+
+			empty_cart();
+			$('#checkout_cancel').val('Close');
+			$('#checkout_cancel').animate({ left: '190', });
+			$("#placeorder_button").hide();
+			$('#checkout_avail').hide();
 		},
 
 	});
 
 	return false;
 }
+
+
 
 function show_card_dialog()
 {
@@ -111,26 +152,36 @@ function check_delivery()
 	date = $('#date').val();
 	time = $('#time').val();
 
-	//142/01-21+21:30/77840/College+Station/1+Main+Street
-	$.get( '/orders/candeliver',
+	if ( date == "" || time == "" )
 	{
-		date: date,
-		time: time,
-	},
-	function(data)
-	{
+		$('#can_deliver').css('color','red');
+		$('#can_deliver').html('Please set date and time first');
+		return;
+	}
+
+	var checkout_butt = $("#placeorder_button");
+	loading(true);
+
+	$.get( '/orders/candeliver', { date: date, time: time, }, function(data){
+
+		loading(false);
+
 		if ( data.delivery == 1 )
 		{
 			$('#can_deliver').html('Delivery Available.');
 			$('#can_deliver').css('color','green');
-		  $("#placeorder_button").removeAttr('disabled');
+
+		  checkout_butt.removeAttr('disabled');
+			checkout_butt.css('color','#FFF');
 
 			return;
 		}
 
-		$('#can_deliver').html('Delivery UnAvailable at This time, Please choose another time.');
+		$('#can_deliver').html(data.msg);
 		$('#can_deliver').css('color','red');
-		$("#placeorder_button").attr('disabled', 'disabled');
+
+		checkout_butt.attr('disabled', 'disabled');
+		checkout_butt.css('color','#AAA');
 	});
 
 } // can_deliver()

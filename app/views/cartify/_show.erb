@@ -4,9 +4,8 @@
 <div id="cartify_items"></div>
 
 <script id="cart_item_template" type="x-tmpl-mustache">
-	<div id="Test">
 		{{#items}}
-		<div id="cart_item_{{id}}">
+		<div id="cart_item_{{id}}" class="cart_item">
 		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}, Total: {{total}}</b> &nbsp;
 		<a href="#" onclick="remove_item({{id}});">Remove [X]<a/><br />
 
@@ -17,9 +16,9 @@
 			{{/options}}
 		</ul>
 		</div>
-		{{/items}}
+		{{/items}}<br />
+
 		<b>Total Price:</b> {{total}}<br />
-	</div>
 </script>
 
 <br />

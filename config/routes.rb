@@ -6,6 +6,7 @@ Fc::Application.routes.draw do
 			get 'candeliver'
 			get 'getcart'
 			get 'remove'
+			get 'emptycart'
 		end
 	end
 

@@ -23,6 +23,11 @@ class Cart
 		end
 	end
 
+	def empty
+		@items = []
+		@total = 0
+	end
+
 	def tray
 		tray_str = ""
 		self.items.each do |item|

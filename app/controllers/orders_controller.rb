@@ -15,6 +15,12 @@ class OrdersController < ApplicationController
 		render :json => current_cart.to_json
 	end
 
+
+	def emptycart
+		current_cart.empty
+		render :text => 'done'
+	end
+
 	def remove
 		current_cart.remove_item(params[:id])
 		render :json => current_cart.to_json
