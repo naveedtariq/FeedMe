@@ -46,7 +46,7 @@
 													<%= hidden_field_tag "option_used", "nil" %>
 													<% option.children.each do |child| %>
 														<%= radio_button_tag option.name, 1, false, {:option_name => child.name, :class => "sub_option", :price => child.price, :id => child.id} %>
-														<%= label_tag option.name, child.name.capitalize + ' ($' + child.price + ')' %>
+														<%= label_tag option.name, (child.name.nil?) ? "" :child.name.capitalize + ' ($' + child.price + ')' %>
 														<br />
 													<% end %>
 													</div>
