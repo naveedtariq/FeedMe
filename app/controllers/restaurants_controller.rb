@@ -2,6 +2,8 @@ class RestaurantsController < ApplicationController
 
   include PublicSection
   include GeoKit::Geocoders
+	
+#caches_page :index, :show
 
   def index
 		conditions = {:datetime => 'ASAP', :postal_code => current_location.zip.split("-")[0], :city => current_location.city, :street_address => current_location.street}

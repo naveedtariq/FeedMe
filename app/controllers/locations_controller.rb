@@ -87,6 +87,7 @@ class LocationsController < ApplicationController
 	else 
 		
 		flash[:notice] = 'You must select a valid location'
+		puts "You must select a valid location\n\n\n\n\n************************************************************"
 		redirect_to :action => "new"
 	end
  end

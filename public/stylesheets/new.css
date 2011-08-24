@@ -101,9 +101,20 @@ body {
 	
 }
 
+input:hover
+{
+background-color: #FFFEED;
+}
+
 .blue_title {
 	color:#3b5998;
 	font-size: 16px;
+}
+
+h1.blue_rest_title {
+	color:#3b5998;
+	font-size: 1.5em;
+	text-shadow: 0px 1px 1px #2B5088;
 }
 
 .red_text {
@@ -761,4 +772,25 @@ li.question {
   font-size: 11px;
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif; 
   text-align: center;
+}
+
+
+.inputbutton:hover, .inputsubmit:hover {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#AAC0EF', endColorstr='#315091') !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#AAC0EF), to(#315091)) !important;
+	background: -moz-linear-gradient(top,  #AAC0EF,  #315091) !important;
+}
+
+span.food_menu_head
+{
+	font-size: 1.55em;
+	color: #3B5998;
+	display: block;
+}
+
+input.inputsubmit:disabled
+{
+background: -moz-linear-gradient(center top , #555555, #AAAAAA) repeat scroll 0 0 transparent !important;
+background-color: #555;
+color: #AAAAAA;
 }

@@ -9,9 +9,9 @@
 
 <div class="notification"><%= flash[:notice] -%></div>
 
-<% content_for :error do -%>
-	<%= error_messages_for :location %>
-<% end -%>
+<%# content_for :error do -%>
+	<%#= error_messages_for :location %>
+<%# end -%>
 
 <div style="padding:15px;" class="light-gray">
 	<div id="new_location" class="clr">
@@ -26,8 +26,7 @@
 					<td width="60%" style="padding-top:20px;">
 						<div class="clr">
 							<div class="left" style="margin-right:30px;">
-								<dt class="blue_text">Enter Street Address</dt>
-								<div><%= f.text_field :street, :size => 50, :class => 'inputtext' %></div>
+								<dt class="blue_text">Enter Street Address <%= f.text_field :street, :size => 50, :class => 'inputtext' %></dt>
 							</div>
 							
 						</div>
@@ -46,12 +45,8 @@
 					<td style="padding-top:20px;">
 						<div class="clr">
 							<div class="left" style="margin-right:30px;">
-								<dt class="blue_text">Apt/Suite</dt>
-								<div><%= f.text_field :apt, :size => 20, :class => 'inputtext' %></div>
-							</div>
-							<div class="left">
-								<dt class="blue_text">Zip Code</dt>
-								<div><%= f.text_field :zip, :size => 20, :class => 'inputtext' %></div>
+								<dt class="blue_text">Apt/Suite <%= f.text_field :apt, :size => 10, :class => 'inputtext' %> &nbsp; 
+								Zip Code <%= f.text_field :zip, :size => 10, :class => 'inputtext' %></dt>
 							</div>
 						
 						</div>
@@ -84,5 +79,3 @@
 	</div>
 	<% end %>
 </div>
-<p>&nbsp;</p>
-		<p>&nbsp;</p>

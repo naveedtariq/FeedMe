@@ -76,7 +76,7 @@ div.notice {
 }
 
 
-.generic_dialog{height:0px;left:0px;overflow:visible;position:relative;top:-100px;width:100%;z-index:100;margin:0 auto;}
+.generic_dialog{height:0px;left:15px;overflow:visible;position:relative;top:-250px;width:100%;z-index:100;margin:0 auto;}
 #generic_dialog_iframe{filter:alpha(opacity=0);left:0px;position:absolute;top:0px;z-index:1;}
 .pop_dialog #generic_dialog_popup,
 .contextual_dialog #generic_dialog_popup{height:0px;overflow:visible;position:relative;}

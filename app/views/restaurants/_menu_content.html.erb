@@ -4,7 +4,8 @@
 	
 	<div style="text-align:center">
 	<%#= image_tag url_for_file_column(menu_section, "filename") if menu_section.filename  %>
-		<%= menu_section.name %> - <a href="#" onclick="display_menu(<%= menu_section.id %>);">&lt;- Back to Categories</a>
+		<span class="food_menu_head"><%= menu_section.name %></span>
+		<input class="inputsubmit" order_button" onclick="display_menu(<%= menu_section.id %>);" value="Back to Menu" type="button" style="float: right;" />
 			
 		<%# if menu_section.notes %>
 		<div class="section_note"><%#=menu_section.notes%></div>
