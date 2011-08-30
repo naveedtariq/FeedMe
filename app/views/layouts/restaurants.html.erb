@@ -4,11 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <%= csrf_meta_tag %>
-	<script type="text/javascript">
-	<%#= fb_connect_async_js  do %>    
-      <%#= yield :fb_connect%>
-    <%# end %>
-	</script>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Restaurants: <%= controller.action_name %></title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -66,6 +61,22 @@
 
 </head>
 <body>
+
+	<%#= fb_connect_async_js %>
+	<div id="fb-root"></div>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	<script>
+	FB.init({
+	appId  : '146926898728049',
+	status : true, // check login status
+	cookie : true, // enable cookies to allow the server to access the session
+	xfbml  : true, // parse XFBML
+	oauth  : true // enable OAuth 2.0
+	});
+	</script>
+
+	<%# <script type="text/javascript">FB.login(function(res){console.log(res);},{scope: 'email'});</script> %>
+
 <div id="header">
 	<div id="logo"><a href="http://71.90.29.134:3000/"></a></div>
 

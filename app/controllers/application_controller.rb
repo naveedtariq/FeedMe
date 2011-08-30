@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  include SslRequirement  
 	include Facebooker2::Rails::Controller 
+  include SslRequirement  
 
   helper_method :current_user, :logged_in?, :searching_delivery?
 
@@ -22,7 +22,8 @@ class ApplicationController < ActionController::Base
 			return true
 		end
 		session[:at]=nil
-		redirect_to authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+#redirect_to authenticator.authorize_url(:scope => 'publish_stream', :display => 'page')
+		render :text => '<script type="text/javascript">window.top.location.href = "' + authenticator.authorize_url(:scope => 'publish_stream', :display => 'page') + '";</script>'
 	end
 
 	def set_up_facebook_user(code)
@@ -38,7 +39,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticator
-		@authenticator ||= Mogli::Authenticator.new('112150088882944', 'ba614b0890c4da8c5d4825a968284222', 'http://localhost:3000/pages/callback')
+		@authenticator ||= Mogli::Authenticator.new('146926898728049', 'a311aac03172c6f434043b9dd325c77e', 'http://localhost:3000/pages/callback')
 	end
 
   protected
@@ -52,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= User.find(session[:current_user_id])
+    @current_user ||= User.find_by_id(session[:current_user_id])
   end
   
   def searching_delivery?

@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   def callback
 		set_up_facebook_user(params[:code]) unless params[:code].empty?
-		redirect_to new_location_path
+		redirect_to 'http://apps.facebook.com/neolaism'
   end
 
   def home; end

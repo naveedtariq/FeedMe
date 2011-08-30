@@ -6,7 +6,7 @@ class LocationsController < ApplicationController
 	before_filter :ensure_authenticated
 
 	def index
-
+		session[:at] = nil
 	end
 
   def new
