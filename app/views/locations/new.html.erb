@@ -1,11 +1,66 @@
+<div style="clear: both; margin-top: 50px;">&nbsp;</div>
 
-<div align="center"><img src="/images/burger.png" width="250" /></div>
+<div style="width: 250px; float: left; margin-right: 50px;"><img src="/images/burger.png" width="250" align="left" /></div>
 
-<div class="blue_header clr" style="font-size:25px; color:#fff; margin-top:50px;">
+<div class="blue_header" style="font-size:25px; color:#fff; height:20px; width: 400px; float: left;">
 	<div class="left">Where are you?</div>
 	<div class="right"><a href="javascript:void(0)" onclick="switchLocationBox();" id="locationLink">Add Another Location</a></div>
 	<div class="clr_fix">&nbsp;</div>
 </div>
+
+	<div style="padding:15px; float: left; width: 410px;" class="light-gray">
+		<div id="new_location" class="clr">
+		
+			<% form_for(@location, :url => location_path) do |f| -%>
+				<%# hidden_field_tag :redirect_to, params[:redirect_to] %>
+				
+				
+				<table width="100%" cellpadding="0" cellspacing="0">
+				
+					<tr>
+						<td width="60%" style="padding-top:20px;">
+							<div class="clr">
+								<div class="left" style="">
+									<dt class="blue_text" style="font-size: 14px;">Street Address <%= f.text_field :street, :style => 'width: 290px;', :class => 'inputtext' %></dt>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="padding-top:20px;">
+							<div class="clr">
+								<div class="left" style="">
+									<dt class="blue_text" style="font-size: 14px;">Apt/Suite <%= f.text_field :apt, :style => 'width: 114px;', :class => 'inputtext' %> &nbsp; 
+									Zip Code <%= f.text_field :zip, :style => 'width: 130px;', :class => 'inputtext' %></dt>
+								</div>
+							
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td width="40%"  style="padding-top:20px" valign="middle">
+							<div class="left">
+									<div class="blue_text" style="font-size: 14px;">
+										<%= check_box :location , :is_home_address , options = {} ,checked_value = "1", unchecked_value = "0" %> Save as Home Address
+									</div>
+							</div>
+						</td>
+					</tr>
+
+					<tr>
+						<td  style="padding-top:20px" valign="bottom">
+							<div class="submit">
+								<%= submit_tag "Delivery", :class => 'inputsubmit', :mode => 'd' %>&nbsp;&nbsp;&nbsp;
+								<%= submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
+							</div>
+						</td>
+					</tr>
+				</table>
+			
+			<% end -%>
+		</div>
 
 <div class="notification"><%= flash[:notice] -%></div>
 
@@ -13,56 +68,6 @@
 	<%#= error_messages_for :location %>
 <%# end -%>
 
-<div style="padding:15px;" class="light-gray">
-	<div id="new_location" class="clr">
-	
-		<% form_for(@location, :url => location_path) do |f| -%>
-			<%# hidden_field_tag :redirect_to, params[:redirect_to] %>
-			
-			
-			<table width="100%" cellpadding="0" cellspacing="0">
-			
-				<tr>
-					<td width="60%" style="padding-top:20px;">
-						<div class="clr">
-							<div class="left" style="margin-right:30px;">
-								<dt class="blue_text">Enter Street Address <%= f.text_field :street, :size => 50, :class => 'inputtext' %></dt>
-							</div>
-							
-						</div>
-					</td>
-					<td width="40%"  style="padding-top:20px" valign="middle">
-						<div class="left">
-								<div class="blue_text">
-									<%= check_box :location , :is_home_address , options = {} ,checked_value = "1", unchecked_value = "0" %> Save as Home Address
-								</div>
-						</div>
-						
-					</td>
-				</tr>
-				
-				<tr>
-					<td style="padding-top:20px;">
-						<div class="clr">
-							<div class="left" style="margin-right:30px;">
-								<dt class="blue_text">Apt/Suite <%= f.text_field :apt, :size => 10, :class => 'inputtext' %> &nbsp; 
-								Zip Code <%= f.text_field :zip, :size => 10, :class => 'inputtext' %></dt>
-							</div>
-						
-						</div>
-					</td>
-						
-					<td  style="padding-top:20px" valign="bottom">
-						<div class="submit">
-							<%= submit_tag "Delivery", :class => 'inputsubmit', :mode => 'd' %>&nbsp;&nbsp;&nbsp;
-							<%= submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
-						</div>
-					</td>
-				</tr>
-			</table>
-		
-		<% end -%>
-	</div>
 	<% if @user_locations != nil and  @user_locations.count > 0%>
 	<div id="saved_locations" class="blue_text"  style="display:none;">
 			<% form_tag('/locations/set') do -%>

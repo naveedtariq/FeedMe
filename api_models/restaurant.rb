@@ -23,9 +23,9 @@ class Restaurant < ApiModel
 		all = RestApi.restaurants(conditions)
 		
 		all.each_with_index do |item, index|
-			if index == 4
-				break
-			end
+#if index == 4
+#				break
+#			end
 			list << self.restaurant( item["id"] ) unless item.nil?
 		end
 		list
