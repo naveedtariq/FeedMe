@@ -1,14 +1,15 @@
 class RestaurantsController < ApplicationController
 
-  include PublicSection
-  include GeoKit::Geocoders
+#include PublicSection
+#include GeoKit::Geocoders
 	
 #caches_page :index, :show
 
   def index
-		conditions = {:datetime => 'ASAP', :postal_code => current_location.zip.split("-")[0], :city => current_location.city, :street_address => current_location.street}
-		@details = Restaurant.restaurants(conditions).paginate
-  end
+		@location = current_location
+		conditions = {:datetime => 'ASAP', :postal_code => @location.zip.split("-")[0], :city => @location.city, :street_address => @location.street}
+		@details = Restaurant.restaurants(conditions).paginate(:page => params[:page], :per_page => 3)
+	end
 
 
 	def show

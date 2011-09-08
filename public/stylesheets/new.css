@@ -24,6 +24,7 @@ body {
 	background:url(/images/header-background.png) repeat-x top left;
 	height:100px;
 	clear:both;
+	width: 760px;
 }
 
 #header .links {
@@ -225,6 +226,7 @@ dt.blue_text {
 #page_content {
 	clear:both;
 	padding:30px 0;
+	width: 760px;
 }
 
 .left {

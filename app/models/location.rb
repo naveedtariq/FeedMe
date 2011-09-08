@@ -5,14 +5,8 @@ class Location < ActiveRecord::Base
 	belongs_to :user
 	has_many :orders
 
-	# composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
-
 	default_scope :order => 'created_at DESC'
-
-	before_validation :set_defaults
-	# before_validation :set_timezone
 	validates_presence_of :street, :zip
-
 
 	def self.find_same_or_create(user, params = nil)
 		options = extract_obj_params_from_input(params)
@@ -26,6 +20,7 @@ class Location < ActiveRecord::Base
 	protected
 
 	def geocode(ls)
+		puts "caleeeeeeeeed with " + ls + "\n\n\n\n"
 		return if ls.blank? or self.coordinates?
 		RAILS_DEFAULT_LOGGER.debug "Location.geocode: geocoding #{ls}"
 		geo = GeoKit::Geocoders::MultiGeocoder.geocode(ls)

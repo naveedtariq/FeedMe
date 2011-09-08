@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 	def set_up_facebook_user(code)
 		session[:at] = mogli_client(code).access_token
 		user = Mogli::User.find("me",Mogli::Client.new(session[:at]))
-		puts "---------------------"
+		puts "--------------------- FACEBOOK USER " + user.inspect + "\n-----------------------------------\n\n"
 		user_id = User.find_or_create(user)
 		session[:current_user_id] = user_id			
 	end
@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by_id(session[:current_user_id])
   end
+
+	def current_location
+		session[:current_location]
+	end
   
   def searching_delivery?
     session[:order_method] == "Delivery"

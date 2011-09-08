@@ -1,9 +1,8 @@
 class LocationsController < ApplicationController
-#  include PublicSection
 
   layout 'restaurants'
   skip_before_filter :require_location
-	before_filter :ensure_authenticated
+#before_filter :ensure_authenticated
 
 	def index
 		session[:at] = nil
@@ -12,6 +11,7 @@ class LocationsController < ApplicationController
   def new
     @location = current_user.locations.build
     @user_id = current_user.id
+
     @user_locations = Location.find(:all, :conditions => "user_id = #{@user_id}")
 	  @home_location = Location.find(:first, :conditions => "user_id = #{@user_id} and is_home_address = 1")
 	  @selected_id = nil
@@ -31,11 +31,9 @@ class LocationsController < ApplicationController
 
 	  session[:order_method] = params[:commit]
 		params[:location][:active] = 1
-		@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = 1")
-		@locations.each do |location|
-			location.active = 0
-			location.save
-		end
+
+		self.deactivate_all_locations
+
 		if params[:location][:is_home_address] == "1"
 			@user_id = current_user.id
 			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and is_home_address = 1")
@@ -47,8 +45,10 @@ class LocationsController < ApplicationController
 			end
 		end
 
-	@location = current_user.locations.build(params[:location])
-	session[:current_location] = @location
+		puts "---------------------------------------------------"
+		@location = current_user.locations.build(params[:location])
+		puts "++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+		session[:current_location] = @location
 
     respond_to do |format|
       if @location.save
@@ -100,4 +100,12 @@ class LocationsController < ApplicationController
     def find_location(id = params[:id])
       current_user.locations.find(id)
     end
+
+		def deactivate_all_locations
+			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = 1")
+			@locations.each do |location|
+				location.active = 0
+				location.save
+			end
+		end
 end

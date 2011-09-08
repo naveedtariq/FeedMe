@@ -1,6 +1,6 @@
-<div style="clear: both; margin-top: 50px;">&nbsp;</div>
+<div style="clear: both; margin-top: 25px;">&nbsp;</div>
 
-<div style="width: 250px; float: left; margin-right: 50px;"><img src="/images/burger.png" width="250" align="left" /></div>
+<div style="width: 250px; float: left; margin-right: 50px; margin-top: 10px;"><img src="/images/burger.png" width="250" align="left" /></div>
 
 <div class="blue_header" style="font-size:25px; color:#fff; height:20px; width: 400px; float: left;">
 	<div class="left">Where are you?</div>
@@ -43,20 +43,14 @@
 						<td width="40%"  style="padding-top:20px" valign="middle">
 							<div class="left">
 									<div class="blue_text" style="font-size: 14px;">
-										<%= check_box :location , :is_home_address , options = {} ,checked_value = "1", unchecked_value = "0" %> Save as Home Address
-									</div>
+										<%= check_box :location , :is_home_address , options = {} ,checked_value = "1", unchecked_value = "0" %> Save as Home Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<%= submit_tag "Delivery", :class => 'inputsubmit', :mode => 'd' %>&nbsp;&nbsp;&nbsp;
+										<%= submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
+								</div>
 							</div>
 						</td>
 					</tr>
 
-					<tr>
-						<td  style="padding-top:20px" valign="bottom">
-							<div class="submit">
-								<%= submit_tag "Delivery", :class => 'inputsubmit', :mode => 'd' %>&nbsp;&nbsp;&nbsp;
-								<%= submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
-							</div>
-						</td>
-					</tr>
 				</table>
 			
 			<% end -%>
@@ -84,3 +78,5 @@
 	</div>
 	<% end %>
 </div>
+
+<div style="clear: both; margin-top: 50px;">&nbsp;</div>
