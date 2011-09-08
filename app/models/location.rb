@@ -1,6 +1,7 @@
 class Location < ActiveRecord::Base
 
 	acts_as_mappable
+	before_validation :geocode_address, :on => :create
 
 	belongs_to :user
 	has_many :orders
@@ -17,13 +18,19 @@ class Location < ActiveRecord::Base
 		loc
 	end
 
+	def address
+		self.street + ', ' + self.zip.to_s
+	end
+
 	protected
 
-	def geocode(ls)
-		puts "caleeeeeeeeed with " + ls + "\n\n\n\n"
-		return if ls.blank? or self.coordinates?
-		RAILS_DEFAULT_LOGGER.debug "Location.geocode: geocoding #{ls}"
-		geo = GeoKit::Geocoders::MultiGeocoder.geocode(ls)
+	def geocode_address
+		puts "\n\n*************************************" + address + "******************************\n\n\n\n"
+
+		return if address.blank?
+
+		RAILS_DEFAULT_LOGGER.debug "Location.geocode: geocoding #{address}"
+		geo = GeoKit::Geocoders::MultiGeocoder.geocode(address)
 		self.attributes = self.attributes.merge({:lng => geo.lng, :lat => geo.lat, :country => geo.country_code, :zip => geo.zip, :state => geo.state, :city => geo.city, :street => geo.street_address})
 	end
 

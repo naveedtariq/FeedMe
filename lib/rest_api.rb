@@ -57,6 +57,7 @@ class RestApi
 	end
 
 	def self.do_post(url, options)
+		RAILS_DEFAULT_LOGGER.debug "REST API POST ------ " + options.inspect
 		puts(options.to_json)
 		puts(URI.escape( add_auth_params url )+ "-----------------------")
 		post(URI.escape( add_auth_params url ), options).parsed_response

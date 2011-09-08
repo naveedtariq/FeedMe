@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
 
   layout 'restaurants'
   skip_before_filter :require_location
-#before_filter :ensure_authenticated
+	before_filter :ensure_authenticated
 
 	def index
 		session[:at] = nil

@@ -1,7 +1,5 @@
 class OrdersController < ApplicationController
 
-  include PublicSection
-  include GeoKit::Geocoders
 	layout "restaurants"
 
 #	def show
