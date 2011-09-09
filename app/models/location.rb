@@ -7,11 +7,13 @@ class Location < ActiveRecord::Base
 	validates_presence_of :street, :zip
 
 	def self.find_same_or_create(user, options = nil)
+		puts "TRYING to FIND ALREADY LOCATIONS --------\n\n"
 		loc = find(:first,:conditions => ["user_id = ? AND raw_address = ?", user.id, options[:street]])
 		if !loc
-			puts "OK!"
+			puts "-----------------------------OK!----------------------------"
 			loc = self.create(options.merge({:user => user}))
 			loc.geocode_address
+			loc.save
 		end
 		loc
 	end
@@ -22,7 +24,6 @@ class Location < ActiveRecord::Base
 
 	def geocode_address
 		return if address.blank?
-		#geo = GeoKit::Geocoders::GoogleGeocoder.geocode(address)
 		geo = RestApi.geocode(address)
 
 		parsed_geo = Location.parse_geo(geo)

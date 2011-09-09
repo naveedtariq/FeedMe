@@ -12,8 +12,9 @@ class LocationsController < ApplicationController
     @location = current_user.locations.build
     @user_id = current_user.id
 
-    @user_locations = Location.find(:all, :conditions => "user_id = #{@user_id}")
-	  @home_location = Location.find(:first, :conditions => "user_id = #{@user_id} and is_home_address = 1")
+#@user_locations = Location.find(:all, :conditions => "user_id = #{@user_id}")
+#@home_location = Location.find(:first, :conditions => "user_id = #{@user_id} and is_home_address = 1")
+
 	  @selected_id = nil
 	  @selected_id = @home_location.id if @home_location
     @user_locations = nil
@@ -29,7 +30,7 @@ class LocationsController < ApplicationController
   def create
     @user_id = current_user.id
 
-	  session[:order_method] = params[:commit]
+#session[:order_method] = params[:commit]
 		params[:location][:active] = 1
 
 		self.deactivate_all_locations
@@ -45,10 +46,8 @@ class LocationsController < ApplicationController
 			end
 		end
 
-		puts "---------------------------------------------------"
-		@location = current_user.locations.build(params[:location])
-		puts "++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-		session[:current_location] = @location
+		@location = current_user.locations.find_same_or_create(current_user,params[:location])
+		puts "\n\n++++++++++++++++++++SAVING LOCATION INTO SESSION #{@location} ++++++++++++++++++++++++++++++++++\n\n"
 
     respond_to do |format|
       if @location.save
@@ -60,6 +59,8 @@ class LocationsController < ApplicationController
         format.xml  { render :xml => @location.errors }
       end
     end
+
+		session[:current_location] = @location
   end
   
    def set

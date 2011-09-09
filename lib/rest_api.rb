@@ -29,17 +29,22 @@ class RestApi
 		self.do_post(url, options)
 	end
 
+	def self.geocode(address)
+		base = 'https://maps.googleapis.com/maps/api/geocode/json?';
+		base = base + 'address='+address+'&sensor=false';
+		get(URI.escape( base )).parsed_response
+	end
+
 	def self.order_hash(order)
-		time = Time.now + 36000
+		user = User.find(order.user_id)
 
 #TODO: Tray not working, ASAP in delivery_date Not working
 
 		{ :restaurant_id => order.restaurant_id,
 			:type => 'RES',
-#:tray => order.tray, :tip => 0,	:delivery_date => time.strftime("%m-%d"), :delivery_time => time.strftime("%H:%M"), :first_name => User.find(order.user_id).name,
-			:tray => order.tray, :tip => 0,	:delivery_date => order.date, :delivery_time => order.time, :first_name => User.find(order.user_id).name,
-			:last_name => User.find(order.user_id).name, :addr => order.location.street, :city => order.location.city,
-			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "2125551212", :em => "aabaassit@gmail.com",
+			:tray => order.tray, :tip => 0,	:delivery_date => order.date, :delivery_time => order.time, :first_name => user.name,
+			:last_name => user.name, :addr => order.location.street, :city => order.location.city,
+			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "2125551212", :em => user.facebook_email,
 			:card_name => order.card.name, :card_number => order.card.number, :card_cvc => order.card.cvv,
 			:card_expiry => order.card.expiry, :card_bill_addr => order.card.bill_addr, :card_bill_addr2 => order.card.bill_addr2,
 			:card_bill_city => order.card.bill_city, :card_bill_state => order.card.bill_state, :card_bill_zip => order.card.bill_zip.split("-")[0]}
