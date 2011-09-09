@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticator
-		@authenticator ||= Mogli::Authenticator.new('146926898728049', 'a311aac03172c6f434043b9dd325c77e', 'https://localhost/pages/callback')
+		@authenticator ||= Mogli::Authenticator.new('112150088882944', 'ba614b0890c4da8c5d4825a968284222', 'https://www.foodcourtapp.com/pages/callback')
 	end
 
   protected

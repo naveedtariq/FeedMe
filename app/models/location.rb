@@ -1,19 +1,17 @@
 class Location < ActiveRecord::Base
 
-	acts_as_mappable
-	before_validation :geocode_address, :on => :create
-
 	belongs_to :user
 	has_many :orders
 
 	default_scope :order => 'created_at DESC'
 	validates_presence_of :street, :zip
 
-	def self.find_same_or_create(user, params = nil)
-		options = extract_obj_params_from_input(params)
-		loc = find(:first,:conditions => ["user_id = ? AND ((lat = ? AND lng = ?) OR (raw_address = ?))", user.id, options[:lat], options[:lng], options[:raw_address]])
+	def self.find_same_or_create(user, options = nil)
+		loc = find(:first,:conditions => ["user_id = ? AND raw_address = ?", user.id, options[:street]])
 		if !loc
+			puts "OK!"
 			loc = self.create(options.merge({:user => user}))
+			loc.geocode_address
 		end
 		loc
 	end
@@ -22,16 +20,37 @@ class Location < ActiveRecord::Base
 		self.street + ', ' + self.zip.to_s
 	end
 
-	protected
-
 	def geocode_address
-		puts "\n\n*************************************" + address + "******************************\n\n\n\n"
-
 		return if address.blank?
+		#geo = GeoKit::Geocoders::GoogleGeocoder.geocode(address)
+		geo = RestApi.geocode(address)
 
-		RAILS_DEFAULT_LOGGER.debug "Location.geocode: geocoding #{address}"
-		geo = GeoKit::Geocoders::MultiGeocoder.geocode(address)
-		self.attributes = self.attributes.merge({:lng => geo.lng, :lat => geo.lat, :country => geo.country_code, :zip => geo.zip, :state => geo.state, :city => geo.city, :street => geo.street_address})
+		parsed_geo = Location.parse_geo(geo)
+		
+#puts "\n\n*************************************" + geo.inspect + "******************************\n\n\n\n"
+
+		self.attributes = self.attributes.merge({:country => parsed_geo[:country], :zip => parsed_geo[:zip], :state => parsed_geo[:state], :city => parsed_geo[:city], :street => "#{parsed_geo[:street_number]} #{parsed_geo[:route]}" })
+#self.attributes = self.attributes.merge({:lng => '234', :lat => '234', :country => 'US', :zip => '77840', :state => 'TX', :city => 'College Station', :street => '1900 Texas Ave S'})
+	end
+
+protected
+	def self.parse_geo(geo)
+		parsed = {}
+		geo['results'][0]['address_components'].each do |comp|
+			parsed[Location.sanitize_key(comp['types'][0].to_sym)] = comp['long_name']
+		end
+
+		puts "********* parsed GEO #{parsed} ****************\n\n"
+		parsed
+	end
+
+	def self.sanitize_key(key)
+		lookups = Hash.new { |hash, key| hash[key] = "#{key}" }
+		lookups[:locality] = 'city'
+		lookups[:administrative_area_level_1] = 'state'
+		lookups[:postal_code] = 'zip'
+
+		lookups[key].to_sym
 	end
 
 end

@@ -11,7 +11,7 @@ gem 'facebooker2'
 gem 'httparty'
 #gem "rmagick"
 #gem "geokit"
-gem 'geokit-rails3'
+#gem 'geokit-rails3'
 gem 'jquery-rails', '>= 1.0.12'
 
 #gem 'slim_scrooge'
