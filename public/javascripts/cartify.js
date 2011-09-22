@@ -75,8 +75,9 @@ function cart_add( food_id , food_name, food_price )
 	count = $('#count',dlg).val();
 	instructions = $('#special_instructions',dlg).val();
 
+	order = new_food(food_id, food_name, food_price, count, instructions);
+
 	if ( opts.length ){
-		order = new_food(food_id, food_name, food_price, count, instructions);
 		order.options = Array();
 		opts.each(function(){
 			option = get_option(this);
@@ -85,11 +86,11 @@ function cart_add( food_id , food_name, food_price )
 			}
 		});
 
-		console.log(order);
-		order_JSON = JSON.stringify(order);
-		console.log(order_JSON);
 	}
 
+	console.log(order);
+	order_JSON = JSON.stringify(order);
+	console.log(order_JSON);
 	$.post( '/orders', 'data='+order_JSON, function(data) { 
 			parse_cart(data);
 			dlg.hide();

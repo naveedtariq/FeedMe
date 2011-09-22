@@ -11,6 +11,13 @@ class RestaurantsController < ApplicationController
 		@details = Restaurant.restaurants(conditions).paginate(:page => params[:page], :per_page => 3)
 	end
 
+	def favorites
+		all = current_user.favourite_restaurants
+		ids = all.map {|x| x.restaurant_id }		
+		@details = Restaurant.from_ids(ids)
+		@details = @details.paginate(:page => params[:page], :per_page => 3)
+	end
+
 
 	def show
 		
@@ -24,6 +31,15 @@ class RestaurantsController < ApplicationController
 	end
 
 	def add_favorite
+		fv = FavouriteRestaurant.new({:user_id => current_user.id, :restaurant_id => params[:restaurant_id]})
+		fv.save
+		render :json => fv.to_json
+	end
+
+	def remove_favorite
+		fv = FavouriteRestaurant.where(:user_id => current_user.id, :restaurant_id => params[:restaurant_id])
+		fv.first.delete
+		render :json => {:message => "deleted"}
 	end
 
 end

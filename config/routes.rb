@@ -11,7 +11,13 @@ Fc::Application.routes.draw do
 	end
 
 	resource :location
-	resources :restaurants
+
+	resources :restaurants do 
+		collection do
+			get 'favorites'
+		end
+	end
+
 
 	root :to => "locations#new"
 
