@@ -95,12 +95,16 @@
 <li><%# link_to_unless_current('Favorite Restaurants', :controller => "favorites", :action => "index" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
 <li><%# link_to_unless_current('Suggest New Restaurant', new_restaurant_suggestion_url ) {|link| content_tag 'span', link, :class => 'current'} %></li>
 <li><%= link_to_function 'Invite Friends!', 
-   "fb_connect_invite_friends({
-       type: 'Foodcourt', 
-       invitation_copy:'Please accept this invitation to Foodcourt.', 
-       request_action_text:'Invite your friends to join Foodcourt',
-	   request_action_url:'http://#{request.env['HTTP_HOST']}/pages/facebook_submit'
-    })" %>
+   "FB.init({
+	appId  : '238876726163777',
+	status : true, // check login status
+	cookie : true, // enable cookies to allow the server to access the session
+	xfbml  : true, // parse XFBML
+	});
+	FB.ui({method: 'apprequests',
+		message: 'Your request message will be displayed here.',
+	});
+	" %>
 </li>
 </ul>
 </div>

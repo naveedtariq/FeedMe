@@ -5,10 +5,12 @@ class PagesController < ApplicationController
   def callback
 		puts "\n\n\nSetting up facebook user\n\n\n"
 		set_up_facebook_user(params[:code]) unless params[:code].empty?
-		redirect_to 'https://apps.facebook.com/neolaism'
+		redirect_to 'http://apps.facebook.com/agaychal'
   end
 
   def home; end
   
-  def facebook_submit; end
+  def facebook_submit; 
+		
+  end
 end
