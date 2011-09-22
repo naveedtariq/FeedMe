@@ -1,3 +1,29 @@
+<script type="text/javascript">
+	var add_favorite = function(rest_id){
+			$.ajax({
+			type: 'POST',
+			url: '/restaurants/add_favorite',
+			data: 'restaurant_id='+rest_id,
+			success: function(response){
+				$("#show_fav").hide();				
+				$("#show_no_fav").show();				
+			},
+			});
+			return false;
+	}
+	var remove_favorite = function(rest_id){
+			$.ajax({
+			type: 'POST',
+			url: '/restaurants/remove_favorite',
+			data: 'restaurant_id='+rest_id,
+			success: function(response){
+				$("#show_no_fav").hide();				
+				$("#show_fav").show();				
+			},
+			});
+			return false;
+	}
+</script>
 <div class="clearfix">
 	
 		<h1 class="blue_title">Please choose your Category</h1>
@@ -32,11 +58,12 @@
 			<% end -%>
 		<% end -%>
 		<div class="section_title" id="save_favorite">
-			<% unless @restaurant.is_favorite? %>
-				<%= link_to "Save Restaurant as Favorite", :action => "add_favorite", :id => @restaurant.id %>
-			<% else %>
-				<%= link_to "Remove from Favorites", :action => "remove_favorite", :id => @restaurant.id %>
-			<% end %>
+				<div id="show_fav" <%= "style='display:none;'" if FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%>>
+				<%= link_to "Save Restaurant as Favorite","#" , :onclick => "add_favorite('#{@restaurant.id}');return false;"%>
+				</div>
+				<div id="show_no_fav" <%= "style='display:none;'" unless FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%> >
+				<%= link_to "Remove from Favorites", "#",:onclick => "remove_favorite('#{@restaurant.id}');return false;", :class=>"specials_title"  %>
+				</div>
 		</div>
 		
 	</div>

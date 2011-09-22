@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
 	has_many :locations, :dependent => :destroy
+	has_many :favourite_restaurants
 
 	def self.find_or_create(user)
 		u = User.find_by_facebook_uid(user.id) 

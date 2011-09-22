@@ -16,6 +16,18 @@ class Restaurant < ApiModel
 		self.populate id, RestApi.restaurant({:id => id})
 	end
 
+	def self.from_ids( ids ) 
+		list = Array.new
+
+		ids.each_with_index do |item, index|
+			if index == 3
+				break
+			end
+			list << self.restaurant( item ) unless item.nil?
+		end
+		list
+	end
+
 
 	def self.restaurants( conditions ) 
 		list = Array.new
