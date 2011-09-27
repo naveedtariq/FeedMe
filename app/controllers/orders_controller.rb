@@ -28,8 +28,14 @@ class OrdersController < ApplicationController
 		render :json => current_cart.to_json
 	end
 
+	
+
 	def candeliver
 		location = current_location
+		puts params[:date] +"BEFORERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+		final_date = formatted_date(params[:date])
+		params[:date] = final_date[:date]
+		params[:time] = final_date[:time] 
 		params[:city] = location.city
 		params[:zip] = current_location.zip.split("-")[0]
 		params[:id] = session[:restaurant_id]
@@ -55,9 +61,9 @@ class OrdersController < ApplicationController
 #puts "*******------\n\n" + params.inspect + "**********\n\n"
 
 		current_cart.card = Card.new(params)
-
-		current_cart.date = params[:date]
-		current_cart.time = params[:time]
+		final_date = formatted_date(params[:date])
+		current_cart.date = final_date[:date]
+		current_cart.time = final_date[:time]
 
 #working test data below
 #		current_cart.card = Card.new({:name => "Abid Mahmood", :number => "4111111111111111", :cvv => "123",
@@ -71,4 +77,14 @@ class OrdersController < ApplicationController
 		render :json => resp.to_json
 	end
 
+private
+
+	def formatted_date(date)
+		puts  date+"AFTERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+		ret = {}
+		tm = Time.strptime(date,"%m/%d/%Y %H:%M")
+		ret[:date] = tm.month.to_s+'-'+tm.day.to_s
+		ret[:time] = tm.hour.to_s+":"+tm.min.to_s
+		ret
+	end
 end

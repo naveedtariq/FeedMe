@@ -5,7 +5,7 @@ class CartItem
 		params.symbolize_keys!
 		@options = []
 
-		@qty = 1
+		@qty = params[:count]
 		@name = params[:name]
 		@price = params[:price].to_f
 		@id = params[:id]

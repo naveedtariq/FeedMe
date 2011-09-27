@@ -1,9 +1,10 @@
 function display_menu(id)
 {
 	//alert(id);
-
+	
 	$('#menu_categories').slideToggle();
 	$('.menu_'+id).slideToggle();
+	document.getElementById( "link_title" ).setAttribute('onclick', 'display_menu('+id+');');
 }
 
 /*function hide_menu(id)
