@@ -1,5 +1,9 @@
 <div id="card_info" style="display: none; width: 350px; left: 175px; position: absolute; top: 20px;">
-
+<script>
+	$(function() {
+		$( "#date" ).datetimepicker();
+	});
+</script>
 <table id="pop_dialog_table" class="pop_dialog_table" style="width: 350px;">
 <tbody>
 	<tr>
@@ -25,8 +29,7 @@
 						<%= label_tag 'cardno', 'Card No', :class => 'checkout' %> <%= text_field_tag 'number', '4111111111111111', :class => 'checkout' %><br />
 						<%= label_tag 'cvv', 'CVV', :class => 'checkout' %> <%= text_field_tag 'cvv', nil, :class => 'checkout' %><br />
 						<%= label_tag 'Expiration', 'Expiration', :class => 'checkout' %> <%= text_field_tag 'expiry', nil, :class => 'checkout' %><br />
-						<%= label_tag 'date', 'Delivery Date & Time', :class => 'checkout' %>, <%= text_field_tag 'date', nil, :class => 'del_datetime' %>
-						<%= text_field_tag 'time', nil, :class => 'del_datetime' %> <br />Eg: 04-16, 22:00<br />
+						<%= label_tag 'date', 'Delivery Date & Time', :class => 'checkout' %> <%= text_field_tag 'date', nil, :class => 'checkout' %>
 						<span id="can_deliver" style="height: 25px; display: block; font-size: 1.25em;"></span><br />
 						<input class="inputsubmit" id="checkout_avail" value="Check Availability" type="button" onclick="check_delivery();" style="float: right;" /><br />
 						<input class="inputsubmit" id="checkout_cancel" value="Cancel" onclick="$('#card_info').hide();" type="button" style="float: left; position: relative;" />
