@@ -31,8 +31,9 @@
 						<td style="padding-top:20px;">
 							<div class="clr">
 								<div class="left" style="">
-									<dt class="blue_text" style="font-size: 14px;">Apt/Suite <%= f.text_field :apt, :style => 'width: 114px;', :class => 'inputtext' %> &nbsp; 
-									Zip Code <%= f.text_field :zip, :style => 'width: 130px;', :class => 'inputtext' %></dt>
+									<dt class="blue_text" style="font-size: 14px;">
+									Zip Code <br />
+							<%= f.text_field :zip, :style => 'width: 290px;', :class => 'inputtext' %></dt>
 								</div>
 							
 							</div>
@@ -45,7 +46,7 @@
 									<div class="blue_text" style="font-size: 14px;">
 										<%= check_box :location , :is_home_address , options = {} ,checked_value = "1", unchecked_value = "0" %> Save as Home Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<%= submit_tag "Delivery", :class => 'inputsubmit', :mode => 'd' %>&nbsp;&nbsp;&nbsp;
-										<%= submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
+										<%# submit_tag "Pick Up", :class => 'inputsubmit', :mode => 'p' %>
 								</div>
 							</div>
 						</td>

@@ -1,3 +1,8 @@
+<script type="text/javascript">
+	$(function(){
+		$('.section_title').first().children().first().trigger('click');
+	});
+</script>
 <% @notice = flash[:notice] %>
 
 	<div id="artwork"><%= image_tag @restaurant.image %></div>
