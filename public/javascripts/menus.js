@@ -30,15 +30,15 @@ function show_menu_item(id)
 	dialog = $('#food_dialog_' + id);
 	dialog.addClass("showing_dialog");
 
-	var height = $(window).height();
-	var width = $(window).width();
+	var height = screen.height;
+	var width = screen.width;
 	console.log(height);
 	console.log(width);
 
 	dialog.css({
 			'position': 'fixed',
 			'left' : width/2 - (dialog.width() / 2),  // half width - half element width
-			'top' : height/2 - (dialog.height() / 2)-150, // similar
+			'top' : height/2 - (dialog.height() / 2)-250, // similar
 			'z-index' : 15,                        // make sure element is on top
 	});
 
