@@ -68,13 +68,6 @@
 			<% end %>
 
 			</div>
-			<div class="clearfix">
-			<% @restaurant.menu_sections.each_with_index do |menu_section, index| %>
-					<% menu_section.menu_items.each do |item| -%>
-							<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
-				<% end -%>
-			<% end %>
-			</div>
 
 		</div>
 		
@@ -112,3 +105,10 @@
 
 
 </div>
+			<div class="clearfix">
+			<% @restaurant.menu_sections.each_with_index do |menu_section, index| %>
+					<% menu_section.menu_items.each do |item| -%>
+							<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
+				<% end -%>
+			<% end %>
+			</div>

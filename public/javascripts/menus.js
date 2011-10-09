@@ -22,8 +22,31 @@ function display_menu(id)
 function show_menu_item(id)
 {
 	//alert( 'About to show dialog:' + id );
-
+	var already = $('.showing_dialog');
+	if(already){
+		already.hide();
+		already.removeClass('showing_dialog');
+	}
 	dialog = $('#food_dialog_' + id);
+	dialog.addClass("showing_dialog");
+
+	var height = $(window).height();
+	var width = $(window).width();
+	console.log(height);
+	console.log(width);
+
+	dialog.css({
+			'position': 'fixed',
+			'left' : width/2 - (dialog.width() / 2),  // half width - half element width
+			'top' : height/2 - (dialog.height() / 2)-150, // similar
+			'z-index' : 15,                        // make sure element is on top
+	});
+
+//	dialog.position({
+//			of : $("body"),
+//			my: "center center",
+//			at: "center center"
+//	});
 
 	$('input#total_price',dialog).attr('class','active_price');
 	dialog.show();
