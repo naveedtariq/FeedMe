@@ -2,9 +2,15 @@ function display_menu(id)
 {
 	//alert(id);
 	
-	$('#menu_categories').slideToggle();
+//	$('#menu_categories').slideToggle();
+	var old_showing = $('.active_menu'); 
+	if(old_showing){
+		old_showing.removeClass('active_menu');
+		old_showing.slideToggle();
+	}
 	$('.menu_'+id).slideToggle();
-	document.getElementById( "link_title" ).setAttribute('onclick', 'display_menu('+id+');');
+	$('.menu_'+id).addClass('active_menu');
+//	document.getElementById( "link_title" ).setAttribute('onclick', 'display_menu('+id+');');
 }
 
 /*function hide_menu(id)

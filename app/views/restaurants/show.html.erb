@@ -17,7 +17,7 @@
 				( <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.75em;" target="_blank">View on Google</a> )
 			</div>
 		<% end %>
-			
+		<div>	
 		<div class="left">
 		<h1 class="blue_rest_title" id="link_title" style="cursor:pointer;"><%= @restaurant.name %></h1>	
 		</div>
@@ -49,82 +49,37 @@
 				<% end %>
 				</div>
 			</div>
-			
-		<div id="menu_categories">
-			<%= render :partial => 'menu_sections' %>
-		</div>
-
-		</div>
-		
-		
-		<% if searching_delivery? and not @restaurant.delivering? %>
-			<div id="error" style="margin-top:10px; font-size:12px">Delivery is currently closed for this restaurant.<br><b>Delivery status:</b> <%=@restaurant.delivering_string %></div>
-		<% end %>
-		
-		<% unless @combo.nil? %>
-			<br>
-			<div id="combo_information">
-			<%= render :partial => 'combos/combo_information', :locals => {:ordered_combo => @ordered_combo} %>
+		</div>	
+		<div>
+			<div style="width:30%;float:left;"id="menu_categories">
+				<%= render :partial => 'menu_sections' %>
 			</div>
-		<% end %>
-		
-		
-		<%# menu section and combo popup dialogs %>
-		<div class="clearfix">
-		<% @restaurant.menu_sections.each_with_index do |menu_section, index| %>
-				<% menu_section.menu_items.each do |item| -%>
-						<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
-			<% end -%>
-		<% end %>
-		
-		<%# @restaurant.specials.each do |special| -%>
-			<%#= render :partial => 'specials/special_dialogs', :locals => {:restaurant => @restaurant, :special => special} %>
-		<%# end %>
-		</div>
-		
-		
-		
-		<br>
-		
-		<% if @combo.nil? %>
-			<% if @restaurant.specials.count > 0 %>
-				<div style="text-align:center" class="specials_title">
-					<a href="#specials" id="specials" class="blue_text" style="text-decoration:underline">SPECIALS</a>
-				</div>
-				 <%= render :partial => "specials/special_content", :locals => { :restaurant => @restaurant } %>
-			<% end %>
-		
-			<% if @restaurant.combos.count > 0 and @combo.nil? %>
-				<br><br>
-				<div style="text-align:center" class="combos_title">
-					<a href="#combos" id="combos" class="blue_text" style="text-decoration:underline">Combinations</a>
-				</div>
-				<%= render :partial => "combos/combo_content", :locals => { :restaurant => @restaurant } %>
-			<% end %>
-		
+			<div style="float:right;width:70%;">
 			<% @restaurant.menu_sections.each do |menu_section| %>
 				<%# next if menu_section.only_for_combos? %>
 				<%# if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
 					<%= render :partial => 'menu_content', :locals => {:menu_section => menu_section} %>
 				<%# end %>
 			<% end %>
-		
-			
-		
-		<% else %>
-			<% unless @combo.nil? %>
-				<% if @error == 1 %>
-					<div style="color:#f00; text-align:center">You must choose the correct number of items before adding to the cart.</div>
-				<% end %>
-				
-				<% @restaurant.menu_sections.each do |menu_section| %>
-					<% if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
-						<%= render :partial => 'menu_content', :locals => {:menu_section => menu_section, :combo => @combo, :ordered_combo => @ordered_combo} %>
-					<% end %>
-				<% end %>
+
+			</div>
+			<div class="clearfix">
+			<% @restaurant.menu_sections.each_with_index do |menu_section, index| %>
+					<% menu_section.menu_items.each do |item| -%>
+							<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>
+				<% end -%>
 			<% end %>
-			
-		<% end %>
+			</div>
+
+		</div>
+		
+		
+		</div>
+		
+		
+		
+		<br>
+		
 		
 
 	</div>

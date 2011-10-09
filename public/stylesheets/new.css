@@ -330,7 +330,7 @@ margin-top: 15px;
 #menu_categories {
 	padding-top: 25px;
 	left:0;
-	width: auto;
+	width: 150px;
 }
 
 .center-column {
@@ -377,10 +377,8 @@ margin-top: 15px;
 	background: -moz-linear-gradient(top,  #627AAD,  #315091);
 	border:1px solid #284585;
 	text-align: center;
-	margin: 5px;
-	padding: 5px;
-
-	float: left;
+	margin: 3px;
+	padding: 1px;
 }
 
 #save_favorite {
@@ -410,8 +408,7 @@ margin-top: 15px;
 	display:block;
 	width:100%;
 	height: 100%;
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 12px;
 }
 
 .section_title a:hover {
@@ -439,7 +436,8 @@ margin-top: 15px;
 }
 
 .food_list {
-width:100%;
+width:93%;
+float:right;
 cellspacing:0;
 cellpadding:0;
 }
@@ -798,3 +796,4 @@ background: -moz-linear-gradient(center top , #555555, #AAAAAA) repeat scroll 0 
 background-color: #555;
 color: #AAAAAA;
 }
+
