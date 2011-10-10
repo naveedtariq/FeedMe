@@ -43,8 +43,7 @@
 				<div class="time_wrapper">
 					<b>Restaurant hours:</b> 
 					<br/>
-					<b>Lunch</b>
-					<div><%= @restaurant.open_times_string %></div>	
+					<div><%= @restaurant.open_times_string.html_safe %></div>	
 				</div>
 				<% if @restaurant.can_deliver? %>
 				<div class="time_wrapper">

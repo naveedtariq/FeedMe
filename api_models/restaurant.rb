@@ -68,7 +68,32 @@ class Restaurant < ApiModel
 	end
 
 	def open_times_string
-		self.raw["meal_hours"].to_s
+
+		def start_day(day)
+			day[:day]+"_"+"start_time"	
+		end
+
+		def end_day(day)
+			day[:day]+"_"+"end_time"	
+		end
+
+		days = [
+							{:day => "sun", :full => "Sunday"},
+							{:day => "mon", :full => "Monday"},
+							{:day => "tue", :full => "Tuesday"},
+							{:day => "wed", :full => "Wednesday"},
+							{:day => "thu", :full => "Thursday"},
+							{:day => "fri", :full => "Friday"},
+							{:day => "sat", :full => "Saturday"}
+		]
+		times_string = ""
+		self.raw["meal_hours"].each do |m|
+			times_string << "<b>#{self.raw["meal_names"][m["meal_name_id"]].capitalize}</b>" + ":"
+			days.each do |day|
+				times_string << "<p>#{day[:full]} from #{m[start_day day]} to #{m[end_day day]}</p>"	
+			end
+		end
+		times_string
 	end
 
 	def can_deliver?
