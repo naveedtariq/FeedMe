@@ -336,7 +336,7 @@ margin-top: 15px;
 
 .center-column {
 	float:left;
-	width: 500px;
+	width: 725px;
 	padding: 25px 5px;
 	position:relative;
 }
@@ -352,6 +352,7 @@ margin-top: 15px;
 	right:0;
 	font-size:11px;
 	width:185px;
+	position:absolute;
 }
 
 .cart_fix {

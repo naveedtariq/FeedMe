@@ -25,7 +25,18 @@ function update_cart()
 			parse_cart(data);
 		});
 }
-
+function show_full_cart(){
+	var showing = $('.showing');
+	if(showing.length > 0){
+		$('#view_details_link').html('Show Details');
+		$('#view_details_link').removeClass('showing');
+	}
+	else{
+		$('#view_details_link').html('Hide Details');
+		$('#view_details_link').addClass('showing');
+	}	
+	$('#cart_details').slideToggle();
+}
 function empty_cart()
 {
 	$.get('/orders/emptycart',function(data){
@@ -33,10 +44,17 @@ function empty_cart()
 	});
 }
 
-
+var cart_view = function(data){
+	var view = { items : data.items,
+							 total : data.total,
+							 count : data.items.length,
+							 user_id : data.user_id
+	}
+	return view;
+}
 function parse_cart(data)
 {
-	ht = $('#cart_item_template').mustache(data);
+	ht = $('#cart_item_template').mustache(cart_view(data));
 	$('#cartify_items').html(ht);
 
 	if (data.items.length > 0)

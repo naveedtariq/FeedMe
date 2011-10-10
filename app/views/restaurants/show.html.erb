@@ -5,7 +5,19 @@
 </script>
 <% @notice = flash[:notice] %>
 
-	<div id="artwork"><%= image_tag @restaurant.image %></div>
+	<div style="margin-bottom:15px;">
+	<div id="artwork" style="float:left"><%= image_tag @restaurant.image %></div>
+	<div style=="style="float:right;margin-right:10px;" id="cart_wrapper">
+	<div id="cart" class="right-column">
+		<%= render :partial => "cartify/show" %>
+		<%= render :partial => "cartify/checkout_dialog" %>
+		
+		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
+			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
+		<% end -%>
+	</div>
+	</div>
+	<div>
 
 <div style="clear:both">
 
@@ -86,16 +98,6 @@
 	</div>
 	
 	
-	<div id="cart_wrapper">
-	<div id="cart" class="right-column">
-		<%= render :partial => "cartify/show" %>
-		<%= render :partial => "cartify/checkout_dialog" %>
-		
-		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
-			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
-		<% end -%>
-	</div>
-	</div>
 	
 	
 	
