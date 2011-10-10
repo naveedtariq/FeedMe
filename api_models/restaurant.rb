@@ -5,10 +5,11 @@ class Restaurant < ApiModel
 		super(params)
 
 		@menu_sections = []
-		params[:raw]["menu"].each do |menu|
-			@menu_sections << MenuSection.populate(menu)
+		if params[:raw]["menu"]
+			params[:raw]["menu"].each do |menu|
+				@menu_sections << MenuSection.populate(menu)
+			end
 		end
-
 	end
 
 
@@ -28,8 +29,7 @@ class Restaurant < ApiModel
 		list
 	end
 
-
-	def self.restaurants( conditions ) 
+	def self.restaurants_with_details( conditions ) 
 		list = Array.new
 
 		all = RestApi.restaurants(conditions)
@@ -39,6 +39,17 @@ class Restaurant < ApiModel
 				break
 			end
 			list << self.restaurant( item["id"] ) unless item.nil?
+		end
+		list
+	end
+
+	def self.restaurants( conditions ) 
+		list = Array.new
+
+		all = RestApi.restaurants(conditions)
+		
+		all.each_with_index do |item, index|
+			list << self.simple_populate(item) unless item.nil?
 		end
 		list
 	end
@@ -104,6 +115,10 @@ class Restaurant < ApiModel
 	
 	def self.populate( id, data )
 		Restaurant.new( {:id => id, :name => data["name"], :raw => data, :logo => data["rds_info"]["logo"] } ) unless data.nil?
+	end
+
+	def self.simple_populate( data )
+		Restaurant.new( {:id => data["id"], :name => data["na"], :raw => data, :logo => data["rds_info"]["logo"] } ) unless data.nil?
 	end
 
 end

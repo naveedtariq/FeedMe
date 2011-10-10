@@ -258,7 +258,8 @@ dt.blue_text {
 	position:relative;
 	width:230px;
 	height:100%;
-	margin: 0 auto;
+	margin-top: 20px;
+	
 }
 .restaurant-box:hover {
 	text-decoration:none;

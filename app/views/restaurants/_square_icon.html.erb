@@ -5,7 +5,7 @@
 	<%# if restaurant.restaurant_images.find(:first) %>
 		<%# image_tag url_for_file_column(restaurant.restaurant_images.find(:first), "filename")  %>
 	<%# else %>
-		<%= image_tag restaurant.image %>
+		<%= image_tag restaurant.image, :width=>"230px" %>
 	<%# end %>
 	</div>
 	

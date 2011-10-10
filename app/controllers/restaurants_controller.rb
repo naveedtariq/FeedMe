@@ -8,7 +8,7 @@ class RestaurantsController < ApplicationController
   def index
 		@location = current_location
 		conditions = {:datetime => 'ASAP', :postal_code => @location.zip.split("-")[0], :city => @location.city, :street_address => @location.street}
-		@details = Restaurant.restaurants(conditions).paginate(:page => params[:page], :per_page => 3)
+		@details = Restaurant.restaurants(conditions).paginate(:page => params[:page], :per_page => 6)
 	end
 
 	def favorites
