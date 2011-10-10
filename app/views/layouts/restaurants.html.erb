@@ -96,7 +96,7 @@
 <div class="second_links">
 <ul class="main_set">
 <li><%= link_to_unless_current('Search Results', :controller => "restaurants", :action => "index" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
-<li><%# link_to_unless_current('Favorite Restaurants', :controller => "favorites", :action => "index" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
+<li><%= link_to_unless_current('Favorite Restaurants', :controller => "restaurants", :action => "favorites" ) {|link| content_tag 'span', link, :class => 'current'} %></li>
 <li><%# link_to_unless_current('Suggest New Restaurant', new_restaurant_suggestion_url ) {|link| content_tag 'span', link, :class => 'current'} %></li>
 <li><%= link_to_function 'Invite Friends!', 
    "FB.init({
@@ -111,7 +111,7 @@
 	" %>
 </li>
 <li>
-	<%= link_to 'My Favorites', :controller => 'restaurants', :action => 'favorites' %>
+	<%# link_to 'My Favorites', :controller => 'restaurants', :action => 'favorites' %>
 </li>
 </ul>
 </div>
