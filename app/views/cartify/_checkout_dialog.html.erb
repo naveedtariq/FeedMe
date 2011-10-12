@@ -1,7 +1,7 @@
 <div id="card_info" style="display: none; width: 350px; left: 175px; position: absolute; top: 20px;">
 <script>
 	$(function() {
-		$( "#date" ).datetimepicker();
+		$( "#date" ).datetimepicker( { ampm : true });
 	});
 </script>
 <table id="pop_dialog_table" class="pop_dialog_table" style="width: 350px;">
@@ -22,7 +22,8 @@
 
 			<div class="dialog_content">
 				<form id="form_card_info" action="" onsubmit="return place_order();">
-					<div class="dialog_body" style="height: 225px; padding: 25px;">
+					<div id="dialog_notice" style="text-align:center;padding-top:5px;"></div>
+					<div class="dialog_body" style="height: 120px; padding: 25px;">
 					<div class="left">
 						<span style="color: #3B5998; font-size: 1.15em; display: none; float: left; width: 270px;" id="ploader">Please wait....</span>
 						<%= label_tag 'name', 'Card Name', :class => 'checkout' %> <%= text_field_tag 'name', nil, :class => 'checkout' %><br />
@@ -30,14 +31,14 @@
 						<%= label_tag 'cvv', 'CVV', :class => 'checkout' %> <%= text_field_tag 'cvv', nil, :class => 'checkout' %><br />
 						<%= label_tag 'Expiration', 'Expiration', :class => 'checkout' %> <%= text_field_tag 'expiry', nil, :class => 'checkout' %><br />
 						<%= label_tag 'date', 'Delivery Date & Time', :class => 'checkout' %> <%= text_field_tag 'date', nil, :class => 'checkout' %>
-						<span id="can_deliver" style="height: 25px; display: block; font-size: 1.25em;"></span><br />
-						<input class="inputsubmit" id="checkout_avail" value="Check Availability" type="button" onclick="check_delivery();" style="float: right;" /><br />
-						<input class="inputsubmit" id="checkout_cancel" value="Cancel" onclick="$('#card_info').hide();" type="button" style="float: left; position: relative;" />
-						<input class="inputsubmit" id="placeorder_button" value="Place Order" type="submit" style="float: right" disabled="disabled" />
 					</div>
+					</div>
+					<div class="dialog_buttons">
+						<input class="inputsubmit" id="checkout_avail" style="padding: 5px 12px 6px;" value="Check Availability" type="button" onclick="check_delivery();" />
+						<input class="inputsubmit" id="checkout_cancel" style="padding: 5px 12px 6px;" value="Cancel" onclick="$('#card_info').hide();" type="button"  />
+						<input class="inputsubmit" id="placeorder_button" style="padding: 5px 12px 6px;" disabled = "disabled" value="Order" onclick="place_order();" type="button"  />
 					</div>
 				</form>
-			<div id="card_transaction"></div>
 			</div>
 
 		</td>

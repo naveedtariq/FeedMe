@@ -32,7 +32,6 @@ class OrdersController < ApplicationController
 
 	def candeliver
 		location = current_location
-		puts params[:date] +"BEFORERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
 		final_date = formatted_date(params[:date])
 		params[:date] = final_date[:date]
 		params[:time] = final_date[:time] 
@@ -41,7 +40,6 @@ class OrdersController < ApplicationController
 		params[:id] = session[:restaurant_id]
 
 		resp = RestApi.check_delivery(params)
-		puts resp.inspect + 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'
 		render :json => resp.to_json
 	end
 
@@ -80,11 +78,10 @@ class OrdersController < ApplicationController
 private
 
 	def formatted_date(date)
-		puts  date+"AFTERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
 		ret = {}
-		tm = Time.strptime(date,"%m/%d/%Y %H:%M")
+		tm = Time.strptime(date,"%m/%d/%Y %H:%M %p")
 		ret[:date] = tm.month.to_s+'-'+tm.day.to_s
-		ret[:time] = tm.hour.to_s+":"+tm.min.to_s
+		ret[:time] = tm.hour.to_s+":"+((tm.min.to_s.length == 1)? "0"+tm.min.to_s : tm.min.to_s)
 		ret
 	end
 end

@@ -12,7 +12,6 @@
 	<div style=="style="float:right;margin-right:10px;" id="cart_wrapper">
 	<div id="cart" class="right-column">
 		<%= render :partial => "cartify/show" %>
-		<%= render :partial => "cartify/checkout_dialog" %>
 		
 		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
 			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
@@ -109,6 +108,7 @@
 
 </div>
 			<div class="clearfix">
+		<%= render :partial => "cartify/checkout_dialog" %>
 			<% @restaurant.menu_sections.each_with_index do |menu_section, index| %>
 					<% menu_section.menu_items.each do |item| -%>
 							<%= render :partial => 'menu_sections/food_dialog', :locals => {:restaurant => @restaurant, :food => item} %>

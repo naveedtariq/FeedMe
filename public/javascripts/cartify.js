@@ -3,6 +3,24 @@ $(function(){
 	update_cart();
 });
 
+var colors = {"notice" : "green", "message" : "black", "error" : "red" }
+function notify(msg, options){
+	var defaults = {type : "message", fo : false}
+	$.extend(defaults, options);
+
+	if( $('#dialog_notice').is(':visible') ) {
+		$("#dialog_notice").hide();
+	}	
+	$('#dialog_notice').css('color', colors[defaults.type]);
+	$('#dialog_notice').html(msg);
+	if(defaults.fo){
+		$('#dialog_notice').fadeIn(); 	
+	}
+	else{
+		$('#dialog_notice').fadeIn().delay(2000).fadeOut('slow'); 	
+	}
+}
+
 
 function loading(tellme)
 {
@@ -122,7 +140,7 @@ function cart_add( food_id , food_name, food_price )
 function place_order()
 {
 	var form = $('#form_card_info');
-	loading(true);
+	notify("Please Wait...",{fo : true});
 
 	$.ajax({
 		url: '/orders/checkout',
@@ -130,18 +148,17 @@ function place_order()
 		data: form.serialize(),
 		dataType: 'JSON',
 		success: function(data) {
-			loading(false);
-			//alert('hello');
-			//form.slideToggle();
+			$("dialog_notify").hide();
 			msg = data.text;
 			if ( data._error == 1 )
 			{
-				$('#card_transaction').html(msg);
+				notify(msg, {type : "error"});
 				return false;
 			}
 
 			msg = msg + '<a href="#" onclick="$(\'#card_info\').slideToggle();">Close [X]</a>';
-			$('#card_transaction').html(msg);
+			notify(msg, { type : "notice" });
+//			$('#card_transaction').html(msg);
 
 			empty_cart();
 			$('#checkout_cancel').val('Close');
@@ -159,7 +176,20 @@ function place_order()
 
 function show_card_dialog()
 {
-	var form = $('#form_card_info');
+	var form = $('#card_info');
+
+	var height = screen.height;
+	var width = screen.width;
+	console.log(height);
+	console.log(width);
+
+	form.css({
+			'position': 'fixed',
+			'left' : width/2 - (form.width() / 2)-150,  // half width - half element width
+			'top' : height/2 - (form.height() / 2)-250, // similar
+			'z-index' : 15,                        // make sure element is on top
+	});
+
 	form.show();
 	$('#card_transaction').html('');
 	$('#card_info').show();
@@ -171,24 +201,23 @@ function check_delivery()
 	date = $('#date').val();
 	time = $('#time').val();
 
-	if ( date == "" || time == "" )
+	if ( date == "")
 	{
-		$('#can_deliver').css('color','red');
-		$('#can_deliver').html('Please set date and time first');
+		notify('Please set date and time first', {type : "error"});
 		return;
 	}
 
 	var checkout_butt = $("#placeorder_button");
-	loading(true);
+	notify('Please Wait...', {fo: true, type : "message"});
+//	loading(true);
 
 	$.get( '/orders/candeliver', { date: date, time: time, }, function(data){
-
-		loading(false);
+	
+		$('#dialog_notice').hide();
 
 		if ( data.delivery == 1 )
 		{
-			$('#can_deliver').html('Delivery Available.');
-			$('#can_deliver').css('color','green');
+			notify('Delivery Available.', {type : "notice"});
 
 		  checkout_butt.removeAttr('disabled');
 			checkout_butt.css('color','#FFF');
@@ -196,8 +225,7 @@ function check_delivery()
 			return;
 		}
 
-		$('#can_deliver').html(data.msg);
-		$('#can_deliver').css('color','red');
+		notify(data.msg, {type : "error"});
 
 		checkout_butt.attr('disabled', 'disabled');
 		checkout_butt.css('color','#AAA');

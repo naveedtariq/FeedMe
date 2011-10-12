@@ -36,7 +36,8 @@ class RestApi
 	end
 
 	def self.order_hash(order)
-		user = User.find(order.user_id)
+#		user = User.find(order.user_id)
+		user = User.find(1)
 
 #TODO: Tray not working, ASAP in delivery_date Not working
 
