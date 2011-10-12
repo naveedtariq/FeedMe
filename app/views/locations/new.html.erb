@@ -20,7 +20,7 @@
 						<td width="60%" style="padding-top:20px;">
 							<div class="clr">
 								<div class="left" style="">
-									<dt class="blue_text" style="font-size: 14px;">Street Address <%= f.text_field :street, :style => 'width: 290px;', :class => 'inputtext' %></dt>
+									<dt class="blue_text" style="font-size: 14px;">Street Address <%= f.text_field :street, :value => current_user.home_location_street,:style => 'width: 290px;', :class => 'inputtext' %></dt>
 								</div>
 							</div>
 						</td>
@@ -32,7 +32,7 @@
 								<div class="left" style="">
 									<dt class="blue_text" style="font-size: 14px;">
 									Zip Code <br />
-							<%= f.text_field :zip, :style => 'width: 290px;', :class => 'inputtext' %></dt>
+							<%= f.text_field :zip, :value => current_user.home_location_zip,:style => 'width: 290px;', :class => 'inputtext' %></dt>
 								</div>
 							
 							</div>

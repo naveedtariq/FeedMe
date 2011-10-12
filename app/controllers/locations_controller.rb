@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
 	  @selected_id = nil
 	  @selected_id = @home_location.id if @home_location
     @user_locations = nil
-	  @home_location = nil
+	  @home_location = current_user.locations.where("is_home_address = 1").first
 	  @selected_id = nil
 	
     respond_to do |format|
@@ -51,7 +51,9 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        flash[:notice] = 'Your address has been updated'
+				if params[:location][:is_home_address] == "1"
+					flash[:notice] = 'Your address has been updated'
+				end
         format.html { redirect_to params[:redirect_to] || :controller => :restaurants, :action => :index, :sort => "cuisine" }
         format.xml  { render :xml => @location, :status => :created, :location => user_location_path(@user, @location) }
       else
