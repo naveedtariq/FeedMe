@@ -1,0 +1,18 @@
+<div style="padding:0px 10px">
+	<h1 class="blue_text">Frequently Asked Questions</h1>
+<ol>
+<% @faqs.each do |faq| -%>
+	<li class="question"><a href="#question<%=faq.id%>"><%= faq.question %></a></li>
+<% end %>
+</ol>
+<br>
+<div align="center"><hr width="90%" style="color:#ccc" /></div>
+<br>
+
+<% @faqs.each do |faq| -%>
+<div class="question_wrapper">
+		<div class="question" id="question<%=faq.id%>"><%= faq.question %></div>
+		<div class="answer"><%= faq.answer %></div>
+</div>
+<% end %>
+</div>

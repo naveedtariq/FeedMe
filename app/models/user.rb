@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
 	has_many :locations, :dependent => :destroy
 	has_many :favourite_restaurants
+	has_many :feedbacks
 
 
 	def home_location
