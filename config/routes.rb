@@ -11,6 +11,7 @@ Fc::Application.routes.draw do
 	end
 
 	resource :location
+	resources :feedbacks
 
 	resources :restaurants do 
 		collection do

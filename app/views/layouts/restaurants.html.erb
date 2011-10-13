@@ -140,11 +140,10 @@
 <div id="footer_clear">
 <div class="first"><%= link_to "about us", "/about/" %></div>
 <div><%= link_to "contact us", :controller => :feedbacks, :action => :new %></div>
-<div><%= link_to "faq", :controller => :faqs, :action => :index %></div>
-<div><%= link_to "restaurant owners", "/restaurant_suggestions/owners" %></div>
-<div><%= link_to "advertisers", :controller => :advertisers, :action => :new %></div>
-<div><%= link_to "privacy policy", "/about/privacy" %></div>
-<div class="last"><%= link_to "terms and conditions", "/about/tos" %></div>
+<div><%= link_to "faq", :controller => :about, :action => :faqs%></div>
+<div><%= link_to "restaurant owners", :controller => :about, :action => :restaurant_owners%></div>
+<div><%= link_to "advertisers", :controller => :about, :action => :advertisers%></div>
+<div class="last"><%= link_to "terms and conditions", :controller => :about, :action => :terms %></div>
 </div>
 </div>
 </div>

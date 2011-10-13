@@ -1,0 +1,77 @@
+
+<div align="center" style="float:left;margin-top:70px;margin-left:10px;"><img src="/images/burger.png" width="250" /></div>
+
+
+<div style="float:left;margin-top:-35px;margin-left:50px;margin-bottom:20px">
+<div class="blue_header clr" style="font-size:25px; color:#fff; margin-top:50px;">
+
+	<div class="left">Contact us</div>
+
+	<div class="clr_fix"></div>
+
+</div>
+
+
+
+
+
+
+
+<% content_for :masthead do -%>
+
+	<%= render :partial => 'layouts/thin_masthead', :locals => {:back_link => link_to('Back to Restaurant List', restaurants_url), :page_title => 'Help'} %>
+
+<% end -%>
+
+
+
+
+
+
+
+<% form_for(@feedback) do |f| -%>
+
+<table cellpadding="0" cellspacing="0" width="100%" class="light-gray">
+
+	<td width="100%" style="padding:10px" valign="top">
+
+		<div class="text">
+
+			<p>
+
+				If you have any questions about your order, <strong>contact the restaurant directly.</strong>
+
+			</p>
+
+			<p>We're happy to answer your questions about our site and business.  Go ahead and shoot us an email at <em>questions@foodcourtapp.com</em></p>
+
+		</div>
+
+<dl class="clearfix">
+
+	<dt style="float:left;" class="blue_text">
+
+		How can we make this site better?
+
+		<span class="explanation">Don't be shy!</span>
+
+	</dt>
+
+	<div><%= f.text_area :content,:cols => 80, :rows => 7 %></div>
+
+</dl>
+
+
+
+<div class="submit">
+
+	<%= submit_tag 'Send your feedback', :class => 'inputsubmit' %>
+
+</div>
+
+</td>
+
+</table>
+
+<% end -%>
+</div>
