@@ -54,6 +54,7 @@ function show_full_cart(){
 		$('#view_details_link').addClass('showing');
 	}	
 	$('#cart_details').slideToggle();
+	return false;
 }
 function empty_cart()
 {
@@ -77,7 +78,7 @@ function parse_cart(data)
 
 	if (data.items.length > 0)
 	{
-		$('div.cart_item').animate({backgroundColor: '#FFF'},1000);
+//		$('div.cart_item').animate({backgroundColor: '#FFF'},1000);
 		$('#checkout_link').show();
 	}
 }
@@ -185,8 +186,8 @@ function show_card_dialog()
 
 	form.css({
 			'position': 'fixed',
-			'left' : width/2 - (form.width() / 2)-150,  // half width - half element width
-			'top' : height/2 - (form.height() / 2)-250, // similar
+			'left' : width/2 - (form.width() / 2)-280,  // half width - half element width
+			'top' : height/2 - (form.height() / 2)-100, // similar
 			'z-index' : 15,                        // make sure element is on top
 	});
 

@@ -9,15 +9,6 @@
 	<div id="artwork" style="float:left">
 		<h1 class="blue_rest_title" id="link_title" style="margin-left:15px;cursor:pointer;"><%= @restaurant.name %></h1>	
 </div>
-	<div style=="style="float:right;margin-right:10px;" id="cart_wrapper">
-	<div id="cart" class="right-column">
-		<%= render :partial => "cartify/show" %>
-		
-		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
-			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
-		<% end -%>
-	</div>
-	</div>
 	<div>
 
 <div style="clear:both">
@@ -38,8 +29,19 @@
 		<div>	
 		<div class="left" style="margin-left:10px;">
 			<%= image_tag @restaurant.image, :width => "200px"%>
+<div style="margin-left:5px;"><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle()">Restaurant Info</a></div>
 		</div>
-		<div class="right"><div><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle()">Restaurant Info</a></div></div>
+		<div class="right">
+	<div style=="style="float:right;margin-right:10px;" id="cart_wrapper">
+	<div id="cart" class="right-column">
+		<%= render :partial => "cartify/show" %>
+		
+		<% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
+			<div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
+		<% end -%>
+	</div>
+	</div>
+</div>
 		<div class="clearfix"></div>
 			<div id="restaurant_info">
 				<div style="position:relative">

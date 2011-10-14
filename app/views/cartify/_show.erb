@@ -1,14 +1,14 @@
 <div id="cartify" style="z-index:10;">
-<h2 style="color: #3B5998; font-size: 1.85em; margin: -10px 0 10px 45px;">Your Cart</h2>
+<h2 style="color: #3B5998; font-size: 1.5em; margin: -10px 0 10px 45px;">Your Cart</h2>
 
 <div id="cartify_items"></div>
 
 <script id="cart_item_template" type="x-tmpl-mustache">
 		<div id="cart_details" style="display:none;">
 		{{#items}}
-		<div id="cart_item_{{id}}" class="cart_item">
+		<div id="cart_item_{{id}}" class="cart_item" style="background-color:none !important;">
 		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}, Total: {{total}}</b> &nbsp;
-		<a href="#" onclick="remove_item({{id}});">Remove [X]<a/><br />
+		<a style="cursor:pointer;" onclick="remove_item({{id}});">Remove [X]<a/><br />
 
 		Options:
 		<ul style="margin-top:0px;margin-bottom:0px;">
@@ -21,10 +21,9 @@
 		</div>
 
 		<b>Total Price:</b> {{total}}<br />
-		<b>Items :</b> {{count}}<br />
+		<b>Items :</b> {{count}}
 </script>
 
-<br />
-<a id="checkout_link" style="display: none;" href="#" onClick="show_card_dialog();">Checkout</a>
-<a id="view_details_link"  href="#" onClick="show_full_cart();">View Details</a>
+<a id="checkout_link" style="cursor:pointer;display: none;" onClick="show_card_dialog();">Checkout</a>
+<a id="view_details_link"  style="cursor:pointer;" onClick="show_full_cart();">View Details</a>
 </div>

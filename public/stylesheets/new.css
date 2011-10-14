@@ -235,7 +235,9 @@ dt.blue_text {
 	float:left;
 }
 .right {
-	float:right;
+  position: absolute;
+  right: -7px;
+  top: 0;
 }
 .clr {
 	clear:both;
@@ -335,22 +337,20 @@ margin-top: 15px;
 .center-column {
 	float:left;
 	width: 725px;
-	padding: 25px 5px;
+	padding: 10px 5px;
 	position:relative;
 }
 
 .right-column {
 	float:right;
 	width:170px;
-	border:1px solid #acb9d0;
 	padding: 15px 3px;
+	background-color :#F4F6F8;
 }
 
 #cart {	
-	right:0;
 	font-size:11px;
-	width:185px;
-	position:absolute;
+	padding : 10px;
 }
 
 .cart_fix {
@@ -721,8 +721,8 @@ td span.food {
 	border:1px solid #5c75aa;
 	padding:5px;
 	position:absolute;
-	top:5;
-	right:0;
+	top:70px;
+	left:10px;
 	background:#fff;
 	width:300px;
 
@@ -796,4 +796,3 @@ background: -moz-linear-gradient(center top , #555555, #AAAAAA) repeat scroll 0 
 background-color: #555;
 color: #AAAAAA;
 }
-
