@@ -7,7 +7,7 @@
 		<%# end %>
 	</div>
 	
-	<div class="name"><h2 class="restaurant_name"><%= restaurant.name %></h2></div>
+	<div class="name"><h2><%= restaurant.name %></h2></div>
 	
 	<div class="info">
 		<div class="left">

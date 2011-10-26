@@ -64,7 +64,7 @@
 				</div>
 		</div>
 		<div style="margin: 10px 37px">
-					( <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.95em;" target="_blank">Locate this restaurant</a> )
+					( <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.95em;" target="_blank">Locate this restaurant.</a> )
 		</div>
 		
 	</div>

@@ -6,6 +6,6 @@
 </div>
 <div class="thin_title_header">
 	<div class="title_header no_padding">
-		<h2 style="background-image: url('/images/hamburger_16.gif')"><%= page_title %></h2>
+		<h2 style="background-image: url('/images/hambsurger_16.gif')"><%= page_title %></h2>
 	</div>
 </div>

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
 	def ensure_authenticated
 		session[:current_user_id] = 1
-		#return true
+		//return true
 		if session[:at]
 			return true
 		end
