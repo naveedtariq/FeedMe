@@ -38,7 +38,6 @@ require 'will_paginate/array'
 
 
 	def show
-		
 		@restaurant = Restaurant.restaurant( params[:id] )
 		@cart = current_cart
 

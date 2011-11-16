@@ -34,11 +34,10 @@ class Cart
 		end
 		
 		if @items.count == 0
-			@fee = 0
-			@tax = 0
-		else
 			@fee = fee_details['fee'].to_f
 			@tax = fee_details['tax'].to_f
+		else
+			
 		end
 		
 		@fulltotal = @total + @fee + @tax

@@ -9,10 +9,18 @@ class OrdersController < ApplicationController
 	def create 
 		data = ActiveSupport::JSON.decode(params[:data])
 		atom = CartItem.new( data )
-		current_cart.add_item(atom)
+		
+		current_cart.location = current_location
+		params[:id] 		= session[:restaurant_id]
+		params[:total] 		= current_cart.total + atom.total
+		params[:street] 	= current_location.street
+		params[:city] 		= current_location.city
+		params[:zip] 		= current_location.zip.split("-")[0]
+		resp = RestApi.get_fee_details(params)
+
+		current_cart.add_item(atom,resp)		
 		render :json => current_cart.to_json
 	end
-
 
 	def emptycart
 		current_cart.empty
@@ -20,15 +28,30 @@ class OrdersController < ApplicationController
 	end
 
 	def remove
-		current_cart.remove_item(params[:id])
+		itemcost = 0
+		current_cart.items.each do |item|
+			if item.id.to_s == params[:id] then
+				itemcost = item.total
+			end
+		end
+		
+		item_id = params[:id]
+		
+		current_cart.location = current_location
+		params[:id] 		= session[:restaurant_id]
+		params[:total] 		= current_cart.total - itemcost
+		params[:street] 	= current_location.street
+		params[:city] 		= current_location.city
+		params[:zip] 		= current_location.zip.split("-")[0]
+		puts resp = RestApi.get_fee_details(params)
+		
+		current_cart.remove_item(item_id,resp)
 		render :json => current_cart.to_json
 	end
 
 	def getcart
 		render :json => current_cart.to_json
 	end
-
-	
 
 	def candeliver
 		location = current_location

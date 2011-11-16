@@ -67,6 +67,9 @@ var cart_view = function(data){
 	
 	var view = { items : data.items,
 				 total : data.total,
+				 fulltotal : data.fulltotal,
+				 tax : data.tax,
+				 fee : data.fee,
 				 itemcount : data.items.length,
 			     user_id : data.user_id
 	}

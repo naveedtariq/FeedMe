@@ -17,11 +17,17 @@
 			{{/options}}
 		</ul>
 		</div>
-		{{/items}}<br />
+		{{/items}}
+		<br />
+		<b>Fee:</b> {{fee}}<br />
+		<b>Tax:</b> {{tax}}<br />
+		<b>Tip:</b> 0<br />
+		<b>Sub Total:</b> {{total}}<br />
+		<br />
 		</div>
 
-		<b>Total Price:</b> {{total}}<br />
-		<b>Items :</b> {{itemcount}}<br />
+		<b>Total Price:</b> {{fulltotal}}<br />
+		<b>Items:</b> {{itemcount}}<br />
 </script>
 
 <a id="checkout_link" style="cursor:pointer;display: none;" onClick="show_card_dialog();">Checkout</a>

@@ -52,12 +52,6 @@ class Restaurant < ApiModel
 			list << self.simple_populate(item) unless item.nil?
 		end
 		
-		## Sort the array alphabetically
-		list = list.sort do |a,b|
-		  a.name.upcase <=> b.name.upcase
-		end
-		##
-		
 		list
 	end
 
