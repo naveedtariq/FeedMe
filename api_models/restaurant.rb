@@ -143,6 +143,10 @@ class Restaurant < ApiModel
 		self.name + ', ' + self.raw["city"] + ', ' + self.raw["state"] + ', ' + self.raw["postal_code"]
 	end
 	
+  def complete_address_string
+		self.raw["addr"] + ', ' + self.raw["addr2"] + ', ' + self.raw["city"] + ', ' + self.raw["state"] + ', ' + self.raw["postal_code"]
+	end
+	
 	protected
 	
 	def self.populate( id, data )
