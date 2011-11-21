@@ -88,16 +88,18 @@ class Restaurant < ApiModel
 							{:day => "sat", :full => "Saturday"}
 		]
 		times_string = ""
-		self.raw["meal_hours"].each do |m|
-			times_string << "<b>#{self.raw["meal_names"][m["meal_name_id"]].capitalize}</b>" + ":"
-			days.each do |day|
-				st_time = Time.gm(1,1,1,m[start_day day])
-				st_time = st_time.strftime("%I:%M%P")
-				end_time = Time.gm(1,1,1,m[end_day day])
-				end_time = end_time.strftime("%I:%M%P")
-				times_string << "<p>#{day[:full]} from #{st_time} to #{end_time}</p>"	
-			end
-		end
+    unless self.raw["meal_hours"].blank?
+      self.raw["meal_hours"].each do |m|
+        times_string << "<b>#{self.raw["meal_names"][m["meal_name_id"]].capitalize}</b>" + ":"
+        days.each do |day|
+          st_time = Time.gm(1,1,1,m[start_day day])
+          st_time = st_time.strftime("%I:%M%P")
+          end_time = Time.gm(1,1,1,m[end_day day])
+          end_time = end_time.strftime("%I:%M%P")
+          times_string << "<p>#{day[:full]} from #{st_time} to #{end_time}</p>"	
+        end
+      end
+    end
 		times_string
 	end
 
