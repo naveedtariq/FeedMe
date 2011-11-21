@@ -5,9 +5,11 @@ class MenuSection < ApiModel
 		super(params)
 
 		@menu_items = []
-		params[:raw]["children"].each do |item|
-			@menu_items << MenuItem.populate(item)
-		end
+    unless params[:raw]["children"].blank?
+      params[:raw]["children"].each do |item|
+        @menu_items << MenuItem.populate(item)
+      end
+    end
 	end
 
 	def self.populate( data )

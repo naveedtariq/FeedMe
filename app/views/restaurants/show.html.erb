@@ -54,7 +54,7 @@
 					<b>Restaurant hours:</b> 
 					<br/>
 					<div><%= 
-						#	@restaurant.open_times_string.html_safe 
+							@restaurant.open_times_string.html_safe 
 						%></div> 		
 				</div>
 				<% if @restaurant.can_deliver? %>
