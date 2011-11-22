@@ -144,7 +144,11 @@ class Restaurant < ApiModel
 	end
 	
   def complete_address_string
-		self.raw["addr"] + ', ' + self.raw["addr2"] + ', ' + self.raw["city"] + ', ' + self.raw["state"] + ', ' + self.raw["postal_code"]
+    address = self.raw["addr"]
+    unless self.raw["addr2"].blank?
+      address = address + ', ' + self.raw["addr2"] 
+    end 
+    address = address + ', ' + self.raw["city"] + ', ' + self.raw["state"] + ', ' + self.raw["postal_code"]
 	end
 	
 	protected
