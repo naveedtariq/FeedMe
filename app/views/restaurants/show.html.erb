@@ -80,12 +80,12 @@
 				<%= render :partial => 'menu_sections' %>
 			</div>
 			<div style="float:right;width:70%;">
-			<% @restaurant.menu_sections.each do |menu_section| %>
+			<%# @restaurant.menu_sections.each do |menu_section| %>
 				<%# next if menu_section.only_for_combos? %>
 				<%# if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
-					<%= render :partial => 'menu_content', :locals => {:menu_section => menu_section} %>
+					<%= render :partial => 'menu_content', :locals => {:menu_section => @restaurant.menu_sections.first} %>
 				<%# end %>
-			<% end %>
+			<%# end %>
 
 			</div>
 

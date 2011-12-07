@@ -43,6 +43,7 @@ require 'will_paginate/array'
 
 		unless @restaurant.nil?
 			session[:restaurant_id] = @restaurant.id
+      session[:current_restaurant_obj] = @restaurant
 		end
 #puts "\n\n-------************\n\n" + @cart.inspect + "\n\n*********************************************\n\n"
 	end
@@ -58,5 +59,16 @@ require 'will_paginate/array'
 		fv.first.delete
 		render :json => {:message => "deleted"}
 	end
+
+  def get_menu_content
+    id = params[:id]
+    @restaurant = session[:current_restaurant_obj] unless session[:current_restaurant]
+    if @restaurant
+      menu_section = @restaurant.menu_sections.find { |menu_section| 
+        menu_section.id == id
+      }
+      return render :partial => 'menu_content', :locals => {:menu_section => menu_section}
+    end
+  end
 
 end

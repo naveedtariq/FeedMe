@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   
 	def ensure_authenticated
 		session[:current_user_id] = 1
-		#return true
+		return true
 		if session[:at]
 			return true
 		end
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticator
-		@authenticator ||= Mogli::Authenticator.new('176485969058177', 'd5883469ab10f4752067ea15b9aabf8d', 'http://localhost.com/pages/callback')
+		@authenticator ||= Mogli::Authenticator.new('128902520555451', 'cf97f8cb71095c3310258c3bfe9d332e', 'https://localhost.com/pages/callback')
 	end
 
   protected

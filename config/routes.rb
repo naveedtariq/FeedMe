@@ -17,11 +17,13 @@ Fc::Application.routes.draw do
 		collection do
 			get 'favorites'
 			get 'sorted'
+      get 'get_menu_content'
 		end
 	end
 
 
 	root :to => "locations#new"
+#  match 'get_menu_content', :controller => 'restaurants', :action => "get_menu_content", :as => :get_menu_content
 
 	match '/:controller(/:action(/:id))'
 	match '/:controller(/:action(/:id)).:format'

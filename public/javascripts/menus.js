@@ -8,8 +8,22 @@ function display_menu(id)
 		old_showing.removeClass('active_menu');
 		old_showing.slideToggle();
 	}
-	$('.menu_'+id).slideToggle();
-	$('.menu_'+id).addClass('active_menu');
+  // check if that menu already exists if it exists show it like below two lines else do ajax call to get the html and show it
+  if($('.menu_'+id).length > 0) {
+    $('.menu_'+id).slideToggle();
+    $('.menu_'+id).addClass('active_menu');
+  } else {
+    $.ajax({
+      url: '/restaurants/get_menu_content',
+      type: 'GET',
+      data: 'id=' + id,
+      success: function(data) {
+          $(data).insertAfter($(old_showing));
+          $('.menu_'+id).slideToggle();
+          $('.menu_'+id).addClass('active_menu');
+        }
+      });
+  }
 //	document.getElementById( "link_title" ).setAttribute('onclick', 'display_menu('+id+');');
 }
 

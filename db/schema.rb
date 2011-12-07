@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111013123533) do
+ActiveRecord::Schema.define(:version => 20111207092234) do
 
   create_table "faqs", :force => true do |t|
     t.text     "question"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20111013123533) do
   end
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
+    t.string   "session_id",                     :null => false
+    t.text     "data",       :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
