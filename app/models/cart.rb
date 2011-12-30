@@ -21,15 +21,10 @@ class Cart
 	end
 
 	def remove_item(id,fee_details)
-	puts 222
-	puts id
-	puts 1111
 		@items.each do |item|
-						puts 333
-						puts item.id.to_s
 			if item.id.to_s == id then
 				@total = @total - item.total
-				@items.delete(item)
+				@removed_item = @items.delete(item)
 			end
 		end
 		
@@ -43,6 +38,27 @@ class Cart
 		
 		@fulltotal = @total + @fee + @tax
 	end
+
+  def update_item(id, fee_details, count)
+    removed_item = 0
+		@items.each do |item|
+			if item.id.to_s == id then
+				@total = @total - item.total
+				removed_item = @items.delete(item)
+			end
+		end
+    puts "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+    puts @items.inspect
+    puts "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+    puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+    puts removed_item.inspect
+    puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+    removed_item.update_quantity(count)
+    puts "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+    puts removed_item.inspect
+    puts "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+    add_item(removed_item, fee_details)
+  end
 
 	def empty
 		@items = []

@@ -1,15 +1,12 @@
 <div class="food_menu menu_<%= menu_section.id %>" style="display: none;">
-
 <div>
-	<div style="margin-left:35px;">
-	<%#= image_tag url_for_file_column(menu_section, "filename") if menu_section.filename  %>
-		<span class="food_menu_head"><%= menu_section.name %></span>
-			
-		<%# if menu_section.notes %>
-		<div class="section_note"><%#=menu_section.notes%></div>
-		<%# end -%>
+	<div style="margin-left:13px; margin-top:10px;">
+		<span class="food_menu_head">Menu</span>
 	</div>
-	
+  <div style="text-align: center;">
+    <span class="category-name"><%= menu_section.name %></span>
+  </div>
+
 	<table class="food_list" width="100%">
 		<% count = 0 %>
 		<% 
@@ -19,18 +16,11 @@
 		%>
 		  <tr class="<%=table_class%>">
 		    <td align="left" width="100%" class="<%=table_class%>">
-					
 		    	<%= link_to_function food.name, "show_menu_item(#{food.id})" %>
-
-					<% unless food.desc.nil? %>
-						<div class="section_note"><%= truncate food.desc, :length => 50 %></div>
-					<% end %>
-				<div class="blue_text">
-					<span class="p"><%=number_to_currency food.price %></span>
-				</div>
-			
-			</td>
-			<%# end %>
+          <div class="blue_text">
+            <span class="p"><%=number_to_currency food.price %></span>
+          </div>
+        </td>
 		  </tr>
 		<% 
 			count += 1

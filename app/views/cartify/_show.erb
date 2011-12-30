@@ -1,35 +1,95 @@
-<div id="cartify" style="z-index:10;">
-<h2 style="color: #3B5998; font-size: 1.5em; margin: -10px 0 10px 45px;">Your Cart</h2>
+<div id="cartify" >
+<span class="category-head">My Cart</span>
+<!--h2 style="color: #3B5998; font-size: 1.5em; margin: -10px 0 10px 45px;">Your Cart</h2-->
 
-<div id="cartify_items"></div>
+<div id="cartify_items">
+
+</div>
 
 <script id="cart_item_template" type="x-tmpl-mustache">
-		<div id="cart_details" style="display:none;">
+{{#itemcount}}
+  <table style="width:250px;border-collapse:collapse;margin-bottom:10px;">
+    <tr id="cart_header_row">
+      <th style="width:65%;"></th>
+      <th style="width:15%;"><span style="color:#3B5998;font-size:8px;">amount</span></th>
+      <th style="width:20%;"></th>
+    </tr>
 		{{#items}}
-		<div id="cart_item_{{id}}" class="cart_item" style="background-color:none !important;">
-		<b>{{name}} - Quantity: {{qty}}, Price: {{price}}, Total: {{total}}</b> &nbsp;
-		<a style="cursor:pointer;" onclick="remove_item({{id}});">Remove [X]<a/><br />
-
-		Options:
-		<ul style="margin-top:0px;margin-bottom:0px;">
-			{{#options}}
-			<li>{{name}} - {{price}}</li>
-			{{/options}}
-		</ul>
-		</div>
+      <tr id="cart_item_{{id}}">
+        <td class="c-item">
+          <span class="c-item-name">{{name}}</span><br />
+          <a class="c-item-remove" onclick="remove_item({{id}});">remove<a/>
+        </td>
+        <td class="c-item-quantity">
+          <input type="text" maxlength=3 name="QUANTITY" onChange='update_quantity(this.value,{{id}});' value="{{qty}}"> 
+        </td>
+        <td class="c-item-price">
+          <span>$ {{total}}</span>
+        </td>
+      </tr>
 		{{/items}}
-		<br />
-		<b>Fee:</b> {{fee}}<br />
-		<b>Tax:</b> {{tax}}<br />
-		<b>Tip:</b> 0<br />
-		<b>Sub Total:</b> {{total}}<br />
-		<br />
-		</div>
-
-		<b>Total Price:</b> {{fulltotal}}<br />
-		<b>Items:</b> {{itemcount}}<br />
+  </table>
+  <table style="width:250px;">
+    <tr>
+      <td style="width: 100px;color: #3B5998;font-size: 13px;font-weight:bold;">
+        <span>This order is for:</span>
+      </td>
+      <td style="width: 150px;color: #3B5998;font-size: 18px;font-weight:bold;text-align:center;">
+        <span>PICK UP</span>
+      </td>
+    </tr>
+  </table>
+  <table style="width:250px;">
+    <tr class="row_1">
+      <td style="width: 65%;text-align:left;padding-left:40px;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Sub Total</span>
+      </td>
+      <td style="width: 35%;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:right;">{{total}}</span>
+      </td>
+    </tr>
+    <tr class="row_2">
+      <td style="width: 70%;text-align:left;padding-left:40px;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tax</span>
+      </td>
+      <td style="width: 30%;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{tax}}</span>
+      </td>
+    </tr>
+    <tr class="row_1">
+      <td style="width: 70%;text-align:left;padding-left:40px;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Fee</span>
+      </td>
+      <td style="width: 30%;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{fee}}</span>
+      </td>
+    </tr>
+    <tr class="row_2">
+      <td style="width: 70%;text-align:left;padding-left:40px;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tip</span>
+      </td>
+      <td style="width: 30%;">
+        <%= select_tag(:tip, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']])) %> 
+      </td>
+    </tr>
+    <tr class="row_1">
+      <td style="width: 70%;text-align:left;padding-left:40px;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Total Price</span>
+      </td>
+      <td style="width: 30%;">
+        <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{fulltotal}}</span>
+      </td>
+    </tr>
+  </table>
+  <div id="checkout_link" class="checkout-btn" style="display:none;" onClick="show_card_dialog();">
+    <a class="checkout-link">Checkout</a>
+  </div>
+{{/itemcount}}
+{{^itemcount}}
+  <div class="no-items">
+    <span>There no items in the cart!</span>
+  </div>
+{{/itemcount}}
 </script>
 
-<a id="checkout_link" style="cursor:pointer;display: none;" onClick="show_card_dialog();">Checkout</a>
-<a id="view_details_link"  style="cursor:pointer;" onClick="show_full_cart();">View Details</a>
 </div>

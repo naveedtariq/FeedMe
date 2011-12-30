@@ -1,0 +1,78 @@
+  <div style="clear:both">
+    <div style="border:1px solid #cccccc; float:left;">
+      <div class="center-column">
+        <div style="position:relative">
+          <div>	
+            <div class="left" style="margin-left:10px;">
+              <%= image_tag @restaurant.image, :width => "200px"%>
+              <div style="margin-left:5px;"><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle()">Restaurant Info</a></div>
+            </div>
+            <div class="right">
+            </div>
+            <div class="clearfix"></div>
+            <div id="restaurant_info">
+              <div style="position:relative">
+                <div style="position:absolute; top:0; right:0; z-index:2"><a href="javascript:void(0)" onclick="$('#restaurant_info').toggle();">close</a></div>
+                  <div class="time_wrapper">
+                    <% unless @restaurant.phone_number.nil? or @restaurant.phone_number.blank? %>
+                      <div><b>Phone number</b>: <%= @restaurant.phone_number %></div>
+                    <% end %>
+                    <% unless @restaurant.fax_number.nil? or @restaurant.fax_number.blank? %>
+                      <div><b>Fax number</b>: <%= @restaurant.fax_number %></div>
+                    <% end %>
+                  </div>
+                  <div class="time_wrapper">
+                    <b>Restaurant hours:</b> 
+                    <br/>
+                    <div><%= 
+                      @restaurant.open_times_string.html_safe 
+                    %></div> 		
+                  </div>
+                  <div class="time_wrapper">
+                    <b>Restaurant Address:</b> 
+                    <br/>
+                    <div><%= 
+                      @restaurant.complete_address_string
+                    %></div> 		
+                  </div>
+                  <% if @restaurant.can_deliver? %>
+                    <div class="time_wrapper">
+                      <b>Delivery hours:</b>
+                      <div><%= 
+                        # @restaurant.delivery_times_string
+                       %></div>				
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>	
+            <div>
+              <div style="width:150px;float:left;border-right: 1px solid blue;"id="menu_categories">
+                <%= render :partial => 'menu_sections' %>
+              </div>
+              <div style="float:left;width:350px;border-right:1px solid blue;">
+                <%# @restaurant.menu_sections.each do |menu_section| %>
+                <%# next if menu_section.only_for_combos? %>
+                <%# if @combo.nil? or @combo.combo_menu_sections.collect{|c| c.menu_section}.include?(menu_section) %>
+                <%= render :partial => 'menu_content', :locals => {:menu_section => @restaurant.menu_sections.first} %>
+                <%# end %>
+                <%# end %>
+              </div>
+              <div style="float: left; width: 210px; margin-left: 5px; margin-right: 5px;">
+                <div id="cart_wrapper">
+                  <div id="cart">
+                    <%= render :partial => "cartify/show" %>
+                    <% unless @restaurant.delivery_note.nil? or @restaurant.delivery_note.empty? -%>
+                      <div class="delivery_note"><b>Delivery note:</b> <%=h @restaurant.delivery_note %></div>
+                    <% end -%>
+                  </div>
+                </div>
+                <%# need to render cart here %>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <div class="clear_fix"></div>
+      </div>
+    </div>

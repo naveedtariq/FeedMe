@@ -1,0 +1,59 @@
+<div style="width: 760px;">
+<div class="checkout-main">
+  <div class="my-cart">
+    <div class="heading"><h2>My Cart</h2></div>
+    <div class="r-info">
+      <%= @restaurant.name %>
+      <br />
+      <%= @restaurant.complete_address_string %>
+    </div>
+    <div class="heading" style="height: 3px;">&nbsp;</div>
+    <div class="cart-info">
+      <%= render :partial => "cartify/checkout_confirmation_show" %>
+    </div>
+    <div class="heading" style="height: 3px;">&nbsp;</div>
+  </div>
+  <div class="deliver-to">
+    <div class="heading"><h2>Deliver To:</h2></div>
+    <div class="r-info">
+      <%= @current_location.street %>,
+      <br />
+      <%= @current_location.city %>, <%= @current_location.state %>, 
+      <br />
+      <%= @current_location.zip %>,
+    </div>
+  </div>
+</div>
+<div class="personal-info">
+  <div class="email-number">
+    <table>
+      <tr>
+        <td class="labeltd">
+          Your e-mail
+        </td>
+        <td>
+          <input type="text" id="email" name="email"  class="inputtext" style="width: 200px;" />
+        </td>
+        <td>
+          needed for confirmation e-mail
+        </td>
+      </tr>
+      <tr>
+        <td class="labeltd">
+          Phone Number
+        </td>
+        <td>
+          <input type="text" id="phone" name="phone" class="inputtext" style="width: 200px;" />
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="placeorder">
+    <input type="button" onclick="check_delivery();" value="Check Availability" style="padding: 5px 12px 6px;" id="checkout_avail" class="inputsubmit">
+    <input type="button" onclick="place_order();" value="Place Order" style="padding: 5px 12px 6px;" id="place_order" disabled="disabled" class="inputsubmit">
+  </div>
+</div>
+</div>

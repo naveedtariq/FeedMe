@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
 	def create 
 		data = ActiveSupport::JSON.decode(params[:data])
 		atom = CartItem.new( data )
-		
 		current_cart.location = current_location
 		params[:id] 		= session[:restaurant_id]
 		params[:total] 		= current_cart.total + atom.total
@@ -45,9 +44,34 @@ class OrdersController < ApplicationController
 		params[:zip] 		= current_location.zip.split("-")[0]
 		puts resp = RestApi.get_fee_details(params)
 		
-		current_cart.remove_item(item_id,resp)
+		puts current_cart.remove_item(item_id,resp).inspect
 		render :json => current_cart.to_json
 	end
+
+  def update_cart_item
+		itemcost = 0
+    itemprice = 0
+		current_cart.items.each do |item|
+			if item.id.to_s == params[:id] then
+				itemcost = item.total
+        itemprice = item.price
+			end
+		end
+	  itemnewcost = itemprice * params[:quantity].to_f
+		item_id = params[:id]
+		
+		current_cart.location = current_location
+		params[:id] 		= session[:restaurant_id]
+		params[:total] 		= current_cart.total - itemcost + itemnewcost
+		params[:street] 	= current_location.street
+		params[:city] 		= current_location.city
+		params[:zip] 		= current_location.zip.split("-")[0]
+		puts resp = RestApi.get_fee_details(params)
+		
+		puts current_cart.update_item(item_id,resp,params[:quantity].to_f).inspect
+		render :json => current_cart.to_json
+    
+  end
 
 	def getcart
 		render :json => current_cart.to_json
@@ -65,6 +89,12 @@ class OrdersController < ApplicationController
 		resp = RestApi.check_delivery(params)
 		render :json => resp.to_json
 	end
+
+  def checkout_confirmation
+    @restaurant = session[:current_restaurant_obj]
+    @current_location = current_location
+#    return render :json => current_location
+  end
 
 	def checkout
 #puts "*******\n\n" + current_location.inspect + "**********\n\n"

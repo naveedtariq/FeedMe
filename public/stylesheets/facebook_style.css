@@ -43,6 +43,8 @@ select {
   font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
   font-size:11px;
   padding:2px;
+  color: #3B5998;
+  font-weight: bold;
 }
 
 td,

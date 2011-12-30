@@ -1,0 +1,120 @@
+<div id="cartify_items">
+</div>
+<script id="cart_item_template" type="x-tmpl-mustache">
+{{#itemcount}}
+  <table style="width:610px;border-collapse:collapse;">
+    <tr id="cart_header_row">
+      <th style="width:65%;">&nbsp;</th>
+      <th style="width:15%;"><span style="color:#3B5998;font-size:8px;">amount</span></th>
+      <th style="width:20%;"><span style="color:#3B5998;font-size:8px;">price</span></th>
+    </tr>
+		{{#items}}
+      <tr id="cart_item_{{id}}">
+        <td class="c-item">
+          <span class="c-item-name">{{name}}</span>
+          <a class="c-item-remove" style="float:right;margin-right: 5px;" onclick="remove_item({{id}});">remove<a/>
+        </td>
+        <td class="c-item-quantity">
+          <input type="text" maxlength=3 name="QUANTITY" onChange='update_quantity(this.value,{{id}});' value="{{qty}}"> 
+        </td>
+        <td class="c-item-price">
+          <span>$ {{total}}</span>
+        </td>
+      </tr>
+		{{/items}}
+  </table>
+{{/itemcount}}
+{{^itemcount}}
+  <div class="no-items">
+    <span>There no items in the cart!</span>
+  </div>
+{{/itemcount}}
+  <div class="card-total">
+    <div class="card-info">
+      <div class="heading"><h2>Payment Methods</h2></div>
+      <div class="internal-card">
+        <div class="card-specs">
+          &nbsp;
+          <div class="card-type">
+            <input type="radio" name="card_type" value="visa" checked="checked">Visa</input>
+            <input type="radio" name="card_type" value="mastercard">MasterCard</input>
+            <input type="radio" name="card_type" value="amex">AMEX</input>
+          </div>
+				<form id="form_card_info" action="" onsubmit="return place_order();">
+          <div class="card-number">
+            Card Name <br />
+            <input type="text" id="name" name="name" class="inputtext" style="width: 200px;"></input>
+          </div>
+          <div class="card-number">
+            Credit Card # <br />
+            <input type="text" id="number" name="number" class="inputtext" style="width: 200px;"></input>
+          </div>
+          <div class="card-cvv-expiry">
+            <div class="card-expiry">
+              Exp. Date<br />
+              <input type="text" id="expiry" name="expiry" class="inputtext" style="width: 100px;"></input>
+            </div>
+            <div class="card-cvv">
+              CVV<br />
+              <input type="text" id="cvv" name="cvv" class="inputtext" style="width: 80px;"></input>
+            </div>
+          </div>
+          <div class="card-number">
+            Delivery Date & Time<br />
+            <input type="text" id="date" name="date" class="inputtext" style="width: 200px;"></input>
+          </div>
+        </div>
+        <div class="coupon">
+          Coupon Code
+          <input type="text" id="coupon_code" name="coupon_code" class="inputtext" style="width: 90px;"></input>
+        </div>
+				</form>
+      </div>
+    </div>
+    <div class="total-info">
+      <table style="width:235px;">
+        <tr class="row_1">
+          <td style="width: 65%;text-align:left;padding-left:20px;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Sub Total</span>
+          </td>
+          <td style="width: 35%;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:right;">{{total}}</span>
+          </td>
+        </tr>
+        <tr class="row_2">
+          <td style="width: 70%;text-align:left;padding-left:20px;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tax</span>
+          </td>
+          <td style="width: 30%;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{tax}}</span>
+          </td>
+        </tr>
+        <tr class="row_1">
+          <td style="width: 70%;text-align:left;padding-left:20px;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Fee</span>
+          </td>
+          <td style="width: 30%;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{fee}}</span>
+          </td>
+        </tr>
+        <tr class="row_2">
+          <td style="width: 70%;text-align:left;padding-left:20px;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tip</span>
+          </td>
+          <td style="width: 30%;">
+            <%= select_tag(:tip, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']])) %> 
+          </td>
+        </tr>
+        <tr class="row_1">
+          <td style="width: 70%;text-align:left;padding-left:20px;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Total Price</span>
+          </td>
+          <td style="width: 30%;">
+            <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">{{fulltotal}}</span>
+          </td>
+        </tr>
+      </table>
+      <br />
+    </div>
+  </div>
+</script>

@@ -24,18 +24,9 @@
 			return false;
 	}
 </script>
+<span class="category-head">Categories</span>
 <div class="clearfix">
-	
-	<div class="title" style="display:none;">
-	<div><%=h @restaurant.name %></div>
-			<div class="distance">
-		TODO: Use Geokit
-			<%#= number_with_precision(@restaurant.distance_from(current_location, :units => :miles), :precision => 1) %> <%#= @restaurant.distance_from(current_location, :units => :miles) == 1 ? 'mile' : 'miles' %> away from you
-		</div>
-	</div>
-	<br>
-
-	<div style="width: auto; margin:0 auto">
+	<div style="width: auto; margin:0 5px;">
 		<% if @restaurant.specials.size > 0 and combo.nil? -%>
 			<div class="section_title specials_title"><a href="#specials">Specials</a></div>
 		<% end -%>
@@ -55,16 +46,21 @@
 				<% end -%>
 			<% end -%>
 		<% end -%>
-		<div class="section_title" id="save_favorite">
+		<div style="width: 100px;margin: 20px 10px;height: 50px;">
+      <div style="float:left;width:36px;">
+        <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.95em;" target="_blank"><%= image_tag "Google_Maps_Marker.png" %></a>
+      </div>
+      <div style="float: left;width:64px">
+        <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.95em;" target="_blank">View on GoogleMaps</a>
+      </div>
+		</div>
+		<div id="save_favorite" class="save-fav">
 				<div id="show_fav" <%= "style='display:none;'" if FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%>>
-				<%= link_to "Save Restaurant as Favorite","#" , :onclick => "add_favorite('#{@restaurant.id}');return false;"%>
+				<%= link_to "Add to Fav","#" , :onclick => "add_favorite('#{@restaurant.id}');return false;"%>
 				</div>
 				<div id="show_no_fav" <%= "style='display:none;'" unless FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%> >
-				<%= link_to "Remove from Favorites", "#",:onclick => "remove_favorite('#{@restaurant.id}');return false;", :class=>"specials_title"  %>
+				<%= link_to "Remove from Fav", "#",:onclick => "remove_favorite('#{@restaurant.id}');return false;" %>
 				</div>
-		</div>
-		<div style="margin: 10px 37px">
-					( <a href="http://maps.google.com/?q=<%=@restaurant.address_string-%>" style="font-size: 0.95em;" target="_blank">Locate this restaurant</a> )
 		</div>
 		
 	</div>

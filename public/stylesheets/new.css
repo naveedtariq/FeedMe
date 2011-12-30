@@ -136,7 +136,7 @@ h1.blue_rest_title {
 .blue_text {
 	color: #3B5998;
 	float: right;
-	font-size: 1.5em;
+	font-size: 15px;
 	margin-right: 10px;
 }
 dt.blue_text {
@@ -357,8 +357,8 @@ margin-top: 15px;
 }
 
 #cart {	
-	font-size:11px;
-	padding : 10px;
+/*	font-size:11px;
+	padding : 10px;*/
 }
 
 .cart_fix {
@@ -389,13 +389,13 @@ margin-top: 15px;
 	padding: 1px;
 }
 
-#save_favorite {
+/*#save_favorite {
 	background: #43A836;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43A836', endColorstr='#167D09');
 	background: -webkit-gradient(linear, left top, left bottom, from(#43A836), to(#167D09));
 	background: -moz-linear-gradient(top,  #43A836,  #167D09);
 	border:1px solid #106904;
-}
+}*/
 
 .specials_title {
 	background: #D42626;
@@ -416,7 +416,8 @@ margin-top: 15px;
 	display:block;
 	padding-right: 1px;
 	height: 100%;
-	font-size: 12px;
+	font-size: 10px;
+  font-weight: bold;
 }
 
 .section_title a:hover {
@@ -444,7 +445,7 @@ margin-top: 15px;
 }
 
 .food_list {
-width:93%;
+width:98%;
 float:right;
 cellspacing:0;
 cellpadding:0;
@@ -767,7 +768,7 @@ li.question {
 
 #artwork {
 	margin:0 auto;
-	width:740px;
+	width:760px;
 	margin-bottom:5px;
 }
 
@@ -803,4 +804,227 @@ input.inputsubmit:disabled
 background: -moz-linear-gradient(center top , #555555, #AAAAAA) repeat scroll 0 0 transparent !important;
 background-color: #555;
 color: #AAAAAA;
+}
+.tdd {
+  border-right: 1px solid black;
+}
+.clear {
+  clear: both;
+}
+.menu-section {
+/*  border: 1px solid #cccccc;*/
+  float:left;
+  padding: 0 5px;
+  position: relative;
+  width: 760px;
+}
+.left-part {
+  border: 1px solid #ccc;
+  float: left;
+  width: 498px;
+}
+.right-part {
+  border: 1px solid #ccc;
+  float: left;
+  margin: 0 5px;
+  width: 248px;
+}
+.menu-left {
+  border-right: 1px solid #ccc;
+  float: left;
+  width: 146px;
+}
+.menu-right {
+  float: left;
+  width: 350px;
+}
+.category-head {
+  color: #3B5998;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+}
+.save-fav {
+  text-align: center;
+  margin: 10px auto;
+}
+.category-name {
+  color: #3B5998;
+  text-align: center;
+}
+.c-item-name {
+  color: #3B5998;
+  font-size: 13px;
+  font-weight: bold;
+}
+.c-item {
+  width:65%;
+  text-align: left;
+  vertical-align: top;
+  border-right: 1px solid #CCCCCC;
+  padding-left: 5px;
+}
+.c-item-remove {
+  color: black;
+  cursor: pointer;
+}
+.c-item-quantity {
+  width: 15%;
+  vertical-align: top;
+  border-right: 1px solid #CCCCCC;
+  text-align: center;
+}
+.c-item-quantity input {
+  width: 20px;
+}
+.c-item-price {
+  width: 20%;
+  vertical-align: top;
+  text-align: center;
+}
+.c-item-price span {
+  color: #3B5998;
+  font-size: 13px;
+}
+.checkout-btn {
+  background: -moz-linear-gradient(center top , #627AAD, #315091) repeat scroll 0 0 transparent;
+  border: 1px solid #284585;
+  margin-left: 60px;
+  padding: 5px 1px;
+  text-align: center;
+  width: 110px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.checkout-link {
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none !important;
+}
+.no-items {
+  text-align: center;
+  margin: 5px 0;
+}
+.no-items span {
+  color: #3B5998;
+  font-size: 13px;
+  text-align: center;
+}
+.checkout-main {
+  width: 760px;
+  float: left;
+}
+.my-cart {
+  width: 610px;
+  float: left;
+  border: 1px solid #CCCCCC;
+  margin: 0 5px;
+}
+.deliver-to {
+  width: 135px;
+  float: right;
+  border: 1px solid #CCCCCC;
+}
+.heading {
+  height: 20px;
+  background-color: #D4DAE8;
+  text-align: center;
+}
+.heading h2 {
+  color: #3B5998;
+  font-size: 15px;
+}
+.r-info {
+  color: #3B5998;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 10px;
+}
+.cart-info {
+  color: #3B5998;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.card-total {
+  color: #3B5998;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.card-info {
+  width: 60%;
+  border-right: 1px solid #CCCCCC;
+  padding-right: 5px;
+  margin-top: 20px;
+  float: left;
+  padding-bottom: 20px;
+}
+.total-info {
+  margin-top: 20px;
+  width: 38%;
+  float: left;
+}
+.internal-card {
+  padding: 5px;
+}
+.card-specs {
+  width: 70%;
+  float: left;
+  border-right: 1px solid #CCCCCC;
+  font-weight: normal;
+/*  height: 125px;*/
+}
+.coupon {
+  width: 25%;
+  margin: 40px 5px;
+  float: left;
+}
+.card-type {
+  width: 100%;
+  margin-bottom: 5px;
+}
+.card-number {
+  margin: 5px 5px;
+}
+.card-cvv-expiry {
+  margin: 5px 5px;
+}
+.card-expiry {
+  float: left;
+  width: 45%;
+}
+.card-cvv {
+  float: left;
+  width: 45%;
+  margin-left: 10px;
+}
+.personal-info {
+  float: left;
+  width: 610px;
+  padding: 5px;
+}
+.email-number {
+  width: 500px;
+  float: left;
+  border: 1px solid #CCCCCC;
+  color: #3B5998;
+  font-size: 13px;
+  padding: 10px 5px;
+}
+.placeorder {
+  width: 85px;
+  float: left;
+  padding-left: 13px;
+  padding-top: 13px;
+}
+.labeltd {
+  font-size: 13px;
+  font-weight: bold;
 }

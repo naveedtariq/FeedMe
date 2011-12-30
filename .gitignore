@@ -6,3 +6,4 @@ tmp/
 *.so
 /config/database.yml
 /vendor/*
+*.sw*

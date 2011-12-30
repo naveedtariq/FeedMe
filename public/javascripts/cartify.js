@@ -144,6 +144,7 @@ function cart_add( food_id , food_name, food_price )
 
 function place_order()
 {
+  alert("hi");
 	var form = $('#form_card_info');
 	notify("Please Wait...",{fo : true});
 
@@ -157,12 +158,14 @@ function place_order()
 			msg = data.text;
 			if ( data._error == 1 )
 			{
+        alert(msg);
 				notify(msg, {type : "error"});
 				return false;
 			}
 
 			msg = msg + '<a href="#" onclick="$(\'#card_info\').slideToggle();">Close [X]</a>';
 			notify(msg, { type : "notice" });
+      alert("Order Placed");
 //			$('#card_transaction').html(msg);
 
 			empty_cart();
@@ -181,6 +184,8 @@ function place_order()
 
 function show_card_dialog()
 {
+  window.location = "/orders/checkout_confirmation";
+  return;
 	var form = $('#card_info');
 
 	var height = screen.height;
@@ -203,17 +208,19 @@ function show_card_dialog()
 
 function check_delivery()
 {
+  alert("hi");
 	date = $('#date').val();
 	time = $('#time').val();
 
 	if ( date == "")
 	{
-		notify('Please set date and time first', {type : "error"});
+    alert("Please set date and time first");
+//		notify('Please set date and time first', {type : "error"});
 		return;
 	}
 
-	var checkout_butt = $("#placeorder_button");
-	notify('Please Wait...', {fo: true, type : "message"});
+	var checkout_butt = $("#place_order");
+//	notify('Please Wait...', {fo: true, type : "message"});
 //	loading(true);
 
 	$.get( '/orders/candeliver', { date: date, time: time, }, function(data){
@@ -231,6 +238,7 @@ function check_delivery()
 		}
 
 		notify(data.msg, {type : "error"});
+    alert(data.msg);
 
 		checkout_butt.attr('disabled', 'disabled');
 		checkout_butt.css('color','#AAA');
@@ -243,4 +251,14 @@ function remove_item(id)
 	$.get('/orders/remove',{id: id}, function(data){
 			parse_cart(data);
 			});
+}
+
+function update_quantity(quantity,id)
+{
+  alert(quantity);
+  alert(id);
+	$.get('/orders/update_cart_item',{id: id,quantity: quantity}, function(data){
+			parse_cart(data);
+			});
+
 }

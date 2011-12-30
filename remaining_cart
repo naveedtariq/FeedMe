@@ -1,0 +1,10 @@
+
+		<br />
+		<b>Fee:</b> {{fee}}<br />
+		<b>Tax:</b> {{tax}}<br />
+		<b>Tip:</b> 0<br />
+		<b>Sub Total:</b> {{total}}<br />
+		<br />
+
+		<b>Total Price:</b> {{fulltotal}}<br />
+		<b>Items:</b> {{itemcount}}<br />
