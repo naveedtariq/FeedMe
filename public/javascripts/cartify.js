@@ -144,7 +144,6 @@ function cart_add( food_id , food_name, food_price )
 
 function place_order()
 {
-  alert("hi");
 	var form = $('#form_card_info');
 	notify("Please Wait...",{fo : true});
 
@@ -208,7 +207,6 @@ function show_card_dialog()
 
 function check_delivery()
 {
-  alert("hi");
 	date = $('#date').val();
 	time = $('#time').val();
 
@@ -255,8 +253,6 @@ function remove_item(id)
 
 function update_quantity(quantity,id)
 {
-  alert(quantity);
-  alert(id);
 	$.get('/orders/update_cart_item',{id: id,quantity: quantity}, function(data){
 			parse_cart(data);
 			});
