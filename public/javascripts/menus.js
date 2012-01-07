@@ -51,7 +51,7 @@ function show_menu_item(id)
 
 	dialog.css({
 			'position': 'fixed',
-			'left' : width/2 - (dialog.width() / 2)-300,  // half width - half element width
+			'left' : width/2 - (dialog.width() / 2)-400,  // half width - half element width
 			'top' : height/2 - (dialog.height() / 2)-250, // similar
 			'z-index' : 15,                        // make sure element is on top
 	});
