@@ -7,9 +7,9 @@ class CartItem
 
 		@qty = params[:count]
 		@name = params[:name]
-		@price = params[:price].to_f
+		@price = (params[:price].to_f).round(2)
 		@id = params[:id]
-		@total = @price * params[:count].to_f
+		@total = (@price * params[:count].to_f).round(2)
 		@unique_id = Time.now.gmtoff
 
 		unless params[:options].nil?
@@ -21,10 +21,10 @@ class CartItem
 	end
 
   def update_quantity(count)
-    @total = @price * count
+    @total = (@price * count).round(2)
     @qty = count
     @options.each do |opt|
-      @total = @total + (opt.price * count)
+      @total = (@total + (opt.price * count)).round(2)
     end
   end
 
@@ -38,7 +38,7 @@ class CartItem
 
 	def add_option(option, count)
 		@options << option
-		@total = @total + (option.price * count)
+		@total = (@total + (option.price * count)).round(2)
 		puts (option.price)
 	end
 

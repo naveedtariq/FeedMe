@@ -1,3 +1,8 @@
+<script type="text/javascript">
+	$(function(){
+		$('.section_title').first().children().first().trigger('click');
+	});
+</script>
 <div style="width: 760px;">
 <div class="checkout-main">
   <div class="my-cart">
@@ -54,6 +59,7 @@
   <div class="placeorder">
     <input type="button" onclick="check_delivery();" value="Check Availability" style="padding: 5px 12px 6px;" id="checkout_avail" class="inputsubmit">
     <input type="button" onclick="place_order();" value="Place Order" style="padding: 5px 12px 6px;" id="place_order" disabled="disabled" class="inputsubmit">
+    <div class="checkout-notify" style="display:none;"><div>
   </div>
 </div>
 </div>

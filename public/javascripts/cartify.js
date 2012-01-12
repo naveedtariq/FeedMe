@@ -3,21 +3,22 @@ $(function(){
 	update_cart();
 });
 
-var colors = {"notice" : "green", "message" : "black", "error" : "red" }
+var colors = {"notice" : "#57A957", "message" : "#339BB9", "error" : "#C43C35" }
 function notify(msg, options){
 	var defaults = {type : "message", fo : false}
 	$.extend(defaults, options);
 
-	if( $('#dialog_notice').is(':visible') ) {
-		$("#dialog_notice").hide();
+	if( $('.checkout-notify').is(':visible') ) {
+		$(".checkout-notify").hide();
 	}	
-	$('#dialog_notice').css('color', colors[defaults.type]);
-	$('#dialog_notice').html(msg);
+	$('.checkout-notify').css('background-color', colors[defaults.type]);
+	$('.checkout-notify').css('border', '1px solid ' +colors[defaults.type]);
+	$('.checkout-notify').html(msg);
 	if(defaults.fo){
-		$('#dialog_notice').fadeIn(); 	
+		$('.checkout-notify').fadeIn(); 	
 	}
 	else{
-		$('#dialog_notice').fadeIn().delay(2000).fadeOut('slow'); 	
+		$('.checkout-notify').fadeIn().delay(2000).fadeOut('slow'); 	
 	}
 }
 
@@ -41,6 +42,9 @@ function update_cart()
 {
 	$.get('/orders/getcart', function(data){
 			parse_cart(data);
+      $("#date").datetimepicker({
+          ampm: true
+        });
 		});
 }
 function show_full_cart(){
@@ -153,18 +157,16 @@ function place_order()
 		data: form.serialize(),
 		dataType: 'JSON',
 		success: function(data) {
-			$("dialog_notify").hide();
+			$(".checkout-notify").hide();
 			msg = data.text;
 			if ( data._error == 1 )
 			{
-        alert(msg);
 				notify(msg, {type : "error"});
 				return false;
 			}
 
-			msg = msg + '<a href="#" onclick="$(\'#card_info\').slideToggle();">Close [X]</a>';
+			msg = msg;
 			notify(msg, { type : "notice" });
-      alert("Order Placed");
 //			$('#card_transaction').html(msg);
 
 			empty_cart();
@@ -207,13 +209,12 @@ function show_card_dialog()
 
 function check_delivery()
 {
-	date = $('#date').val();
-	time = $('#time').val();
 
+  var date = $('#date').val();
+  var time = $('#time').val();
 	if ( date == "")
 	{
-    alert("Please set date and time first");
-//		notify('Please set date and time first', {type : "error"});
+		notify('Please set date and time first', {type : "error"});
 		return;
 	}
 
@@ -236,7 +237,6 @@ function check_delivery()
 		}
 
 		notify(data.msg, {type : "error"});
-    alert(data.msg);
 
 		checkout_butt.attr('disabled', 'disabled');
 		checkout_butt.css('color','#AAA');

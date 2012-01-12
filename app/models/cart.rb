@@ -14,16 +14,16 @@ class Cart
 
 	def add_item(item,fee_details)
 		@items << item
-		@total = @total + item.total
-		@fee = fee_details['fee'].to_f
-		@tax = fee_details['tax'].to_f
-		@fulltotal = @total + @fee + @tax
+		@total = (@total + item.total).round(2)
+		@fee = (fee_details['fee'].to_f).round(2)
+		@tax = (fee_details['tax'].to_f).round(2)
+		@fulltotal = (@total + @fee + @tax).round(2)
 	end
 
 	def remove_item(id,fee_details)
 		@items.each do |item|
 			if item.id.to_s == id then
-				@total = @total - item.total
+				@total = (@total - item.total).round(2)
 				@removed_item = @items.delete(item)
 			end
 		end
@@ -32,31 +32,22 @@ class Cart
 			@fee = 0
 			@tax = 0
 		else
-			@fee = fee_details['fee'].to_f
-			@tax = fee_details['tax'].to_f
+			@fee = (fee_details['fee'].to_f).round(2)
+			@tax = (fee_details['tax'].to_f).round(2)
 		end
 		
-		@fulltotal = @total + @fee + @tax
+		@fulltotal = (@total + @fee + @tax).round(2)
 	end
 
   def update_item(id, fee_details, count)
     removed_item = 0
 		@items.each do |item|
 			if item.id.to_s == id then
-				@total = @total - item.total
+				@total = (@total - item.total).round(2)
 				removed_item = @items.delete(item)
 			end
 		end
-    puts "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-    puts @items.inspect
-    puts "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-    puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-    puts removed_item.inspect
-    puts "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
     removed_item.update_quantity(count)
-    puts "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
-    puts removed_item.inspect
-    puts "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
     add_item(removed_item, fee_details)
   end
 

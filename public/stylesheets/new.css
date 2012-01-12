@@ -1007,7 +1007,7 @@ color: #AAAAAA;
 }
 .personal-info {
   float: left;
-  width: 610px;
+  width: 760px;
   padding: 5px;
 }
 .email-number {
@@ -1019,12 +1019,24 @@ color: #AAAAAA;
   padding: 10px 5px;
 }
 .placeorder {
-  width: 85px;
+  width: 230px;
   float: left;
   padding-left: 13px;
-  padding-top: 13px;
 }
 .labeltd {
   font-size: 13px;
   font-weight: bold;
 }
+.checkout-notify {
+  border: 1px solid black;
+  margin-top: 5px;
+  text-align: center;
+  width: 210px;
+  color: white;
+}
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
