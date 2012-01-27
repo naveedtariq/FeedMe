@@ -56,7 +56,7 @@
 		</div>
 		<div id="save_favorite" class="save-fav">
 				<div id="show_fav" <%= "style='display:none;'" if FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%>>
-				<%= link_to "Add to Fav","#" , :onclick => "add_favorite('#{@restaurant.id}');return false;"%>
+				<%= link_to "Add to Fav","#" , :onclick => "add_favorite('#{@restaurant.id}');return false;", :style => "text-decoration: underline;"%>
 				</div>
 				<div id="show_no_fav" <%= "style='display:none;'" unless FavouriteRestaurant.favorite?(@restaurant.id, current_user.id)%> >
 				<%= link_to "Remove from Fav", "#",:onclick => "remove_favorite('#{@restaurant.id}');return false;" %>

@@ -98,7 +98,7 @@ class OrdersController < ApplicationController
 
   def thankyou
     @cart = current_cart
-    @restaurant = session[:current_restautant_obj]
+    @restaurant = session[:current_restaurant_obj]
     @current_location = current_location
   end
 
