@@ -1,0 +1,118 @@
+<script type="text/javascript">
+	$(function(){
+		empty_cart();
+	});
+</script>
+<div style="width: 760px;">
+  <div id="main-thankyou" style="margin: 10px;">
+    <span class="food_menu_head">Thank you for placing order from facebook FeedMe!</span>
+      <p>
+        <span class="remaining-t">Please save this information for your records.</span>
+        <span class="remaining-t">Have a question about your order? Call (XXX) XXX XXXX</span>
+      </p>
+  </div>
+  <div id="summary_addr_payment">
+    <div id="summary">
+      <div class="s_heading">
+        <h2 class="s_h2">Order Summary</h2>
+      </div>
+      <div class="s_details">
+        <p>
+          <span class="s_d_title">Order# : </span>
+          <span class="s_d_value">XXXXXX</span>
+        </p>
+        <p>
+          <span class="s_d_title">Order Date : </span>
+          <span class="s_d_value"><%= @cart.full_date %></span>
+        </p>
+        <p>
+          <span class="s_d_title">Order Total : </span>
+          <span class="s_d_value">$ <%= @cart.fulltotal %></span>
+        </p>
+      </div>
+    </div>
+    <div id="addr_payment">
+      <div class="s_heading">
+        <h2 class="s_h2">Delivery address & payment</h2>
+      </div>
+      <div class="s_details">
+        <p>
+          <span class="s_d_title">Delivery Address : </span>
+          <span class="s_d_value">
+            <%= @current_location.street %>, <%= @current_location.city %>, <%= @current_location.state %>, <%= @current_location.zip %>
+          </span>
+        </p>
+        <p>
+          <span class="s_d_title">Payment Method : </span>
+          <span class="s_d_value">Credit Card: <%= @cart.card.number %></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="o_details">
+    <div class="s_heading">
+      <h2 class="s_h2">Order</h2>
+    </div>
+    <div class="s_details">
+      <table style="width:610px;border-collapse:collapse;">
+        <tr id="cart_header_row">
+          <th style="width:65%;">&nbsp;</th>
+          <th style="width:15%;"><span style="color:#3B5998;font-size:8px;">amount</span></th>
+          <th style="width:20%;"><span style="color:#3B5998;font-size:8px;">price</span></th>
+        </tr>
+        <% @cart.items.each do |item| %>
+          <tr id="cart_item_{{id}}">
+            <td class="c-item">
+              <span class="c-item-name"><%= item.name %></span>
+            </td>
+            <td class="c-item-quantity">
+              <span class="c-item-name"><%= item.qty %></span>
+            </td>
+            <td class="c-item-price">
+              <span>$ <%= item.total %></span>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <div class="ty-subtotal">
+        <table style="width:235px;">
+          <tr class="row_1">
+            <td style="width: 65%;text-align:left;padding-left:20px;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Sub Total</span>
+            </td>
+            <td style="width: 35%;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:right;"><%= @cart.total %></span>
+            </td>
+          </tr>
+          <tr class="row_2">
+            <td style="width: 70%;text-align:left;padding-left:20px;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tax</span>
+            </td>
+            <td style="width: 30%;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;"><%= @cart.tax %></span>
+            </td>
+          </tr>
+          <tr class="row_1">
+            <td style="width: 70%;text-align:left;padding-left:20px;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Fee</span>
+            </td>
+            <td style="width: 30%;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;"><%= @cart.fee %></span>
+            </td>
+          </tr>
+          <tr class="row_2">
+            <td style="width: 70%;text-align:left;padding-left:20px;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Total Price</span>
+            </td>
+            <td style="width: 30%;">
+              <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;"><%= @cart.fulltotal %></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="disclaimer">
+    Disclaimer: 
+  </div>
+</div>

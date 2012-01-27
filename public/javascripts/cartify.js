@@ -169,11 +169,12 @@ function place_order()
 			notify(msg, { type : "notice" });
 //			$('#card_transaction').html(msg);
 
-			empty_cart();
+//			empty_cart();
 			$('#checkout_cancel').val('Close');
 			$('#checkout_cancel').animate({ left: '190', });
 			$("#placeorder_button").hide();
 			$('#checkout_avail').hide();
+      window.location = "/orders/thankyou";
 		},
 
 	});

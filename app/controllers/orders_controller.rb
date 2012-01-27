@@ -96,6 +96,12 @@ class OrdersController < ApplicationController
 #    return render :json => current_location
   end
 
+  def thankyou
+    @cart = current_cart
+    @restaurant = session[:current_restautant_obj]
+    @current_location = current_location
+  end
+
 	def checkout
 #puts "*******\n\n" + current_location.inspect + "**********\n\n"
 #puts "*******------\n\n" + params.inspect + "**********\n\n"
@@ -113,6 +119,7 @@ class OrdersController < ApplicationController
 
 		current_cart.card = Card.new(params)
 		final_date = formatted_date(params[:date])
+    current_cart.full_date = params[:date]
 		current_cart.date = final_date[:date]
 		current_cart.time = final_date[:time]
 

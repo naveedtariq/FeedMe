@@ -1040,3 +1040,53 @@ color: #AAAAAA;
 .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
 .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+.remaining-t {
+  color: #3B5998;
+  display: block;
+  font-size: 15px;
+}
+.s_heading {
+  background: none repeat scroll 0 0 #627AAD;
+  color: #5C75AA;
+  display: block;
+  font-size: 12px;
+  padding: 5px;
+}
+#summary {
+  float: left;
+  width: 370px;
+}
+#addr_payment {
+  float: right;
+  width: 370px;
+}
+#summary_addr_payment {
+  width: 760px;
+}
+#o_details {
+  clear: both;
+  margin-bottom: 10px;
+}
+.s_h2 {
+  color: white;
+  font-size: 15px;
+}
+.s_d_title {
+  font-size: 14px;
+  color: #3B5998;
+}
+.s_d_value {
+  font-size: 14px;
+  color: #000044;
+}
+#disclaimer {
+  font-size: 14px;
+  color: #3B5998;
+  clear: both;
+}
+.ty-subtotal {
+  float: right;
+  margin-bottom: 10px;
+  margin-right: 150px;
+  margin-top: 10px;
+}

@@ -1,5 +1,5 @@
 class Cart 
-	attr_accessor :user_id, :restaurant_id, :items, :total, :fulltotal, :fee, :tax, :location, :card, :date, :time
+	attr_accessor :user_id, :restaurant_id, :items, :total, :fulltotal, :fee, :tax, :location, :card, :date, :time, :full_date
 
 	def initialize(params)
 		@items = []

@@ -9,6 +9,7 @@ Fc::Application.routes.draw do
 			get 'emptycart'
 			get 'update_cart_item'
 			get 'checkout_confirmation'
+			get 'thankyou'
 		end
 	end
 

@@ -38,6 +38,9 @@ require 'will_paginate/array'
 
 
 	def show
+    if params[:id].to_s != session[:restaurant_id].to_s
+      current_cart.empty
+    end
 		@restaurant = Restaurant.restaurant( params[:id] )
 		@cart = current_cart
 
