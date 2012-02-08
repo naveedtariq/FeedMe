@@ -1,6 +1,7 @@
 
 $(function(){
 	update_cart();
+  console.log("here I am");
 });
 
 var colors = {"notice" : "#57A957", "message" : "#339BB9", "error" : "#C43C35" }
@@ -45,6 +46,7 @@ function update_cart()
       $("#date").datetimepicker({
           ampm: true
         });
+      $("#tipercent").val(data.tipercent);
 		});
 }
 function show_full_cart(){
@@ -74,6 +76,8 @@ var cart_view = function(data){
 				 fulltotal : data.fulltotal,
 				 tax : data.tax,
 				 fee : data.fee,
+         tip : data.tip, 
+         tipercent : data.tipercent,
 				 itemcount : data.items.length,
 			     user_id : data.user_id
 	}
@@ -132,6 +136,15 @@ function cart_add( food_id , food_name, food_price )
 		});
 
 	}
+  tip = $("#tipercent option:selected").val();
+  if(tip)
+  {
+    order.tip = tip;
+  }
+  else
+  {
+    order.tip = 5;
+  }
 
 	console.log(order);
 	order_JSON = JSON.stringify(order);
@@ -139,6 +152,7 @@ function cart_add( food_id , food_name, food_price )
 	$.post( '/orders', 'data='+order_JSON, function(data) { 
 			parse_cart(data);
 			dlg.hide();
+      $("#tipercent").val(tip);
 	});
 
 }
@@ -148,6 +162,19 @@ function cart_add( food_id , food_name, food_price )
 
 function place_order()
 {
+
+  var email = $('#email').val();
+  var phone = $('#phone').val();
+	if ( email == "")
+	{
+		notify('Please provide your email address.', {type : "error"});
+		return;
+	}
+	if ( phone == "")
+	{
+		notify('Please provide your contact number. Format XXX-XXX-XXXX', {type : "error"});
+		return;
+	}
 	var form = $('#form_card_info');
 	notify("Please Wait...",{fo : true});
 
@@ -247,15 +274,29 @@ function check_delivery()
 
 function remove_item(id)
 {
+
+  tip = $("#tipercent option:selected").val();
 	$.get('/orders/remove',{id: id}, function(data){
 			parse_cart(data);
+      $("#tipercent").val(tip);
 			});
 }
 
 function update_quantity(quantity,id)
 {
+  tip = $("#tipercent option:selected").val();
 	$.get('/orders/update_cart_item',{id: id,quantity: quantity}, function(data){
 			parse_cart(data);
+      $("#tipercent").val(tip);
+			});
+
+}
+
+function update_tip(tipercent)
+{
+	$.get('/orders/update_tip',{tipercent: tipercent}, function(data){
+			parse_cart(data);
+      $("#tipercent").val(tipercent);
 			});
 
 }

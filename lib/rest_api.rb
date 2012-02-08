@@ -28,10 +28,10 @@ class RestApi
 		self.do_get(url)
 	end
 	
-	def self.place_order(cart)
+	def self.place_order(cart, option)
 		url = "/o/#{cart.restaurant_id}"
 #url = "http://www.postbin.org/14evnuh/#{cart.restaurant_id}"
-    options = { :body => self.order_hash(cart)}
+    options = { :body => self.order_hash(cart, option)}
 		self.do_post(url, options)
 	end
 
@@ -41,7 +41,7 @@ class RestApi
 		get(URI.escape( base )).parsed_response
 	end
 
-	def self.order_hash(order)
+	def self.order_hash(order, options)
 #		user = User.find(order.user_id)
 		user = User.find(1)
 
@@ -49,12 +49,13 @@ class RestApi
 
 		{ :restaurant_id => order.restaurant_id,
 			:type => 'RES',
-			:tray => order.tray, :tip => 0,	:delivery_date => order.date, :delivery_time => order.time, :first_name => user.name,
+			:tray => order.tray, :tip => order.tip,	:delivery_date => order.date, :delivery_time => order.time, :first_name => user.name,
 			:last_name => user.name, :addr => order.location.street, :city => order.location.city,
 			:state => order.location.state, :zip => order.location.zip.split("-")[0], :phone => "2125551212", :em => user.facebook_email,
 			:card_name => order.card.name, :card_number => order.card.number, :card_cvc => order.card.cvv,
 			:card_expiry => order.card.expiry, :card_bill_addr => order.card.bill_addr, :card_bill_addr2 => order.card.bill_addr2,
-			:card_bill_city => order.card.bill_city, :card_bill_state => order.card.bill_state, :card_bill_zip => order.card.bill_zip.split("-")[0]}
+			:card_bill_city => order.card.bill_city, :card_bill_state => order.card.bill_state, :card_bill_zip => order.card.bill_zip.split("-")[0],
+      :phone => options["phone"]}
 	end
 
 	protected

@@ -41,7 +41,7 @@
 											<% food.children.each do |option| %>
 												<%= check_box_tag option.id, 1, false, :class => 'item_options' %> <%= option.name.capitalize %>
 												<% unless option.children.empty? %>
-													<div id="child_opts_<%= option.id %>" style="margin-left: 15px; display: none;">
+													<div id="child_opts_<%= option.id %>" style="margin-left: 15px; display: none; height: 140px; overflow-y: scroll;">
 													<%= hidden_field_tag "option_used", "nil" %>
 													<% option.children.each do |child| %>
 														<%= radio_button_tag option.name, 1, false, {:option_name => child.name, :class => "sub_option", :price => child.price, :id => child.id} %>

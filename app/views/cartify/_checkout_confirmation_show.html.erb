@@ -40,7 +40,6 @@
             <input type="radio" name="card_type" value="mastercard">MasterCard</input>
             <input type="radio" name="card_type" value="amex">AMEX</input>
           </div>
-				<form id="form_card_info" action="" onsubmit="return place_order();">
           <div class="card-number">
             Card Name <br />
             <input type="text" id="name" name="name" class="inputtext" style="width: 200px;"></input>
@@ -68,7 +67,6 @@
           Coupon Code
           <input type="text" id="coupon_code" name="coupon_code" class="inputtext" style="width: 90px;"></input>
         </div>
-				</form>
       </div>
     </div>
     <div class="total-info">
@@ -102,7 +100,7 @@
             <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tip</span>
           </td>
           <td style="width: 30%;">
-            <%= select_tag(:tip, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']])) %> 
+            <%= select_tag(:tipercent, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']]), :onchange=>"change_tip();return false;") %> 
           </td>
         </tr>
         <tr class="row_1">
@@ -117,4 +115,10 @@
       <br />
     </div>
   </div>
+</script>
+<script type="text/javascript">
+function change_tip()
+{
+  update_tip($("#tipercent option:selected").val())      
+}
 </script>

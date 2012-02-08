@@ -1,5 +1,5 @@
 class Cart 
-	attr_accessor :user_id, :restaurant_id, :items, :total, :fulltotal, :fee, :tax, :location, :card, :date, :time, :full_date
+	attr_accessor :user_id, :restaurant_id, :items, :total, :fulltotal, :fee, :tax, :location, :card, :date, :time, :full_date, :tip, :tipercent
 
 	def initialize(params)
 		@items = []
@@ -7,17 +7,21 @@ class Cart
 		@total = 0
 		@fee = 0
 		@tax = 0
+    @tip = 0
+    @tipercent = 0
 
 		@user_id = params[:user_id]
 		@restaurant_id = params[:restaurant_id]
 	end
 
-	def add_item(item,fee_details)
+	def add_item(item, fee_details, tip)
 		@items << item
 		@total = (@total + item.total).round(2)
 		@fee = (fee_details['fee'].to_f).round(2)
 		@tax = (fee_details['tax'].to_f).round(2)
-		@fulltotal = (@total + @fee + @tax).round(2)
+    @tip = calculate_tip(@total,tip)
+    @tipercent = (tip.to_f).round(2)
+		@fulltotal = (@total + @fee + @tax + @tip).round(2)
 	end
 
 	def remove_item(id,fee_details)
@@ -36,7 +40,7 @@ class Cart
 			@tax = (fee_details['tax'].to_f).round(2)
 		end
 		
-		@fulltotal = (@total + @fee + @tax).round(2)
+		@fulltotal = (@total + @fee + @tax + @tip).round(2)
 	end
 
   def update_item(id, fee_details, count)
@@ -48,7 +52,14 @@ class Cart
 			end
 		end
     removed_item.update_quantity(count)
-    add_item(removed_item, fee_details)
+    add_item(removed_item, fee_details, @tipercent)
+  end
+
+  def update_tip(tipercent)
+    self.tipercent = tipercent.to_f.round(2)
+    self.fulltotal = self.fulltotal - self.tip
+    self.tip = calculate_tip(self.total, tipercent)
+    self.fulltotal = (self.fulltotal + self.tip).round(2)
   end
 
 	def empty
@@ -57,6 +68,8 @@ class Cart
 		@total = 0
 		@fee = 0
 		@tax = 0
+    @tip = 0
+    @tipercent = 0
 	end
 
 	def tray
@@ -66,5 +79,10 @@ class Cart
 		end
 		tray_str.chomp("+")
 	end
+
+  protected
+  def calculate_tip(total, tip)
+    (total * tip.to_f * 0.01).round(2)
+  end
 
 end

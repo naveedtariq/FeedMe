@@ -69,7 +69,7 @@
         <span style="color:#3B5998; font-size: 13px;font-weight:bold;text-align:center;">Tip</span>
       </td>
       <td style="width: 30%;">
-        <%= select_tag(:tip, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']])) %> 
+        <%= select_tag(:tipercent, options_for_select([['5%','5'], ['10%', '10'], ['15%', '15'], ['20%', '20'], ['25%', '25']]), :onchange=>"change_tip();return false;") %> 
       </td>
     </tr>
     <tr class="row_1">
@@ -92,4 +92,10 @@
 {{/itemcount}}
 </script>
 
+<script type="text/javascript">
+function change_tip()
+{
+  update_tip($("#tipercent option:selected").val())      
+}
+</script>
 </div>

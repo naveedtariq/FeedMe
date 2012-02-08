@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 		params[:zip] 		= current_location.zip.split("-")[0]
 		resp = RestApi.get_fee_details(params)
 
-		current_cart.add_item(atom,resp)		
+		current_cart.add_item(atom, resp, data[:tip].to_f)		
 		render :json => current_cart.to_json
 	end
 
@@ -73,7 +73,14 @@ class OrdersController < ApplicationController
     
   end
 
+  def update_tip
+		current_cart.update_tip(params[:tipercent])
+    @tipercent =  params[:tipercent].to_f.round(2)
+		render :json => current_cart.to_json
+  end
+
 	def getcart
+    puts current_cart.to_json
 		render :json => current_cart.to_json
 	end
 
@@ -128,7 +135,7 @@ class OrdersController < ApplicationController
 #														:bill_addr => current_location.street, :bill_addr2 => current_location.street, :bill_city => current_location.city,
 #														:bill_state => current_location.state, :expiry => "06/2019", :bill_zip => current_location.zip.split("-")[0]})
 
-		resp = RestApi.place_order(current_cart)
+		resp = RestApi.place_order(current_cart, params)
 
 #render :json => resp.to_json + RestApi.order_hash(current_cart).to_json
 #{"_error":0,"msg":"Success","text":"Thank you for your order!"}
