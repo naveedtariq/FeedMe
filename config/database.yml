@@ -8,7 +8,7 @@ development:
     pool: 5
     timeout: 5000
     username: root
-    password: 
+    password: root
     host: localhost
 production:
     adapter: mysql

@@ -969,7 +969,8 @@ color: #AAAAAA;
 .total-info {
   margin-top: 20px;
   width: 38%;
-  float: left;
+  float: right;
+  margin-right: 5px;
 }
 .internal-card {
   padding: 5px;
