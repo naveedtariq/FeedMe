@@ -19,7 +19,7 @@ class RestApi
 	
 	#	/rd/[restaurant id]
 	def self.get_fee_details(params)
-		url = "/fee/#{params[:id]}/#{params[:total]}/0/ASAP/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/ASAP/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
 		self.do_get(url)
 	end
 

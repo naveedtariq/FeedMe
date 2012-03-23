@@ -16,7 +16,7 @@
 		%>
 		  <tr class="<%=table_class%>">
 		    <td align="left" width="100%" class="<%=table_class%>">
-		    	<%= link_to_function food.name, "show_menu_item(#{food.id})" %>
+		    	<%= link_to_function food.name, "show_menu_item(#{food.id})", :title => food.desc %>
           <div class="blue_text">
             <span class="p"><%=number_to_currency food.price %></span>
           </div>

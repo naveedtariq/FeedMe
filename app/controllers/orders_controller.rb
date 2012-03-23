@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
 		params[:street] 	= current_location.street
 		params[:city] 		= current_location.city
 		params[:zip] 		= current_location.zip.split("-")[0]
+    params[:tip] = (current_cart.tipercent * params[:total] * 0.01).round(2)
 		resp = RestApi.get_fee_details(params)
 
 		current_cart.add_item(atom, resp, data[:tip].to_f)		
@@ -42,6 +43,7 @@ class OrdersController < ApplicationController
 		params[:street] 	= current_location.street
 		params[:city] 		= current_location.city
 		params[:zip] 		= current_location.zip.split("-")[0]
+    params[:tip] = (current_cart.tipercent * params[:total] * 0.01).round(2)
 		puts resp = RestApi.get_fee_details(params)
 		
 		puts current_cart.remove_item(item_id,resp).inspect
@@ -66,6 +68,7 @@ class OrdersController < ApplicationController
 		params[:street] 	= current_location.street
 		params[:city] 		= current_location.city
 		params[:zip] 		= current_location.zip.split("-")[0]
+    params[:tip] = (current_cart.tipercent * params[:total] * 0.01).round(2)
 		puts resp = RestApi.get_fee_details(params)
 		
 		puts current_cart.update_item(item_id,resp,params[:quantity].to_f).inspect

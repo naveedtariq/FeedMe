@@ -1,7 +1,6 @@
 
 $(function(){
 	update_cart();
-  console.log("here I am");
 });
 
 var colors = {"notice" : "#57A957", "message" : "#339BB9", "error" : "#C43C35" }
