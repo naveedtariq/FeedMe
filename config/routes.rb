@@ -11,6 +11,7 @@ Fc::Application.routes.draw do
 			get 'update_tip'
 			get 'checkout_confirmation'
 			get 'thankyou'
+      post 'update_fee'
 		end
 	end
 

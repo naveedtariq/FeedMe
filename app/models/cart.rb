@@ -80,6 +80,11 @@ class Cart
 		tray_str.chomp("+")
 	end
 
+	def update_fee_details(fee_details)
+		@fee = (fee_details['fee'].to_f).round(2)
+		@tax = (fee_details['tax'].to_f).round(2)
+		@fulltotal = (total + @fee + @tax + tip).round(2)
+	end
   protected
   def calculate_tip(total, tip)
     (total * tip.to_f * 0.01).round(2)

@@ -23,6 +23,11 @@ class RestApi
 		self.do_get(url)
 	end
 
+	def self.get_fee_details_with_time(params)
+		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{params[:date]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		self.do_get(url)
+	end
+
 	def self.check_delivery(params)
 		url = "/dc/#{params[:id]}/#{params[:date]}+#{params[:time]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
 		self.do_get(url)

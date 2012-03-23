@@ -269,6 +269,12 @@ function check_delivery()
 		checkout_butt.css('color','#AAA');
 	});
 
+  tip = $("#tipercent option:selected").val();
+  $.post('/orders/update_fee', {date: date}, function (data){
+			parse_cart(data);
+      $("#tipercent").val(tip);
+			});
+
 } // can_deliver()
 
 function remove_item(id)

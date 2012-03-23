@@ -145,6 +145,19 @@ class OrdersController < ApplicationController
 		render :json => resp.to_json
 	end
 
+	def update_fee
+		params[:id] 		= session[:restaurant_id]
+		params[:total] 		= current_cart.total
+		params[:street] 	= current_location.street
+		params[:city] 		= current_location.city
+		params[:zip] 		= current_location.zip.split("-")[0]
+    params[:tip] = (current_cart.tipercent * params[:total] * 0.01).round(2)
+		final_date = formatted_date(params[:date])
+    params[:date] = final_date[:date].to_s + "+" + final_date[:time]
+		puts resp = RestApi.get_fee_details_with_time(params)
+    current_cart.update_fee_details(resp)
+		render :json => current_cart.to_json
+	end
 private
 
 	def formatted_date(date)
