@@ -1,7 +1,7 @@
 class ChangeDataTypeForSessions < ActiveRecord::Migration
   def self.up
     change_table :sessions do |t|
-      t.change :data, :text, :limit => 4.megabytes
+      t.change :data, :text
     end
   end
 
