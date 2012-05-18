@@ -21,7 +21,6 @@ gem 'acts_as_rateable'
 #gem 'shuber-attr_encrypted'
 gem 'aasm'
 gem 'efax'
-gem 'ruby-debug19'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -44,5 +43,9 @@ gem 'ruby-debug19'
 # and rake tasks are available in development mode:
  group :development, :test do
    gem 'webrat'
+    gem 'ruby-debug19'
 #	 gem 'test-unit'
+ end
+ group :production do
+   gem 'pg'
  end
