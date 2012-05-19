@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
 	end
   
 	def ensure_authenticated
-		session[:current_user_id] = 1
-		return true
+#		session[:current_user_id] = 1
+#		return true
 		if session[:at]
 			return true
 		end
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticator
-		@authenticator ||= Mogli::Authenticator.new('128902520555451', 'cf97f8cb71095c3310258c3bfe9d332e', 'https://localhost.com/pages/callback')
+		@authenticator ||= Mogli::Authenticator.new('380428701993956', '40929b736c7aa91e16076b90425662c7', 'https://foodcourtapp.herokuapp.com/pages/callback')
 	end
 
   protected
