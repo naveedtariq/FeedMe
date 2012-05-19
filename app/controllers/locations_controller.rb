@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
 	  @selected_id = nil
 	  @selected_id = @home_location.id if @home_location
     @user_locations = nil
-	  @home_location = current_user.locations.where("is_home_address = 1").first
+	  @home_location = current_user.locations.where("is_home_address = true").first
 	  @selected_id = nil
 	
     respond_to do |format|
@@ -31,15 +31,15 @@ class LocationsController < ApplicationController
     @user_id = current_user.id
 
 #session[:order_method] = params[:commit]
-		params[:location][:active] = 1
+		params[:location][:active] = true
 
 		self.deactivate_all_locations
 
-		if params[:location][:is_home_address] == "1"
+		if params[:location][:is_home_address] == true
 			@user_id = current_user.id
-			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and is_home_address = 1")
+			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and is_home_address = true")
 			@locations.each do |location|
-				location.is_home_address = 0
+				location.is_home_address = false
 				if location.save
 					flash[:notice] = params[:location][:is_home_address]
 				end
@@ -51,7 +51,7 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-				if params[:location][:is_home_address] == "1"
+				if params[:location][:is_home_address] == true
 					flash[:notice] = 'Your address has been updated'
 				end
         format.html { redirect_to params[:redirect_to] || :controller => :restaurants, :action => :index, :sort => "cuisine" }
@@ -69,13 +69,13 @@ class LocationsController < ApplicationController
    	session[:order_method] = params[:commit]
    	@user_id = current_user.id
   	if params[:saved_location] != "0"
-		@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = 1")
+		@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = true")
 		@locations.each do |location|
-			location.active = 0
+			location.active = false
 			location.save
 		end
 		@home_location = Location.find(params[:saved_location])
-		@home_location.active = 1
+		@home_location.active = true
 		session[:current_location] = @home_location
 		respond_to do |format|
 			  if @home_location.save
@@ -105,9 +105,9 @@ class LocationsController < ApplicationController
     end
 
 		def deactivate_all_locations
-			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = 1")
+			@locations = Location.find(:all, :conditions => "user_id = #{@user_id} and active = true")
 			@locations.each do |location|
-				location.active = 0
+				location.active = false
 				location.save
 			end
 		end
