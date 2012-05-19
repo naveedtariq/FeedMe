@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
 
 	def home_location
-		@home_location || self.locations.where("is_home_address = 1").first
+		@home_location || self.locations.where("is_home_address = true").first
 	end
 
 	def home_location_street
