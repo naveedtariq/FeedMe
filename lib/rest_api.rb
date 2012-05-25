@@ -74,7 +74,7 @@ class RestApi
 	end
 
 	def self.do_get(url)
-		puts "\n******** API CALL\n" + self.base_uri + URI.escape( add_auth_params url ).inspect + "\n\n"
+		puts "\n******** API CALL\n" + URI.escape( add_auth_params url ).inspect + "\n\n"
 		get(URI.escape( add_auth_params url )).parsed_response
 	end
 
