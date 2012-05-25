@@ -1,12 +1,12 @@
 class RestApi
 	include HTTParty
-#	base_uri 'http://o-test.ordr.in:8000/'
+	base_uri 'http://o-test.ordr.in:8000/'
 	format :json
 
 #	/dl/[datetime]/[postal code]/[city]/[street address]
 	def self.restaurants(params)
 		url = "/dl/#{params[:datetime]}/#{params[:postal_code]}/#{params[:city]}/#{params[:street_address]}"
-		respt = self.do_get(self.rest_test_uri+url)
+		respt = self.do_get(url)
 		puts respt.to_json + "-----------------------------**-------"
 		respt
 	end
@@ -14,7 +14,7 @@ class RestApi
 #	/rd/[restaurant id]
 	def self.restaurant(params)
 		url = "/rd/#{params[:id]}"
-		self.do_get(self.rest_test_uri+url)
+		self.do_get(url)
 	end
 	
 	#	/rd/[restaurant id]
@@ -24,24 +24,24 @@ class RestApi
       dt = "#{params[:date]}+#{params[:time]}"
     end
 		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{dt}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
-		self.do_get(self.rest_test_uri+url)
+		self.do_get(url)
 	end
 
 	def self.get_fee_details_with_time(params)
 		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{params[:date]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
-		self.do_get(self.rest_test_uri+url)
+		self.do_get(url)
 	end
 
 	def self.check_delivery(params)
 		url = "/dc/#{params[:id]}/#{params[:date]}+#{params[:time]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
-		self.do_get(self.rest_test_uri+url)
+		self.do_get(url)
 	end
 	
 	def self.place_order(cart, option)
 		url = "/o/#{cart.restaurant_id}"
 #url = "http://www.postbin.org/14evnuh/#{cart.restaurant_id}"
     options = { :body => self.order_hash(cart, option)}
-		self.do_post(self.order_test_uri+url, options)
+		self.do_post(url, options)
 	end
 
 	def self.geocode(address)
@@ -91,22 +91,18 @@ class RestApi
 
   def self.rest_test_uri
     "https://r-test.ordr.in"
-    "http://o-test.ordr.in:8000/"
   end
 
   def self.rest_uri
     "https://r.ordr.in"
-    "http://o-test.ordr.in:8000/"
   end
 
   def self.order_test_uri
     "https://o-test.ordr.in"
-    "http://o-test.ordr.in:8000/"
   end
 
   def self.order_uri
     "https://o.ordr.in"
-    "http://o-test.ordr.in:8000/"
   end
 end
 
