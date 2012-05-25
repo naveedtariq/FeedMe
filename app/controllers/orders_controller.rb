@@ -69,6 +69,9 @@ class OrdersController < ApplicationController
 		params[:city] 		= current_location.city
 		params[:zip] 		= current_location.zip.split("-")[0]
     params[:tip] = (current_cart.tipercent * params[:total] * 0.01).round(2)
+		final_date = formatted_date(params[:date])
+		params[:date] = final_date[:date]
+		params[:time] = final_date[:time] 
 		puts resp = RestApi.get_fee_details(params)
 		
 		puts current_cart.update_item(item_id,resp,params[:quantity].to_f).inspect

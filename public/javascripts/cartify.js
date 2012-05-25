@@ -289,8 +289,10 @@ function remove_item(id)
 
 function update_quantity(quantity,id)
 {
+  var date = $('#date').val();
+  var time = $('#time').val();
   tip = $("#tipercent option:selected").val();
-	$.get('/orders/update_cart_item',{id: id,quantity: quantity}, function(data){
+	$.get('/orders/update_cart_item',{id: id,quantity: quantity,date: date, time: time }, function(data){
 			parse_cart(data);
       $("#tipercent").val(tip);
 			});
