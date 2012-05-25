@@ -5,7 +5,7 @@ class CartItem
 		params.symbolize_keys!
 		@options = []
 
-		@qty = params[:count]
+		@qty = params[:count].to_i
 		@name = params[:name]
 		@price = (params[:price].to_f).round(2)
 		@id = params[:id]
@@ -22,7 +22,7 @@ class CartItem
 
   def update_quantity(count)
     @total = (@price * count).round(2)
-    @qty = count
+    @qty = count.to_i
     @options.each do |opt|
       @total = (@total + (opt.price * count)).round(2)
     end
