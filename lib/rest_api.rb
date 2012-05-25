@@ -91,18 +91,22 @@ class RestApi
 
   def self.rest_test_uri
     "https://r-test.ordr.in"
+    "http://o-test.ordr.in:8000/"
   end
 
   def self.rest_uri
     "https://r.ordr.in"
+    "http://o-test.ordr.in:8000/"
   end
 
   def self.order_test_uri
     "https://o-test.ordr.in"
+    "http://o-test.ordr.in:8000/"
   end
 
   def self.order_uri
     "https://o.ordr.in"
+    "http://o-test.ordr.in:8000/"
   end
 end
 
