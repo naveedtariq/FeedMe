@@ -96,6 +96,7 @@ class OrdersController < ApplicationController
 		params[:date] = final_date[:date]
 		params[:time] = final_date[:time] 
 		params[:city] = location.city
+		params[:street] = location.street
 		params[:zip] = current_location.zip.split("-")[0]
 		params[:id] = session[:restaurant_id]
 

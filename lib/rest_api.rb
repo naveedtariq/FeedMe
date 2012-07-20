@@ -1,11 +1,11 @@
 class RestApi
 	include HTTParty
-	base_uri 'http://o-test.ordr.in:8000/'
+#	base_uri 'http://o-test.ordr.in:8000/'
 	format :json
 
 #	/dl/[datetime]/[postal code]/[city]/[street address]
 	def self.restaurants(params)
-		url = "/dl/#{params[:datetime]}/#{params[:postal_code]}/#{params[:city]}/#{params[:street_address]}"
+		url = self.rest_uri + "/dl/#{params[:datetime]}/#{params[:postal_code]}/#{params[:city]}/#{params[:street_address]}"
 		respt = self.do_get(url)
 		puts respt.to_json + "-----------------------------**-------"
 		respt
@@ -13,7 +13,7 @@ class RestApi
 
 #	/rd/[restaurant id]
 	def self.restaurant(params)
-		url = "/rd/#{params[:id]}"
+		url = self.rest_uri + "/rd/#{params[:id]}"
 		self.do_get(url)
 	end
 	
@@ -23,22 +23,22 @@ class RestApi
     if params[:date] && params[:time]
       dt = "#{params[:date]}+#{params[:time]}"
     end
-		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{dt}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		url = self.rest_uri + "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{dt}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
 		self.do_get(url)
 	end
 
 	def self.get_fee_details_with_time(params)
-		url = "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{params[:date]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		url = self.rest_uri + "/fee/#{params[:id]}/#{params[:total]}/#{params[:tip]}/#{params[:date]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
 		self.do_get(url)
 	end
 
 	def self.check_delivery(params)
-		url = "/dc/#{params[:id]}/#{params[:date]}+#{params[:time]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
+		url = self.rest_uri + "/dc/#{params[:id]}/#{params[:date]}+#{params[:time]}/#{params[:zip]}/#{params[:city]}/#{params[:street]}"
 		self.do_get(url)
 	end
 	
 	def self.place_order(cart, option)
-		url = "/o/#{cart.restaurant_id}"
+		url = self.order_uri + "/o/#{cart.restaurant_id}"
 #url = "http://www.postbin.org/14evnuh/#{cart.restaurant_id}"
     options = { :body => self.order_hash(cart, option)}
 		self.do_post(url, options)
