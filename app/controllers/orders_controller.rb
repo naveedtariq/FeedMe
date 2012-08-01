@@ -122,12 +122,12 @@ class OrdersController < ApplicationController
 		current_cart.location = current_location
 		current_cart.restaurant_id = session[:restaurant_id]
 
-		#overriding paramas
-		params[:bill_addr] = current_location.street
-		params[:bill_addr2] = current_location.street
-		params[:bill_city] = current_location.city
-		params[:bill_state] = current_location.state
-		params[:bill_zip] = current_location.zip.split("-")[0]
+#   #overriding paramas
+#   params[:bill_addr] = current_location.street
+#   params[:bill_addr2] = current_location.street
+#   params[:bill_city] = current_location.city
+#   params[:bill_state] = current_location.state
+#   params[:bill_zip] = current_location.zip.split("-")[0]
 
 #puts "*******------\n\n" + params.inspect + "**********\n\n"
 
